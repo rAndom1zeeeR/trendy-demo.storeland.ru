@@ -1,0 +1,37 @@
+{% IF promotion_campaign_empty %}
+<div class="message attention">Акций в нашем магазине пока не проводилось</div>
+{% ELSE %}
+<!-- Список акций -->
+<div class="products__container">
+	<div class="row">
+	  <div class="products__grid promotion__grid flex-start">
+	  {% FOR promotion_campaign %}
+	  <div class="promotion__item product__item {% IFNOT promotion_campaign.IS_WORK %}promotion__empty{% ENDIF %}" data-id="{promotion_campaign.ID}">
+			<a class="product__form-{promotion_campaign.ID}" href="{promotion_campaign.URL | url_amp}">
+				<div class="promotion__top">
+					<div class="promotion__name" title="{promotion_campaign.NAME}">
+						<span>{promotion_campaign.NAME}</span>
+					</div>
+					<div class="promotion__end" data-end="{promotion_campaign.EXPIRED_TIME | date('m/d/Y H:i:s')}" data-now="{CURRENT_TIME | date('m/d/Y H:i:s')}"><span></span></div>
+					<!-- {% IF promotion_campaign.DESCRIPTION_SHORT %}
+					<div class="promotion__desc">
+						<span>{promotion_campaign.DESCRIPTION_SHORT}</span>
+					</div>
+					{% ENDIF %} -->
+				</div>
+				<div class="promotion__bottom flex">
+					<div class="promotion__percentage">
+						<span>-{promotion_campaign.PERCENTAGE}%</span>
+					</div>
+					<div class="promotion__date {% IF promotion_campaign.IS_WORK %}mitt-white{% ELSE %}mitt-gray{% ENDIF %}">
+						<i class="material-icons">timer</i>
+						<span>До {promotion_campaign.EXPIRED_TIME | date('d.m.Y')}</span>
+					</div>
+				</div>
+			</a>
+	  </div>
+	  {% ENDFOR promotion_campaign %}
+	  </div>
+	</div>
+</div>
+{% ENDIF %}
