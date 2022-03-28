@@ -329,7 +329,7 @@
 			<span class="cart__word">товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}</span>
 		</span>
 		<span class="price__now cartSumNow">{CART_SUM_NOW | money_format}</span>
-		<a class="removeAll mitt-gray" href="{CART_TRUNCATE_URL}" onclick="removeFromCartAll($(this))" title="Очистить корзину">
+		<a class="removeAll" href="{CART_TRUNCATE_URL}" onclick="removeFromCartAll($(this))" title="Очистить корзину">
 			<i class="material-icons">disabled_by_default</i>
 		</a>
 	</div>

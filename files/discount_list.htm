@@ -23,7 +23,7 @@
 					<div class="promotion__percentage">
 						<span>-{promotion_campaign.PERCENTAGE}%</span>
 					</div>
-					<div class="promotion__date {% IF promotion_campaign.IS_WORK %}mitt-white{% ELSE %}mitt-gray{% ENDIF %}">
+					<div class="promotion__date">
 						<i class="material-icons">timer</i>
 						<span>До {promotion_campaign.EXPIRED_TIME | date('d.m.Y')}</span>
 					</div>

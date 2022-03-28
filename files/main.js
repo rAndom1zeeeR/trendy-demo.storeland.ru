@@ -745,7 +745,7 @@ function counterDate() {
 	}, 1000);
 	// Добавляем контент анимации
 	$('.banner__counter > div').append('<svg width="52" height="52"><circle class="svg-figure" stroke-dasharray="151" cx="26" cy="26" r="24" transform="rotate(-90, 26, 26)"/></svg>');
-	$('.product__counter > div').append('<svg width="100%" height="100%"><rect class="svg-figure" stroke-dasharray="255" x="0" y="0" width="100%" height="100%" transform="rotate(0, 32, 32)"/></svg>');
+	// $('.product__counter > div').append('<svg width="100%" height="100%"><rect class="svg-figure" stroke-dasharray="255" x="0" y="0" width="100%" height="100%" transform="rotate(0, 32, 32)"/></svg>');
 	// Функция анимации счетчика
 	function counterAnimate(obj){		
 		$(obj).each(function(){
@@ -767,52 +767,90 @@ function counterDate() {
 }
 
 // Функция показать все для "Товары на главной"
-function pdtSale() {
+function pdtSale(){
 	var id = '#pdt__sale';
 	var btn = $(id).find('.showAll');
 	var item = $(id).find('.product__item');
 	var buttons = $(id).find('.products__buttons');
-	var max = '12';
+	var max = $(id).find('.product__item:visible').length;
 	// Скрываем кнопку показать все если меньше 5 товаров
-	item.length > max ? buttons.show() : buttons.hide();
+	item.length > max ? buttons.show() : buttons.hide()
 	// Функция открытия доп товаров
 	btn.on('click', function (event){
 		event.preventDefault();
 		var t = $(this);
-		var parents = t.parents().find(id)
-		var btnText = t.find('span')
+		var parents = t.parents().find(id);
+		var btnText = t.find('span');
 		if(t.hasClass('active')){
 			t.removeClass('active')
 			parents.removeClass('active')
 			btnText.text('Показать все')
-			item.removeClass('show')
-			parents.css({height: ''})
+			parents.find('.product__item').removeClass('show')
+			$('html, body').animate({scrollTop : parents.offset().top}, 600);
 		}else{
 			t.addClass('active')
 			parents.addClass('active')
 			btnText.text('Скрыть')
-			item.addClass('show')
-			parents.css({height: '100%'})
+			parents.find('.product__item').addClass('show')
 		}
 	});
 }
 
-// Функция слайдера для "Хиты продаж" на главной странице
-function pdtBest(){
-	var id = $('#pdt__best');
+// Функция слайдера для "Новинки" на главной странице
+function pdtSales(){
+	var id = $('#pdt__sales');
 	var carousel = id.find('.owl-carousel');
 	var buttons = id.find('.owl-nav');
 	var dots = id.find('.owl-dots');
 	carousel.owlCarousel({
-		items: 3,
-		margin: 32,
+		items: 2,
+		margin: 0,
 		loop: false,
 		rewind: true,
 		lazyLoad: true,
 		nav: true,
 		navContainer: buttons,
 		navText: [ , ],
-		dots: true,
+		dots: false,
+		dotsContainer: dots,
+		autoHeight: false,
+		autoHeightClass: 'owl-height',
+		autoplay: false,
+		autoplayHoverPause: true,
+		smartSpeed: 500,
+		mouseDrag: true,
+		touchDrag: true,
+		pullDrag: true,
+		responsiveClass: true,
+		responsiveRefreshRate: 100,
+		responsive: {
+			0:{items:1, autoHeight: true},
+			320:{items:1, autoHeight: true},
+			480:{items:1},
+			640:{items:1},
+			768:{items:2},
+			992:{items:2},
+			1200:{items:2}
+		}
+	});
+}
+
+// Функция слайдера для "Новинки" на главной странице
+function pdtNew(){
+	var id = $('#pdt__new');
+	var carousel = id.find('.owl-carousel');
+	var buttons = id.find('.owl-nav');
+	var dots = id.find('.owl-dots');
+	carousel.owlCarousel({
+		items: 5,
+		margin: 0,
+		loop: false,
+		rewind: true,
+		lazyLoad: true,
+		nav: true,
+		navContainer: buttons,
+		navText: [ , ],
+		dots: false,
 		dotsContainer: dots,
 		autoHeight: false,
 		autoHeightClass: 'owl-height',
@@ -828,51 +866,21 @@ function pdtBest(){
 			0:{items:1, autoHeight: true},
 			320:{items:1, autoHeight: true},
 			480:{items:2},
-			640:{items:2},
+			640:{items:3},
 			768:{items:3},
-			992:{items:3},
-			1200:{items:3}
+			992:{items:4},
+			1200:{items:5}
 		}
 	});
 }
 
-// Функция слайдера для "Новинки" на главной странице
-function pdtNew(){
-	var id = $('#pdt__new');
-	var carousel = id.find('.owl-carousel');
-	var buttons = id.find('.owl-nav');
-	var dots = id.find('.owl-dots');
-	carousel.owlCarousel({
-		items: 1,
-		margin: 0,
-		loop: false,
-		rewind: true,
-		lazyLoad: true,
-		nav: true,
-		navContainer: buttons,
-		navText: [ , ],
-		dots: false,
-		dotsContainer: dots,
-		autoHeight: true,
-		autoHeightClass: 'owl-height',
-		autoplay: false,
-		autoplayHoverPause: true,
-		smartSpeed: 500,
-		mouseDrag: true,
-		touchDrag: true,
-		pullDrag: true,
-		responsiveClass: true,
-		responsiveRefreshRate: 100
-	});
-}
-
-// Функция Показать все для "Акции" на главной странице
-function pdtSales(){
-	var id = '#pdt__sales';
+// Функция для "Хиты продаж" на главной странице
+function pdtBest(){
+	var id = '#pdt__best';
 	var btn = $(id).find('.showAll');
 	var item = $(id).find('.product__item');
 	var buttons = $(id).find('.products__buttons');
-	var max = '5';
+	var max = $(id).find('.product__item:visible').length;
 	// Скрываем кнопку показать все если меньше 5 товаров
 	item.length > max ? buttons.show() : buttons.hide()
 	// Функция открытия доп товаров
@@ -885,16 +893,13 @@ function pdtSales(){
 			t.removeClass('active')
 			parents.removeClass('active')
 			btnText.text('Показать все')
-			parents.find('.product__items-quad').removeClass('show')
 			parents.find('.product__item').removeClass('show')
-			parents.css({height: ''})
+			$('html, body').animate({scrollTop : parents.offset().top}, 600);
 		}else{
 			t.addClass('active')
 			parents.addClass('active')
 			btnText.text('Скрыть')
-			parents.find('.product__items-quad').addClass('show')
 			parents.find('.product__item').addClass('show')
-			parents.css({height: '100%'})
 		}
 	});
 }
@@ -949,15 +954,15 @@ function newsCarousel() {
 	var dots = id.find('.owl-dots');
 	// Функция слайдера для Новостей
 	carousel.owlCarousel({
-		items: 1,
-		margin: 0,
+		items: 3,
+		margin: 32,
 		loop: false,
 		rewind: true,
 		lazyLoad: true,
 		nav: true,
-		navContainer: buttons,
+		navContainer: '',
 		navText: [ , ],
-		dots: true,
+		dots: false,
 		dotsContainer: dots,
 		autoHeight: true,
 		autoHeightClass: 'owl-height',
@@ -968,19 +973,40 @@ function newsCarousel() {
 		touchDrag: true,
 		pullDrag: true,
 		responsiveClass: true,
-		responsiveRefreshRate: 100
+		responsiveRefreshRate: 100,
+		responsive: {
+			0:{items:1, autoHeight: true},
+			320:{items:1, autoHeight: true},
+			480:{items:2},
+			640:{items:3},
+			768:{items:3},
+			992:{items:3},
+			1200:{items:3}
+		}
+	});
+
+	// Табы в товарах на главной
+	$('#news .tabs__nav').on('click', function (event) {
+		event.preventDefault();
+		var id = $(this).attr('data-tab');
+		$('#news .tabs__content').prepend('<div class="preloader"><div class="loading"></div></div>');
+		preload();
+		$('#news .tabs__nav').removeClass('active')
+		$('#news .tabs__content').removeClass('active');
+		$(this).addClass('active');
+    $('#'+ id).addClass('active');
 	});
 }
 
 // Функция слайдер для "Вы смотрели"
 function viewed() {
-	var id = $('#viewed');
+	var id = $('.viewed');
 	var carousel = id.find('.owl-carousel');
 	var buttons = id.find('.owl-nav');
 	var dots = id.find('.owl-dots');
 	carousel.owlCarousel({
-		items: 4,
-		margin: 32,
+		items: 2,
+		margin: 0,
 		loop: false,
 		rewind: true,
 		lazyLoad: true,
@@ -1001,12 +1027,12 @@ function viewed() {
 		responsiveRefreshRate: 100,
 		responsive: {
 			0:{items:1, autoHeight: true},
-			320:{items:1, autoHeight: true},
-			480:{items:2},
-			640:{items:2},
-			768:{items:3},
-			992:{items:3},
-			1200:{items:4}
+			320:{items:2, autoHeight: true},
+			480:{items:3},
+			640:{items:4},
+			768:{items:5},
+			992:{items:2},
+			1200:{items:2}
 		}
 	});
 }
@@ -3364,6 +3390,7 @@ $(document).ready(function(){
 	priceDiff('.cart__item', 'diff');
 	addCart();
 	addTo();
+	hoverImage();
 	// Добавление товара в корзину
 	$('.add-cart').on('click', function() {
 		var form = $(this).closest('form');
@@ -3540,4 +3567,44 @@ function discountEndDay(){
 
 function stylerOn(){
 	$('select').styler();
+}
+
+
+// Функция изменения изображений при наведении на товар
+function hoverImage(){
+	$('.product__item').each(function(){
+		var t = $(this);
+		var imagesLen = t.find('.product__imgID').length
+		// Останавливаем функцию если меньше 2 изображений товара
+		if (imagesLen < 2){
+			return
+		}
+
+		// Создаем элементы при наведении на которые будут меняться изображения
+		t.find('.product__imgID').each(function(){
+			var href = $(this).data('href')
+			var id =  $(this).data('id')
+			// Создаем элементы
+			t.find('.product__hoverImages').append('<div class="product__hoverImage" data-id="'+ id +'" data-href="'+ href +'"></div>');
+			// Добавляем активный класс на элемент навигации
+			if (id == t.find('.product__img').data('id')){
+				t.find('.product__hoverImage').removeClass('active')
+				t.find('.product__hoverImage[data-id="' + id + '"]').addClass('active')
+			}
+		});
+
+		// Ховер эффект изменения изображения
+		t.find('.product__hoverImage').hover(function(){
+			var href = $(this).data('href')
+			var id =  $(this).data('id')
+			t.find('.product__img').attr({
+				'data-id': id,
+				'href': href
+			})
+			t.find('.product__img img').attr('src', href)
+			t.find('.product__hoverImage').removeClass('active')
+			$(this).addClass('active')
+		})
+
+	})
 }

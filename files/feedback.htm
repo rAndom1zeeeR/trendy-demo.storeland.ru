@@ -40,7 +40,7 @@
 			<div class="contacts flex-start" itemscope itemtype="https://schema.org/Organization">
 				<!-- Телефоны -->
 				{% IF SETTINGS_STORE_PHONE_NUMBER1 || SETTINGS_STORE_PHONE_NUMBER2 || SETTINGS_STORE_PHONE_NUMBER3 %}
-				<div class="contacts__block phone flex mitt">
+				<div class="contacts__block phone flex">
 					<div class="contacts__block-icon"><i class="material-icons">phone_in_talk</i></div>
 					<div class="contacts__block-content">
 						<!-- Телефон 1 -->
@@ -73,7 +73,7 @@
 
 				<!-- Почта -->
 				{% IF SETTINGS_STORE_EMAIL_MAIN %}
-				<div class="contacts__block email flex mitt">
+				<div class="contacts__block email flex">
 					<div class="contacts__block-icon"><i class="material-icons">drafts</i></div>
 					<div class="contacts__block-content">
 						<a class="contacts__block-link email"
@@ -87,7 +87,7 @@
 
 				<!-- Адрес -->
 				{% IF SETTINGS_STORE_REGION %}
-				<div class="contacts__block region flex mitt"
+				<div class="contacts__block region flex"
 					target="_blank"
 					itemprop="address"
 					itemscope
@@ -103,7 +103,7 @@
 
 				<!-- Время работы -->
 				{% IF SETTINGS_STORE_WORK_TIME %}
-				<div class="contacts__block worktime flex mitt">
+				<div class="contacts__block worktime flex">
 					<div class="contacts__block-icon"><i class="material-icons">schedule</i></div>
 					<div class="contacts__block-content">
 						<a class="contacts__block-link work" href="{FEEDBACK_URL}" title="Режим работы">

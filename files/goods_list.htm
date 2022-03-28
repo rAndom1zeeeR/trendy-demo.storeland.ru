@@ -328,7 +328,7 @@
 
 			<!-- Фильтры -->
 			<div class="toolbar__filters {% FOR filter_attr_list %}{% FOR values %}{% IF filter_attr_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}{% ENDFOR %} {% FOR filter_prop_list %}{% FOR values %}{% IF filter_prop_list.values.CHECKED %}has-filters {% ENDIF %}{% ENDFOR %}{% ENDFOR %}">
-				<a class="filters__icon mitt" href="javascript:;">
+				<a class="filters__icon" href="javascript:;">
 					<i class="material-icons">filter_alt</i>
 					<span class="filters__icon-has"></span>
 					<span>Фильтры</span>
@@ -758,7 +758,7 @@
 							<div class="product__addCart">
 								<!-- Добавление в корзину -->
 								{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods.MAX_REST_VALUE=0 %}
-								<a class="button-empty add-notify mitt-gray"
+								<a class="button-empty add-notify"
 									title="Уведомить"
 									data-tooltip="Уведомить"
 									rel="nofollow"
@@ -1105,7 +1105,7 @@
 							<div class="product__addCart">
 								<!-- Добавление в корзину -->
 								{% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods.MAX_REST_VALUE=0 %}
-								<a class="button-empty add-notify mitt-gray"
+								<a class="button-empty add-notify"
 									title="Уведомить"
 									data-tooltip="Уведомить"
 									rel="nofollow"
