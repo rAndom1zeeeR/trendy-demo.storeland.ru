@@ -3,7 +3,7 @@
 	  <div class="client__block">
 	    <h3 class="client__title">Постоянным покупателям</h3>
 	    <p>Если вы уже имеете аккаунт, войдите в него, используя свои логин и пароль.</p>
-	    <form action="{USER_LOGIN_URL}" method="post" class="form__client lex">
+	    <form action="{USER_LOGIN_URL}" method="post" class="form__client">
 	      <input type="hidden" name="hash" value="{HASH}" />
 	      <input type="hidden" name="from" value="{FROM}" />
 	      <!-- Набор полей которые не видит пользователь, но видят боты. Когда они их заполняют мы точно знаем, что их прислал нам бот и мы не сохраняем подобный отзыв о товаре, а боту отправившему отзыв сообщаем, что отзыв добавлен успешно, но будет отображён здесь после прохождения модерации -->
@@ -15,20 +15,20 @@
 	        </div>
 	        <div class="form__fields form__pass">
 	          <label for="sites_client_pass" class="required">Пароль: <em>*</em></label>
-	          <input type="password" id="sites_client_pass" name="form[sites_client_pass]" value="{FORM_SITES_CLIENT_PASS}" maxlength="50" minlength="6" class="form__input" placeholder="Пароль" onkeyup="checkCapsWarning(event)" onfocus="checkCapsWarning(event)" onblur="removeCapsWarning()" required/>
+	          <input id="sites_client_pass" type="password" class="form__input" name="form[sites_client_pass]" value="{FORM_SITES_CLIENT_PASS}" maxlength="50" minlength="6" placeholder="Пароль" onkeyup="checkCapsWarning(event)" onfocus="checkCapsWarning(event)" onblur="removeCapsWarning()" required/>
 	          {% IFNOT user_agent_ie %}
 						<div class="showPassBlock"><a href="#" rel="Скрыть пароль" class="showPass">Показать пароль</a></div>
 	          {% ENDIF %}
-	          <div id="capslock">
-	            <div><i class="material-icons">warning</i></div>
-	            <div><strong>Caps Lock включен.</strong></div>
-	            <div>Пароль может быть введен неверно.</div>
-	          </div>
 	        </div>
+					<div id="capslock">
+						<div><i class="material-icons">warning</i></div>
+						<div><strong>Caps Lock включен.</strong></div>
+						<div>Пароль может быть введен неверно.</div>
+					</div>
 	      </div>
 	      <div class="client__buttons">
-	        <button type="submit" name="send" class="button" title="Войти"><span>Войти</span></button>
-	        <a href="{USER_RECOVERY_URL}" class="button2 button"><span>Забыли пароль?</span></a>
+	        <a class="button-tertiary" href="{USER_RECOVERY_URL}"><span>Забыли пароль?</span></a>
+					<button class="button" type="submit" name="send" title="Войти"><span>Войти</span></button>
 	      </div>
 	    </form>
 	  </div>
@@ -42,7 +42,7 @@
 	      <li>И многое другое...</li>
 	    </ul>
 	    <div class="client__buttons">
-	      <a href="{USER_REGISTER_URL}" class="button><span>Зарегистрироваться</span></a>
+	      <a class="button" href="{USER_REGISTER_URL}"><span>Зарегистрироваться</span></a>
 	    </div>
 	  </div>
 	</div>

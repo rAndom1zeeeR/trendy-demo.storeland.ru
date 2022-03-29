@@ -22,19 +22,19 @@
 	        </div>
 	        <div class="form__fields form__pass">
 	          <label for="sites_client_pass" class="required">Придумайте пароль <em>*</em></label>
-	          <input id="sites_client_pass" type="password" name="form[{ANTISPAM_FORM_FIELD_NAME_SITES_CLIENT_PASS}]" value="{FORM_SITES_CLIENT_PASS}" maxlength="50" minlength="6" class="form__input" onkeyup="checkCapsWarning(event)" onfocus="checkCapsWarning(event)" onblur="removeCapsWarning()" placeholder="Придумайте пароль" required />
+	          <input id="sites_client_pass" class="form__input" type="password" name="form[{ANTISPAM_FORM_FIELD_NAME_SITES_CLIENT_PASS}]" value="{FORM_SITES_CLIENT_PASS}" maxlength="50" minlength="6" onkeyup="checkCapsWarning(event)" onfocus="checkCapsWarning(event)" onblur="removeCapsWarning()" placeholder="Придумайте пароль" required />
 	          {% IFNOT user_agent_ie %}
 						<div class="showPassBlock"><a href="#" rel="Скрыть пароль" class="showPass">Показать пароль</a></div>
 	          {% ENDIF %}
-	          <div id="capslock">
-	            <div><i class="material-icons">warning</i></div>
-	            <div><strong>Caps Lock включен.</strong></div>
-	            <div>Пароль может быть введен неверно.</div>
-	          </div>
 	        </div>
+					<div id="capslock">
+						<div><i class="material-icons">warning</i></div>
+						<div><strong>Caps Lock включен.</strong></div>
+						<div>Пароль может быть введен неверно.</div>
+					</div>
 	      </div>
 	      <div class="client__buttons">
-	        <button type="submit" title="Зарегистрироваться" class="button><span>Зарегистрироваться</span></button>
+	        <button type="submit" title="Зарегистрироваться" class="button"><span>Зарегистрироваться</span></button>
 					<div class="form__pp">Нажимая на кнопку Зарегистрироваться, Вы соглашаетесь с <a data-fancybox data-src="#fancybox__pp" href="javascript:;">правилами обработки данных</a></div>
 	      </div>
 	    </form>
@@ -45,7 +45,7 @@
 	    <p>Если Вы забыли пароль, воспользуйтесь формой восстановления.</p>
 	    <div class="client__buttons">
 	      <a href="{USER_LOGIN_URL}" class="button"><span>Вход с паролем</span></a>
-	      <a href="{USER_RECOVERY_URL}" class="button button2"><span>Восстановление пароля</span></a>
+	      <a href="{USER_RECOVERY_URL}" class="button-tertiary"><span>Восстановление пароля</span></a>
 	    </div>
 	  </div>
 	</div>

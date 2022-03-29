@@ -29,7 +29,7 @@
             <a class="compare-image flex-center" href="{goods_mod_info.GOODS_MOD_URL}" title="Перейти к странице &laquo;{goods_mod_info.GOODS_NAME}&raquo;">
               <img src="{% IF goods_mod_info.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=Deluxe{% ELSE %}{goods_mod_info.GOODS_IMAGE_SMALL}{% ENDIF %}" rel="{goods_mod_info.GOODS_IMAGE_ID}" class="CompareGoodsImageMain{goods_mod_info.GOODS_MOD_ID} goods-image-small" alt="{goods_mod_info.GOODS_NAME}" />
             </a>
-            <a class="remove" href="{COMPARE_DELETE_URL}?id={goods_mod_info.GOODS_MOD_ID}" title="Убрать из таблицы сравнения"><i class="material-icons">close</i></a>
+            <a class="remove" href="{COMPARE_DELETE_URL}?id={goods_mod_info.GOODS_MOD_ID}" title="Убрать из таблицы сравнения"><i class="icon-close"></i></a>
           </div>
         {% ENDFOR %}
         </div>
@@ -140,7 +140,7 @@
           <div class="content owl-carousel">
           {% FOR values %}
             <div class="compare-td compare-td-{goods_attr_list.values.index}">
-              <span>{% IF goods_attr_list.values.VALUE %}{goods_attr_list.values.VALUE}{% ELSE %}<i class="material-icons">close</i>{% ENDIF %}</span>
+              <span>{% IF goods_attr_list.values.VALUE %}{goods_attr_list.values.VALUE}{% ELSE %}<i class="icon-close"></i>{% ENDIF %}</span>
             </div>
           {% ENDFOR %}
           </div>
@@ -218,7 +218,7 @@
         <span>Отобразить скрытые</span>
       </a>
       <a href="{COMPARE_RESET_URL}" class="button title="Очистить список сравнения">
-        <i class="material-icons">close</i>
+        <i class="icon-close"></i>
         <span>Очистить список</span>
       </a>
     </div>

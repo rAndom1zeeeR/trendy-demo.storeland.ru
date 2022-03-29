@@ -19,12 +19,12 @@
 	          {% IFNOT user_agent_ie %}
 						<div class="showPassBlock"><a href="#" rel="Скрыть пароль" class="showPass">Показать пароль</a></div>
 	          {% ENDIF %}
-	          <div id="capslock">
-	            <div><i class="material-icons">warning</i></div>
-	            <div><strong>Caps Lock включен.</strong></div>
-	            <div>Пароль может быть введен неверно.</div>
-	          </div>
 	        </div>
+					<div id="capslock">
+						<div><i class="material-icons">warning</i></div>
+						<div><strong>Caps Lock включен.</strong></div>
+						<div>Пароль может быть введен неверно.</div>
+					</div>
 	      </div>
 	      <div class="client__buttons">
 	        <button type="submit" title="Восстановить" class="button"><span>Восстановить</span></button>
@@ -36,7 +36,7 @@
 	    <p>Если Вы уже имеете аккаунт у нас, пожалуйста входите. <br/>Если Вы забыли пароль, вопользуйтесь формой восстановления.</p>
 	    <div class="client__buttons">
 	      <a href="{USER_LOGIN_URL}" class="button"><span>Вход с паролем</span></a>
-	      <a href="{USER_REGISTER_URL}" class="button2"><span>Зарегистрироваться</span></a>
+	      <a href="{USER_REGISTER_URL}" class="button-tertiary"><span>Зарегистрироваться</span></a>
 	    </div>
 	  </div>
 	</div>

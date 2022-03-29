@@ -44,7 +44,7 @@
 		</span>
 		<span class="price__now cartSumNow">{CART_SUM_NOW | money_format}</span>
 		<a class="removeAll" href="{CART_TRUNCATE_URL}" onclick="removeFromCartAll($(this))" title="Очистить корзину">
-			<i class="material-icons">disabled_by_default</i>
+			<i class="icon-close"></i>
 		</a>
 	</div>
 	<div class="addto__items">
@@ -75,7 +75,7 @@
 				<div class="addto__actions">
 					<!-- Удаление -->
 					<a class="addto__remove remove flex-center" href="{cart_items.ORDER_LINE_DELETE_URL}" data-qty="{cart_items.ORDER_LINE_QUANTITY}" title="Удалить позицию" data-id="{cart_items.GOODS_ID}" onclick="removeFromCart($(this))">
-						<i class="material-icons">close</i>
+						<i class="icon-close"></i>
 					</a>
 				</div>
 			</div>

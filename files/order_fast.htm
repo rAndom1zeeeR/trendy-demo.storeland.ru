@@ -257,11 +257,11 @@
 								<div class="form__fields form__pass" {% IFNOT ORDER_FORM_CONTACT_WANT_REGISTER %}style="display: none;"{% ENDIF %}>
 									<input id="sites_client_pass" type="password" name="form[contact][pass]" value="{ORDER_FORM_CONTACT_PASS}" maxlength="50" minlength="6" class="form__input {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}required{% ENDIF %}" onkeyup="checkCapsWarning(event)" onfocus="checkCapsWarning(event)" onblur="removeCapsWarning()" placeholder="Придумайте пароль *"/>
 									<div class="showPassBlock"><a href="#" rel="Скрыть пароль" class="showPass">Показать пароль</a></div>
-									<div id="capslock">
-										<div><i class="material-icons">warning</i></div>
-										<div><strong>Caps Lock включен.</strong></div>
-										<div>Пароль может быть введен неверно.</div>
-									</div>
+								</div>
+								<div id="capslock">
+									<div><i class="material-icons">warning</i></div>
+									<div><strong>Caps Lock включен.</strong></div>
+									<div>Пароль может быть введен неверно.</div>
 								</div>
 								{% ENDIF %}
 							</div>
@@ -330,7 +330,7 @@
 		</span>
 		<span class="price__now cartSumNow">{CART_SUM_NOW | money_format}</span>
 		<a class="removeAll" href="{CART_TRUNCATE_URL}" onclick="removeFromCartAll($(this))" title="Очистить корзину">
-			<i class="material-icons">disabled_by_default</i>
+			<i class="icon-close"></i>
 		</a>
 	</div>
 	<div class="addto__items">
@@ -361,7 +361,7 @@
 				<div class="addto__actions">
 					<!-- Удаление -->
 					<a class="addto__remove remove flex-center" href="{cart_items.ORDER_LINE_DELETE_URL}" data-qty="{cart_items.ORDER_LINE_QUANTITY}" title="Удалить позицию" data-id="{cart_items.GOODS_ID}" onclick="removeFromCart($(this))">
-						<i class="material-icons">close</i>
+						<i class="icon-close"></i>
 					</a>
 				</div>
 			</div>

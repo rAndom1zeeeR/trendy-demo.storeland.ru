@@ -106,7 +106,7 @@
     </tr>
   </table>
   <div class="client__buttons">
-    <a href="{CLIENT_ORDER_INFO_URL}" class="button><span>Cтраница заказа</span></a>
+    <a class="button" href="{CLIENT_ORDER_INFO_URL}"><span>Cтраница заказа</span></a>
   </div>
   <div style="margin: 1rem 0;width: 100%;"></div>
   {% IFNOT order_lines_empty %}
@@ -172,9 +172,9 @@
     </table>
   </div>
   <div class="client__buttons">
-    <a href="{USER_HISTORY_LIST_URL}" class="button title="Назад к списку моих заказов"><span>Назад</span></a>
+    <a class="button" href="{USER_HISTORY_LIST_URL}" title="Назад к списку моих заказов"><span>Назад</span></a>
     {% IF CLIENT_ORDER_NUM %}
-      <form action="{USER_ORDER_REPEAT_URL}/{CLIENT_ORDER_NUM}" method="GET" style="display: inline-block;"><button  type="submit" title="Повторить заказ" class="button><span>Повторить заказ</span></button></form>
+      <form action="{USER_ORDER_REPEAT_URL}/{CLIENT_ORDER_NUM}" method="GET" style="display: inline-block;"><button  type="submit" title="Повторить заказ" class="button"><span>Повторить заказ</span></button></form>
     {% ENDIF %}
   </div>
   {% ENDIF %}

@@ -1446,7 +1446,7 @@ function addTo() {
 											'</div>' +
 										'</div>' +
 										'<div class="addto__actions flex">' +
-											'<a href="'+ delUrl +'?id='+ pDataMod +'" data-id="'+ pDataMod +'" class="addto__remove remove flex-center" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"><i class="material-icons">close</i></a>' +
+											'<a href="'+ delUrl +'?id='+ pDataMod +'" data-id="'+ pDataMod +'" class="addto__remove remove flex-center" title="Убрать товар из списка сравнения" onclick="removeFromCompare($(this))"><i class="icon-close"></i></a>' +
 										'</div>' +
 									'</div>' +
 								'</div>' +
@@ -1639,7 +1639,7 @@ function addTo() {
 										'</div>' +
 									'</div>' +
 									'<div class="addto__actions flex">' +
-              			'<a href="'+ delUrl +'?id='+ pDataMod +'" data-id="'+ pDataMod +'" class="addto__remove remove flex-center" title="Убрать товар из списка избранного" onclick="removeFromFavorites($(this))"><i class="material-icons">close</i></a>' +
+              			'<a href="'+ delUrl +'?id='+ pDataMod +'" data-id="'+ pDataMod +'" class="addto__remove remove flex-center" title="Убрать товар из списка избранного" onclick="removeFromFavorites($(this))"><i class="icon-close"></i></a>' +
               		'</div>' +
               	'</div>' +
               '</div>' +
