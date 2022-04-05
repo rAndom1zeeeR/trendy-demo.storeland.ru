@@ -538,11 +538,11 @@ function openMenu() {
   });
 
   // Открытие каталога с сохранением вложенности
-  $('.catalog__item .open').on('click', function(event){
+  $('.catalog__open').on('click', function(event){
     event.preventDefault();
     var parent = $(this).closest('.parent');
     var sub = $(this).parent().next('.sub');
-    var open = $(this).closest('.open');
+    var open = $(this).closest('.catalog__open');
     if (parent.hasClass('opened')) {
       sub.slideUp(600);
       parent.removeClass('opened');
@@ -1199,13 +1199,18 @@ function priceDiff(obj,type) {
 function goodsModRest() {
 	$('.goodsModRestValue').each(function(){
 		var value = $(this).data('value');
-		if (value > 10) {
-			$(this).html('На складе много');
-			$(this).css('opacity', '1');
-		}else{
-			$(this).html('На складе мало');
+		if (value > 0 && value < 11) {
+			$(this).text('В наличии мало');
 			$(this).css('opacity', '1');
 			$(this).parent().addClass('few');
+		}else if (value > 10) {
+			$(this).text('В наличии много');
+			$(this).css('opacity', '1');
+			$(this).parent().addClass('alot');
+		}else if (value == 0) {
+			$(this).text('нет в наличии');
+			$(this).css('opacity', '1');
+			$(this).parent().addClass('zero');
 		}
 	});
 }
@@ -2190,16 +2195,40 @@ function catalog() {
 	// 	$(this)[0].form.submit();
 	// });
 
+	// Открытие сортировки и показать по
+  $('.select label').on('click',function(){
+		if(!$(this).parent().hasClass('opened')){
+			$(this).parent().addClass('opened');
+		}
+  });
+  // Закрытие сортировки и показать по
+  $(document).mouseup(function (e){
+    let selectDown = $(".select .select__items");
+    if (!selectDown.is(e.target)) {
+      selectDown.parent().removeClass('opened');
+      setTimeout(function(){
+        selectDown.parent().addClass('clicked');
+      }, 1);
+    }
+  });
+  // Обновление названия сортировки
+  let selectText = $('.select .select__items a.active span').text();
+  let lengthText = selectText.length;
+  if (lengthText == '0' ){
+    selectText = 'Название сортировки';
+  }
+  $('.toolbar .sort-by.select .select__value span').text(selectText);
+
 	// Боковое меню сохранение открытой вложенности
-	$('.collapsible:not(".active")').find('.collapsible__content').css('display', 'none');
-	$('.collapsible.active').find('.collapsible__content').css('display', 'block');
+	// $('.collapsible:not(".active")').find('.collapsible__content').css('display', 'none');
+	// $('.collapsible.active').find('.collapsible__content').css('display', 'block');
 	$('.collapsible__click').on('click', function(event){
 		event.preventDefault();
 		if ($(this).closest('.collapsible').hasClass('active')) {
-			$(this).parent().find('.collapsible__content').slideUp(600);
+			$(this).parent().find('.collapsible__content').slideDown(600);
 			$(this).closest('.collapsible').removeClass('active');
 		} else {
-			$(this).parent().find('.collapsible__content').slideDown(600);
+			$(this).parent().find('.collapsible__content').slideUp(600);
 			$(this).closest('.collapsible').addClass('active');
 		}
 	});
@@ -2212,8 +2241,6 @@ function catalog() {
 		checkboxes.prop('checked', false).attr('checked', false);
 		$('.form__filters')[0].submit();
 	});
-
-	
 
 	function prodPromo() {
 		var id = $('.products__promo');
@@ -3353,7 +3380,6 @@ $(document).ready(function(){
 	mobile();
 	counterDate();
 	newsCarousel();
-	openCatalog();
   // Ленивая загрузка
   $(function(){
     var observer = lozad(); // lazy loads elements with default selector as '.lozad'
@@ -3608,3 +3634,35 @@ function hoverImage(){
 
 	})
 }
+
+// Функция наведения на категории
+function hoverCatalog(){
+	
+	$('.sideСatalog').each(function(){
+		var t = $(this);
+		var content = t.find('.sideСatalog__content');
+		var height = $('.slider__item').height()
+
+		if(height == undefined){
+			var height = 500
+		}
+
+		// Скрываем кнопку если мало категорий. Сравниваем размеры по слайдеру
+		if(content.height() >= height) {
+			$('.sideСatalog').append('<div class="sideСatalog__more"><i class="icon-arrow_down"></i></div>');
+			
+			var button = t.find('.sideСatalog__more');
+			
+			// Показать больше категорий
+			button.on('click', function(){
+				$(this).toggleClass('active')
+				content.toggleClass('active')
+			})
+		}
+
+
+	})
+
+}
+
+hoverCatalog()
