@@ -935,15 +935,7 @@ function slideShow() {
 		pullDrag: true,
 		animateOut: 'fadeOut',
     animateIn: 'fadeIn',
-		// onInitialized: counter,
-		// onChanged: counter
 	});
-
-	// function counter(event) {
-	// 	$('#slideshow .owl-dot').each(function(i){
-	// 		$(this).find('span').text(i+1)
-	// 	});
-	// }
 }
 
 // Новости
@@ -2203,7 +2195,7 @@ function catalog() {
   });
   // Закрытие сортировки и показать по
   $(document).mouseup(function (e){
-    let selectDown = $(".select .select__items");
+    var selectDown = $(".select .select__items");
     if (!selectDown.is(e.target)) {
       selectDown.parent().removeClass('opened');
       setTimeout(function(){
@@ -2212,8 +2204,8 @@ function catalog() {
     }
   });
   // Обновление названия сортировки
-  let selectText = $('.select .select__items a.active span').text();
-  let lengthText = selectText.length;
+  var selectText = $('.select .select__items a.active span').text();
+  var lengthText = selectText.length;
   if (lengthText == '0' ){
     selectText = 'Название сортировки';
   }
@@ -2438,14 +2430,14 @@ function pageGoods() {
 		var dots = id.find('.owl-dots');
 		carousel.owlCarousel({
 			items: 5,
-			margin: 16,
+			margin: 0,
 			loop: false,
 			rewind: true,
 			lazyLoad: true,
 			nav: true,
 			navContainer: buttons,
 			navText: [ , ],
-			dots: true,
+			dots: false,
 			dotsContainer: dots,
 			autoHeight: false,
 			autoHeightClass: 'owl-height',
@@ -2461,7 +2453,7 @@ function pageGoods() {
 				0:{items:1, autoHeight: true},
 				320:{items:1, autoHeight: true},
 				480:{items:2},
-				640:{items:2},
+				640:{items:3},
 				768:{items:3},
 				992:{items:4},
 				1200:{items:5}
@@ -2477,17 +2469,17 @@ function pageGoods() {
 		var buttons = id.find('.owl-nav');
 		var dots = id.find('.owl-dots');
 		carousel.owlCarousel({
-			items: 4,
-			margin: 16,
+			items: 5,
+			margin: 0,
 			loop: false,
 			rewind: true,
 			lazyLoad: true,
 			nav: true,
 			navContainer: buttons,
 			navText: [ , ],
-			dots: true,
+			dots: false,
 			dotsContainer: dots,
-			autoHeight: true,
+			autoHeight: false,
 			autoHeightClass: 'owl-height',
 			autoplay: false,
 			autoplayHoverPause: true,
@@ -2501,10 +2493,10 @@ function pageGoods() {
 				0:{items:1, autoHeight: true},
 				320:{items:1, autoHeight: true},
 				480:{items:2},
-				640:{items:2},
+				640:{items:3},
 				768:{items:3},
-				992:{items:3},
-				1200:{items:4}
+				992:{items:4},
+				1200:{items:5}
 			}
 		});
 	}
@@ -2540,22 +2532,29 @@ function pageGoods() {
 	// Переключение для Положительный и Отрицательный отзыв
 	$('.opinion__nav a').on('click', function(){
     if($(this).hasClass('goodOpinions')){
-      $('.good').show();
-      $('.bad').hide();
+      $('.good').removeClass('hide');
+      $('.bad').removeClass('show');
+      $('.good').addClass('show');
+      $('.bad').addClass('hide');
+			$('.opinion__buttons').hide();
 			$('.opinion__nav a').removeClass('active')
 			$(this).addClass('active')
     } else if($(this).hasClass('badOpinions')){
-      $('.good').hide();
-      $('.bad').show();
+      $('.good').removeClass('show');
+      $('.bad').removeClass('hide');
+      $('.good').addClass('hide');
+      $('.bad').addClass('show');
+			$('.opinion__buttons').hide();
 			$('.opinion__nav a').removeClass('active')
 			$(this).addClass('active')
     } else {
-      $('.bad').show();
-      $('.good').show();
+      $('.good, .bad').removeClass('show');
+      $('.good, .bad').removeClass('hide');
+			$('.opinion__buttons').show();
 			$('.opinion__nav a').removeClass('active')
 			$(this).addClass('active')
     }
-  })
+  });
 
 	// Добавление отзыва о товаре. Рейтинг
 	if($('.goodsOpinionRating').length){
@@ -2638,30 +2637,23 @@ function pageGoods() {
 		}
 	});
 
-	// Перейти к описанию
-	$('.productView__goto').on('click', function(event){
-		event.preventDefault();
-		$('html, body').animate({scrollTop : jQuery('.productView__tabs').offset().top - 60}, 500);
-	})
-
-	// Счетчик доп товаров
+	// Показать все доп изображения
 	function thumbs(){
 		var thumbCount = $('.thumblist__item').length
 		var thumbVisible = $('.thumblist__item:visible').length
-		var thumbSum = parseInt(thumbCount) - parseInt(thumbVisible)
-		if (thumbCount > thumbVisible) {
-			$('.thumblist__item').removeClass('last')
-			$('.thumblist__item').eq(thumbVisible - 1).addClass('last')
-			$('.thumblist__item').eq(thumbVisible - 1).find('a').attr('data-count', '+' + thumbSum)
-			$('.thumblist__item').eq(thumbVisible - 2).find('a:before').show();
-		}else{
-			$('.thumblist__item').removeClass('last')
+		var thumbButtons = $('.thumblist__buttons')
+		if(thumbCount > thumbVisible){
+			thumbButtons.show();
+			thumbButtons.find('a').on('click', function(event){
+				event.preventDefault();
+				$(this).toggleClass('active')
+				$(this).parents().find('.thumblist__item').toggleClass('show')
+				$(this).parents().find('.thumblist__items').toggleClass('justify-start')
+			})
 		}
+		
 	}
 	thumbs();
-	$(window).resize(function(){
-		thumbs();
-	});
 
 }
 
@@ -2672,12 +2664,14 @@ function initTabs() {
 	if(!tabs.length) {
 		return false;
 	}
+	// Добавляем аткивные классы на первый элемент
+	tabs.find('[data-tab]').first().addClass('active');
+	tabs.find('[data-tab-content]').first().addClass('active');
 	// Проверяет хэш и если по нему была открыта вкладка, то эта функция автоматически откроет её.
 	checkTabHash();
-	// Если текущий адрес страницы предполагает добавление отзыва
-	if('#goodsDataOpinionAdd' == document.location.hash) {
-		$('#goodsDataOpinionAddBlock').show();
-		$('html, body').animate({scrollTop : jQuery('.goodsDataOpinion').offset().top - 160}, 400);
+	// Если используется хеш, то скролим до контента
+	if(document.location.hash !== '') {
+		$('html, body').animate({scrollTop : jQuery('.tabs__content').offset().top - 68}, 600);
 	}
 	// Биндим изменение хэша - проверка какой таб нужно открыть.
 	$(window).bind('hashchange', function() { checkTabHash(); });

@@ -154,7 +154,7 @@
 .icon-grid_hover:before {
   content: "\e92a";
 }
-.icon-tick_in_circle:before {
+.icon-check_circle:before {
   content: "\e92b";
 }
 .icon-unlock:before {
