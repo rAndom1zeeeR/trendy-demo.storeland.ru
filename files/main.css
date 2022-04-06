@@ -69,8 +69,8 @@ ol.unstyled, ul.unstyled {margin: 0;padding: 0;list-style: none;}
 /**************************************/
 /*** Инпут поля ***/
 /**************************************/
-input, select, textarea {width: 100%;height: 3rem;padding: 0 1rem;color: #151B22;background-color: transparent;border-color: #151B22;border-width: 2px;border-style: solid;border-radius: 10px;outline: 0;font-size: 14px;font-weight: 400;font-family: 'Montserrat', sans-serif;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
-input:focus, select:focus, textarea:focus {border-color: #0172DB;}
+input, select, textarea {width: 100%;height: 3rem;padding: 0 1rem;color: #151B22;background-color: transparent;border-color: #0172DB;border-width: 2px;border-style: solid;border-radius: 10px;outline: 0;font-size: 14px;font-weight: 400;font-family: 'Montserrat', sans-serif;-webkit-appearance: none;-moz-appearance: none;appearance: none;}
+input:focus, select:focus, textarea:focus {border-color: #151B22;}
 textarea {height: auto;padding-top: 1rem;resize: vertical;}
 select {cursor: pointer;}
 input.error {border-color: red;}
@@ -412,16 +412,39 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 /*** Страница: Связь с администрацией ***/
 /**************************************/
-.client .form__pp {text-align: left;padding: 0;}
-.page-feedback .maps {width: 100%;margin-top: 2rem;}
+.client .form__pp {text-align: left;padding: 1rem 0 0 0;}
 /* Страница: Связь с администрацией. Контакты */
 .page-feedback .contacts__content {margin: 0;padding: 0;list-style: none;width: 100%;}
-.page-feedback .contacts__block {width: 100%;}
-.page-feedback .contacts__block:first-child {padding-top: 0;}
+.page-feedback .contacts__block {width: 100%;margin-bottom: 2rem;}
+.page-feedback .contacts__block.phone .flex + .flex {margin-top: 1rem;}
 .page-feedback .contacts__block label {display: none;}
 .page-feedback .contacts__block-link {white-space: normal;max-width: 100%;}
 .page-feedback .contacts__block-link + .contacts__block-link {margin-top: .5rem;}
-.page-feedback input {font-size: 13px;}
+.page-feedback .client__blocks {margin-top: 2rem;}
+.page-feedback .client__block:first-child {width: 300px;flex-grow: 0;}
+.page-feedback .client__block {flex-grow: 1;}
+
+.page-feedback .form__fields {width: calc(33.333333% - 2rem);margin: 1rem;}
+.page-feedback .feedbackForm {padding: 1rem 0rem;box-shadow: 5px 0px 30px 0px #8187BD26;}
+.page-feedback textarea {height: 172px;}
+
+@media (max-width: 991px) {
+	.page-feedback .client__block:first-child {width: 100%;flex-grow: 1;margin-bottom: 2rem;}
+	.page-feedback .contacts__block {width: 50%;margin: 2rem 0 0 0;}
+	.page-feedback .contacts {display: flex;flex-wrap: wrap;align-items: flex-start;}
+}
+
+@media (max-width: 767px) {
+	.page-feedback .form__fields {width: calc(50% - 2rem);}
+	.page-feedback .form__fields:last-child {width: 100%;max-width: 100%;}
+}
+@media (max-width: 639px) {
+	.page-feedback .form__fields {width: 100%;max-width: 100%;}
+	.page-feedback .contacts__block {width: 100%;margin: 2rem 0 0 0;}
+}
+
+
+
 
 
 /**************************************/
@@ -791,8 +814,11 @@ footer a {color: #F6F6F6;display: block;padding: .75rem 0;}
 /*** Подвал. Контакты ***/
 footer .contacts__block {padding: .5rem 0;}
 footer .contacts__block-label {display: none;}
-footer .contacts__block-link {font-size: 1.125rem;padding: .25rem 0;}
 footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
+.contacts__block-label {font-size: 1.125rem;font-weight: bold;margin-bottom: 1rem;width: 100%;}
+.contacts__block-icon {font-size: 1.5rem;line-height: 1;margin-right: .5rem;}
+.contacts__block-link {font-size: 1.125rem;padding: .25rem 0;}
+.contacts__block-content {width: calc(100% - 2rem);}
 /*** Подвалю. Иконки ***/
 .footer__icons span {display: none;}
 .footer__icons a {margin: .5rem 1rem 0 0;padding: 0;}
@@ -1424,8 +1450,6 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 .opinion__block {margin-bottom: 1rem;}
 .opinion__block:last-child {margin-bottom: 0;}
 .opinion__block label {display: none;}
-.opinion__block input, .opinion__block textarea {border-color: #0172DB;}
-.opinion__block input:focus, .opinion__block textarea:focus {border-color: #151B22;}
 .opinion__label {margin-right: .5rem;}
 .goodsOpinionRating.loading {height: 1.5rem;display: none;}
 .generally input {display: none;}
