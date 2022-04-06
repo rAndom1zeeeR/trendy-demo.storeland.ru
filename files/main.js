@@ -719,52 +719,32 @@ function notyStart(text, type) {
 // Отсчет даты до окончания акции
 function counterDate() {
 	// Устанавливаем дату обратного отсчета ММ-ДД-ГГ
-	var end = $('.counter').attr('end');
-	var countDownDate = new Date(end).getTime();
-	// Обновление счетчика каждую секунду
-	var x = setInterval(function() {
-		var now = new Date().getTime();
-		var distance = countDownDate - now;
-		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-		// Вывод
-		$('.counter .days span').text(days);
-		$('.counter .hours span').text(hours);
-		$('.counter .minutes span').text(minutes);
-		$('.counter .seconds span').text(seconds);
-		// Счетчик завершен
-		if (distance < 0) {
-			clearInterval(x);
-			$('.counter').hide();
-		}
-		// Запуск Функции анимации
-		counterAnimate('.banner__counter > div')
-		counterAnimate('.product__counter > div')
-	}, 1000);
-	// Добавляем контент анимации
-	$('.banner__counter > div').append('<svg width="52" height="52"><circle class="svg-figure" stroke-dasharray="151" cx="26" cy="26" r="24" transform="rotate(-90, 26, 26)"/></svg>');
-	// $('.product__counter > div').append('<svg width="100%" height="100%"><rect class="svg-figure" stroke-dasharray="255" x="0" y="0" width="100%" height="100%" transform="rotate(0, 32, 32)"/></svg>');
-	// Функция анимации счетчика
-	function counterAnimate(obj){		
-		$(obj).each(function(){
-			var item = $(this).find('.svg-figure');
-			var value = $(this).find('span').text();
-			var limit = item.attr('stroke-dasharray')
-			if ($(this).hasClass('days')){
-				var time = 365;
-			}else if ($(this).hasClass('hours')){
-				var time = 24;
-			}else{
-				var time = 60;
+	$('.product__counter').each(function(){		
+		var t = $(this);
+		var end = t.attr('end');
+		var countDownDate = new Date(end).getTime();
+		// Обновление счетчика каждую секунду
+		var x = setInterval(function() {
+			var now = new Date().getTime();
+			var distance = countDownDate - now;
+			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+			// Вывод
+			t.find('.days span').text(days);
+			t.find('.hours span').text(hours);
+			t.find('.minutes span').text(minutes);
+			t.find('.seconds span').text(seconds);
+			// Счетчик завершен
+			if (distance < 0) {
+				clearInterval(x);
+				t.find('div span').text('0');
 			}
-			var current = parseInt(value/time * limit)
-			item.attr('stroke-dashoffset', current)
-			item.attr('stroke-dasharray', limit)
-		})
-	}
+		}, 1000);
+	})
 }
+
 
 // Функция показать все для "Товары на главной"
 function pdtSale(){
@@ -3577,7 +3557,7 @@ function discountEndDay(){
 		if(days < 0){
 			var text = 'Акция завершена'
 		}else{
-			var text = 'Осталось ' + days + ' дн' + genWordEnd(days, 'ь', 'я', 'ей')
+			var text = 'Осталось ' + days + ' д' + genWordEnd(days, 'ень', 'ня', 'ней')
 		}
 		// Обновляем остаток дней
 		$(this).find('.promotion__end').text(text)

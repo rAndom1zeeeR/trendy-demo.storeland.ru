@@ -1066,19 +1066,19 @@
 									<!-- Счетчик обратного отсчета. end дата окончания акции в формате Месяц:День:Год Часы:Минуты:Секунды -->
 									<div class="product__counter counter flex-center" end="{index_page_sale_goods.MAX_DISCOUNT_EXPIRED_AT | date('m/d/Y H:i:s')}" now="{CURRENT_TIME | date('m/d/Y H:i:s')}">
 										<div class="days">
-											<span>00</span>
+											<span>0</span>
 											<label>дн</label>
 										</div>
 										<div class="hours">
-											<span>00</span>
-											<label>час</label>
+											<span>0</span>
+											<label>ч</label>
 										</div>
 										<div class="minutes">
-											<span>00</span>
+											<span>0</span>
 											<label>мин</label>
 										</div>
 										<div class="seconds">
-											<span>00</span>
+											<span>0</span>
 											<label>сек</label>
 										</div>
 									</div>
@@ -2044,7 +2044,7 @@
 					{% ENDIF catalog %}
 
 					<!-- Правая часть -->
-					<div class="main__right {% IF MOD_LNAME = catalog %}has-sidebar{% ENDIF %}">
+					<div class="main__right {% IF MOD_LNAME = catalog || MOD_LNAME = search || MOD_LNAME = discount %}has-sidebar{% ENDIF %}">
 						
 						<div id="page__title">
 							<!-- Хлебные крошки -->
