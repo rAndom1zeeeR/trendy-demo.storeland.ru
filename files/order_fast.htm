@@ -7,7 +7,7 @@
   {% ELSE %}
 	  <div class="fastOrderForm flex-start">
 	    <form action="{ORDER_STAGE_CONFIRM_WITHOUT_DOMAIN_URL}" method="post" class="fastOrder__form" novalidate="novalidate">
-				<div class="fastOrder__content">
+				<div class="fastOrder__content flex-start">
 
 					<!-- Способ доставки-->
 					<div class="delivery" order="1">
@@ -305,7 +305,7 @@
 				<!-- Корзина: Оформление -->
 				<div class="total__buttons">
 			    <input type="hidden" name="hash" value="{HASH}" />
-					<a id="makeOrder" class="button disabled" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></a>
+					<a class="button disabled" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></a>
 					<div class="total__pp">
 						<span>Нажимая на кнопку &laquo;Оформить заказ&raquo;, Вы соглашаетесь</span>
 						<a data-fancybox data-src="#fancybox__pp" href="javascript:;">с правилами обработки данных</a>

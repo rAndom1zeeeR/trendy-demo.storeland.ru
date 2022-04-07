@@ -3140,9 +3140,6 @@ function cartQuantity(){
 			$(this).val('1');
 			$(this).trigger('change');
 		}
-		setTimeout(function(){
-			priceDiff('.cart__item', 'diff');
-		}, 1000);
 	}));
 	quantity();
 }
@@ -3159,7 +3156,6 @@ function cartDelete(s){
 			success:function(d){
 				$('.page-cartTable').html($(d).find('.page-cartTable').html());
 				cartQuantity();
-				priceDiff('.cart__item', 'diff');
 				cartMinSum()
 				$('#startOrder').on('click', function() {
 					startOrder();
@@ -3191,6 +3187,7 @@ function startOrder(){
 	closeOrder.addClass('show');
 	$('.cart__clear').hide();
 	startOrder.hide();
+	$('#makeOrder').show();
 	$.ajax({
 		type: "POST",
 		cache: false,
@@ -3212,6 +3209,7 @@ function startOrder(){
 				globalOrder.hide();
 				closeOrder.removeClass('show');
 				startOrder.show();
+				$('#makeOrder').hide();
 				$('.cart__clear').show();
 				$('html, body').delay(400).animate({scrollTop : jQuery('#globalOrder').offset().top}, 800);
 				return false;
@@ -3387,7 +3385,6 @@ $(document).ready(function(){
 	quickViewMod();
 	goodsModRest();
 	priceDiff('.product__item', 'percent');
-	priceDiff('.cart__item', 'diff');
 	addCart();
 	addTo();
 	hoverImage();

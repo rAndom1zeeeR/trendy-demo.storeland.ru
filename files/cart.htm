@@ -11,6 +11,7 @@
 				<div class="cart__items">
 					{% FOR cart_items %}
 					<div class="cart__item flex" data-id="{cart_items.GOODS_MOD_ID}">
+						<a class="cart__name hidden" href="{cart_items.GOODS_URL}">{cart_items.GOODS_NAME}</a>
 						<a class="cart__image flex-center" href="{cart_items.GOODS_URL}">
 							<img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=florist{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}">
 						</a>
@@ -18,27 +19,29 @@
 							<div class="cart__info">
 								<a class="cart__name" href="{cart_items.GOODS_URL}">{cart_items.GOODS_NAME}</a>
 								<!-- Если у товара есть отличительные свойства для модификации товара, допишем их к названию товара -->
-								{% IF cart_items.GOODS_MOD_ART_NUMBER %}
+								<!-- {% IF cart_items.GOODS_MOD_ART_NUMBER %}
 								<div class="cart__art">
 									<label>Артикул:</label>
 									<span>{cart_items.GOODS_MOD_ART_NUMBER}</span>
 								</div>
-								{% ENDIF %}
+								{% ENDIF %} -->
 								{% IFNOT cart_items.distinctive_properties_empty %}
+								<div class="row">
 									{% FOR distinctive_properties %}
 									<div class="cart__prop flex">
 										<label>{cart_items.distinctive_properties.NAME}:</label>
 										<span>{cart_items.distinctive_properties.VALUE}</span>
 									</div>
 									{% ENDFOR %}
+								</div>
 								{% ENDIF %}
 							</div>
 							<div class="cart__actions flex">
 								<div class="cart__qty">
 									<div class="qty flex-center">
-										<a href="javascript:void(0)" class="qty__minus flex-center unselectable" title="Уменьшить"><i class="material-icons">remove</i></a>
+										<a href="javascript:void(0)" class="qty__minus flex-center unselectable" title="Уменьшить"><i class="icon-minus"></i></a>
 										<input type="text" name="form[quantity][{cart_items.GOODS_MOD_ID}]" maxlength="4" value="{cart_items.ORDER_LINE_QUANTITY}" max="{cart_items.GOODS_MOD_REST_VALUE}" title="Количество, {cart_items.GOODS_MOD_MEASURE_NAME}" class="cartqty" onkeypress="return keyPress(this, event);" onpaste="return false;" autocomplete="off" />
-										<a href="javascript:void(0)" class="qty__plus flex-center unselectable" title="Увеличить"><i class="material-icons">add</i></a>
+										<a href="javascript:void(0)" class="qty__plus flex-center unselectable" title="Увеличить"><i class="icon-plus"></i></a>
 									</div>
 								</div>
 								<div class="cart__price {CURRENCY_CHAR_CODE}">
@@ -47,17 +50,22 @@
 									{% IF cart_items.ORDER_LINE_PRICE_OLD > cart_items.ORDER_LINE_PRICE_NOW %}
 									<div class="price__old">{cart_items.ORDER_LINE_PRICE_OLD | money_format}</div>
 									{% ENDIF %}
-									<div class="ico__sales"><span>Скидка </span><span class="num"></span></div>
 								</div>
 							</div>
 							<!-- Удалить -->
-							<a class="cart__delete flex-center remove" data-href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить позицию" onclick="cartDelete($(this))">
+							<a class="cart__remove flex-center remove" data-href="{cart_items.ORDER_LINE_DELETE_URL}" title="Удалить позицию" onclick="cartDelete($(this))">
 								<i class="icon-close"></i>
 								<span>Удалить</span>
 							</a>
 						</div>
 					</div>
 					{% ENDFOR %}
+				</div>
+				<div class="cart__buttons">
+					<a href="{CART_TRUNCATE_URL}" class="cart__clear button4 flex" title="Очистить корзину" onclick="return confirm('Вы действительно хотите удалить все товары из корзины?')">
+						<i class="icon-arrow_round"></i>
+						<span>Очистить корзину</span>
+					</a>
 				</div>
 			</form>
 
@@ -70,24 +78,9 @@
 		
 		<!-- Корзина: Итоговый блок -->
 		<div class="cartTotal">
-			<div class="cartTotal__min flex">
-				<div class="cartTotal__min-icon">
-					<i class="material-icons">local_shipping</i>
-				</div>
-				<div class="cartTotal__min-content">
-					<div class="cartTotal__min-title">{% IF SETTINGS_STORE_ORDER_MIN_ORDER_PRICE > CART_SUM_NOW_WITH_DISCOUNT %}До мин. суммы заказа осталось{% ELSE %}Минимальная сумма заказа достингнута!{% ENDIF %}</div>
-					<div class="cartTotal__min-price price__now" data-price="{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE}">{SETTINGS_STORE_ORDER_MIN_ORDER_PRICE | money_format}</div>
-				</div>
-			</div>
 			<div class="cartTotal__items">
 				<!-- Корзина: Заголовок -->
-				<div class="cartTotal__item total__title flex justify-between">
-					<b>Ваш заказ</b>
-					<a href="{CART_TRUNCATE_URL}" class="cart__clear" title="Очистить корзину" onclick="return confirm('Вы действительно хотите удалить все товары из корзины?')">
-						<i class="icon-close"></i>
-						<!-- <span>Очистить </span><span>корзину</span> -->
-					</a>
-				</div>
+				<div class="cartTotal__title">Ваш заказ</div>
 				<!-- Корзина: Товары -->
 				<div class="cartTotal__item total__coupons flex justify-between">
 					<span class="cartTotal__label"><span>Товары ({CART_COUNT_TOTAL})</span></span>
@@ -120,7 +113,7 @@
 
 				<!-- Корзина: Итого -->
 				<div class="cartTotal__item total__cart flex justify-between">
-					<b>Общая стоимость: </b>
+					<b>Итого: </b>
 					<span class="total__price cartSumTotal price__now" data-value="{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT}">{CART_SUM_NOW_WITH_DELIVERY_AND_DISCOUNT | money_format}</span>
 					<div style="display: none;" class="total__price cartSumNow" data-value="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</div>
 					<div style="display: none;" class="total__price cartSumTotalHide" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
@@ -129,8 +122,9 @@
 
 				<!-- Корзина: Оформление -->
 				<div class="cartTotal__buttons total__buttons flex">
-					<a id="startOrder" class="button" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></a>
-					<a id="closeOrder" class="button2" title="Отменить заказ"><span>Отменить </span><span>заказ</span></a>
+					<a id="startOrder" class="button-secondary" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></a>
+					<a id="makeOrder" class="button disabled" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></a>
+					<a id="closeOrder" class="button2" title="Отменить заказ"><span>Изменить </span><span>заказ</span></a>
 					<div class="total__pp">
 						<span>Нажимая на кнопку &laquo;Оформить заказ&raquo;, Вы соглашаетесь</span>
 						<a data-fancybox data-src="#fancybox__pp" href="javascript:;">с правилами обработки данных</a>
