@@ -122,7 +122,7 @@
 
 						<!-- ЛК, Войти -->
 						<div class="header__block header__block-login dropdown">
-							<a class="header__block-link flex" href="{USER_LOGIN_URL}" title="Личный кабинет">
+							<a class="header__block-link dropdown__open flex" href="{USER_LOGIN_URL}" title="Личный кабинет">
 								<div class="header__block-content">
 									<span>{% IF CLIENT_IS_LOGIN %}ЛК{% ELSE %}Вход{% ENDIF %}</span>
 								</div>
@@ -162,7 +162,7 @@
 										</div>
 									</div>
 									<div class="client__buttons flex justify-between">
-										<a href="{USER_RECOVERY_URL}" class="button3">Забыли пароль?</a>
+										<a href="{USER_RECOVERY_URL}" class="">Забыли пароль?</a>
 										<a href="{USER_LOGIN_URL}" class="button-secondary" onclick="$('.form__client').submit()">Войти</a>
 									</div>
 									<div class="client__text">
@@ -256,7 +256,7 @@
 							<!-- Сравнение -->
 							{% IFNOT MOD_LNAME = compare && SETTINGS_COMPARE_DISABLE=0 %}
 							<div class="addto__block compare dropdown {% IF COMPARE_GOODS_COUNT > 0 %}has-items{% ENDIF %}">
-								<a class="addto__link" href="{COMPARE_URL}" title="Сравнение">
+								<a class="addto__link dropdown__open" href="{COMPARE_URL}" title="Сравнение">
 									<i class="icon-compare"></i>
 									<span class="addto__count count-compare" data-count="{COMPARE_GOODS_COUNT}">{COMPARE_GOODS_COUNT}</span>
 								</a>
@@ -300,7 +300,7 @@
 							
 							<!-- Избранное -->
 							<div class="addto__block favorites dropdown {% IF FAVORITES_GOODS_COUNT > 0 %}has-items{% ENDIF %}">
-								<a class="addto__link" href="{FAVORITES_URL}" title="Избранное">
+								<a class="addto__link dropdown__open" href="{FAVORITES_URL}" title="Избранное">
 									<i class="icon-favorites"></i>
 									<span class="addto__count count-favorites" data-count="{FAVORITES_GOODS_COUNT}">{FAVORITES_GOODS_COUNT}</span>
 								</a>
@@ -343,10 +343,9 @@
 							
 							<!-- Корзина -->
 							<div class="addto__block cart dropdown {% IF CART_COUNT_TOTAL > 0 %}has-items{% ENDIF %}">
-								<a class="addto__link cart__icon flex-center" href="{CART_URL}" title="Перейти в корзину">
+								<a class="addto__link cart__icon dropdown__open" href="{CART_URL}" title="Перейти в корзину">
 									<i class="icon-cart"></i>
 									<span class="addto__count count-cart" data-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
-									<!-- <span class="cartSumNow {CURRENCY_CHAR_CODE}">{CART_SUM_NOW | money_format}</span> -->
 								</a>
 								<!-- Выпадаюзая Корзина -->
 								<div class="addto__cart dropdown__content" data-content="cart">
@@ -1109,28 +1108,30 @@
 							<h3 class="title"><span>Вы смотрели</span></h3>
 							<div class="owl-nav"></div>
 						</div>
-						<div class="products__grid flex-stretch owl-carousel">
-							{% FOR recently_viewed_goods %}
-							{% IF recently_viewed_goods.first %}<div class="product__items">{% ENDIF %}
-							<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && recently_viewed_goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF recently_viewed_goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{recently_viewed_goods.ID}" itemscope itemtype="https://schema.org/Product">
-								<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{index_page_favorites_goods.MIN_PRICE_NOW_ID} goodsListForm">
-									<input type="hidden" name="hash" value="{HASH}" />
-									<input type="hidden" name="form[goods_from]" value="{index_page_favorites_goods.GOODS_FROM}" />
-									<input type="hidden" name="form[goods_mod_id]" value="{index_page_favorites_goods.MIN_PRICE_NOW_ID}" />
-									<input type="hidden" name="form[goods_id][{index_page_favorites_goods.ID}]" value="{index_page_favorites_goods.ID}" />
-									<link itemprop="image" href="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}" />
-									<!-- Изображение -->
-									<a class="product__img flex-center" href="{recently_viewed_goods.URL_MIN_PRICE_NOW | url_amp}" title="{recently_viewed_goods.NAME}" itemprop="url">
-										<noscript>
-											<img src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{recently_viewed_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{recently_viewed_goods.NAME}" />
-										</noscript>
-										<img class="lozad script__on" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{recently_viewed_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{recently_viewed_goods.NAME}" />
-									</a>
-								</form>
+						<div class="row">
+							<div class="products__grid flex-stretch owl-carousel">
+								{% FOR recently_viewed_goods %}
+								{% IF recently_viewed_goods.first %}<div class="product__items">{% ENDIF %}
+								<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && recently_viewed_goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF recently_viewed_goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{recently_viewed_goods.ID}" itemscope itemtype="https://schema.org/Product">
+									<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{index_page_favorites_goods.MIN_PRICE_NOW_ID} goodsListForm">
+										<input type="hidden" name="hash" value="{HASH}" />
+										<input type="hidden" name="form[goods_from]" value="{index_page_favorites_goods.GOODS_FROM}" />
+										<input type="hidden" name="form[goods_mod_id]" value="{index_page_favorites_goods.MIN_PRICE_NOW_ID}" />
+										<input type="hidden" name="form[goods_id][{index_page_favorites_goods.ID}]" value="{index_page_favorites_goods.ID}" />
+										<link itemprop="image" href="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}" />
+										<!-- Изображение -->
+										<a class="product__img flex-center" href="{recently_viewed_goods.URL_MIN_PRICE_NOW | url_amp}" title="{recently_viewed_goods.NAME}" itemprop="url">
+											<noscript>
+												<img src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{recently_viewed_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{recently_viewed_goods.NAME}" />
+											</noscript>
+											<img class="lozad script__on" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{recently_viewed_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{recently_viewed_goods.NAME}" />
+										</a>
+									</form>
+								</div>
+								{% IFNOT recently_viewed_goods.last %}{recently_viewed_goods.index | is_divided("2","</div><div class=product__items>","")}{% ENDIF %}
+									{% IF recently_viewed_goods.last %}</div>{% ENDIF %}
+								{% ENDFOR %}
 							</div>
-							{% IFNOT recently_viewed_goods.last %}{recently_viewed_goods.index | is_divided("2","</div><div class=product__items>","")}{% ENDIF %}
-								{% IF recently_viewed_goods.last %}</div>{% ENDIF %}
-							{% ENDFOR %}
 						</div>
 					</div>
 

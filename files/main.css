@@ -132,7 +132,7 @@ textarea.error:-ms-input-placeholder {color: red;}
 }
 
 /*** Иконки Новинка, Хит, Скидка ***/
-.product__ico {color: #F6F6F6;z-index: 2;}
+.product__ico {color: #F6F6F6;z-index: 2;position: relative;}
 .product__ico label {display: none;}
 .product__ico span {font-size: .875rem;margin: 0 .5rem .5rem 0;padding: .5rem .75rem;line-height: .875rem;border-radius: 10px;text-align: center;}
 .product__ico span:last-child {margin-right: 0 !important;}
@@ -175,7 +175,6 @@ button:hover, .button:hover, [class*="button-"]:hover, .paymentFormSubmitLink:ho
 .remove i, .fancybox-close-small i {transition: all 0.3s ease;display: inline-block;}
 .remove:hover i, .fancybox-close-small:hover i {transform: rotate(90deg);}
 
-.fancybox-button {background: rgba(30,30,30,.6);color: #ccc;padding: 10px;}
 
 /**************************************/
 /*** Рейтинг Товаров ***/
@@ -310,7 +309,7 @@ h6 {font-size: 0.875rem;}
 /*** Показать пароль ***/
 /**************************************/
 .form__pass {display: flex;align-items: center;position: relative;}
-.showPassBlock {position: absolute;right: .25rem;cursor: pointer;}
+.showPassBlock {position: absolute;top: .5rem;right: .25rem;cursor: pointer;}
 .showPassBlock:before {content: '\e922';margin-right: 0.5rem;color: #9E9E9E;font-size: 1.5rem;font-family: 'icomoon';vertical-align: middle;}
 .showPassBlock.active:before {content: '\e92c';}
 .showPassBlock .showPass {vertical-align: middle;display: none;}
@@ -322,7 +321,9 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 /*** Модальные окна ***/
 /**************************************/
-.fancybox-close-small {line-height: 1;font-size: 1.25rem;}
+.fancybox-button {background: rgba(30,30,30,.6);color: #ccc;padding: 10px;}
+.fancybox-slide--html .fancybox-close-small {}
+.fancybox-close-small {line-height: 1;font-size: 1.25rem;background: transparent;}
 .fancybox-close-small:hover {background: none;color: #0172DB;}
 .fancybox-content.modal {max-width: 24rem;}
 .fancybox-content {max-width: 50rem;padding: 2.75rem 2rem 2rem 2rem;background-color: #F6F6F6;border-radius: 10px;transition: all 0.3s ease;}
@@ -340,12 +341,12 @@ h6 {font-size: 0.875rem;}
 /*** Выпадающее обхекты ***/
 /**************************************/
 .dropdown {position: relative;}
-.dropdown__content {width: 500px;padding: 1rem;right: 0;top: 3rem;height: auto;background: #F6F6F6;border-radius: 10px;position: absolute;z-index: 11;}
+.dropdown__content {width: 500px;padding: 1rem;right: 0;top: 3rem;height: auto;background: #F6F6F6;border-radius: 10px;position: absolute;z-index: 11;box-shadow: 5px 0px 30px 0px rgb(129 135 189 / 15%);}
 .dropdown__content {display: block;transform: scale(1,0);transform-origin: right top;transition: all 0.3s ease-in-out;}
 .opened .dropdown__content, .dropdown__content.opened {transform: scale(1);}
 .dropdown__open {position: relative;cursor: pointer;}
 @media all and (min-width: 992px) {
-	.dropdown .dropdown__open:before {content: "";right: 0;bottom: -4rem;height: 5rem;width: 100%;display: block;position: absolute;}
+	.dropdown .dropdown__open:before {content: "";right: 0;bottom: -1rem;height: 2rem;width: 100%;display: block;position: absolute;}
 	.dropdown:hover .dropdown__content {transform: scale(1);}
 }
 @media (max-width: 991px) {
@@ -391,6 +392,7 @@ h6 {font-size: 0.875rem;}
 .client .form__fields label {display: none;}
 .client .form__fields {max-width: 360px;}
 .client__buttons {width: 100%;}
+.client__buttons .button {margin: 1rem 1rem 0 0;}
 @media all and (max-width: 1199px) {
 .client__blocks {width: 100%;}
 .client__blocks + .client__blocks {margin-top: 2rem;}
@@ -450,7 +452,7 @@ h6 {font-size: 0.875rem;}
 /*** Страницы новостей ***/
 /**************************************/
 /*** Страница: Список новостей ***/
-.news__list .news__item {margin-bottom: 2rem;padding: 1.5rem;border: 1px solid #9E9E9E;width: 100%;}
+.news__list .news__item {margin-bottom: 2rem;padding: 1.5rem;border: 1px solid #9E9E9E;width: 100%;border-radius: 10px;}
 .news__list .news__item:last-child {margin-bottom: 0;}
 .news__list .news__title {margin: 0 0 1rem 0;font-weight: bold;display: block;}
 .news__list .news__text {word-break: break-all;font-size: 0.875rem;}
@@ -463,7 +465,7 @@ h6 {font-size: 0.875rem;}
 /*** Страница: Просмотр новости ***/
 .newsListBlockItemFiles {margin-top: 1rem;overflow: hidden;word-break: break-all;}
 .page-news .news__date {position: relative;text-align: right;margin-top: 1rem;}
-.page-news .htmlDataBlock {padding: 1.5rem;border: 1px solid #9E9E9E;}
+.page-news .htmlDataBlock {padding: 1.5rem;border: 1px solid #9E9E9E;border-radius: 10px;}
 .page-news .htmlDataBlock img {margin-bottom: 1rem;}
 
 
@@ -1053,11 +1055,14 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 #pdt__sales .ratings__label, #pdt__sales .ratings__count {font-size: .875rem;}
 #pdt__sales .product__counter {width: calc(100% - 260px);border-radius: 0px 0px 10px 0px;}
 /*** . Адаптивность ***/
+@media (min-width: 992px) and (max-width: 1199px) {
+	#pdt__sales .product__addCart a i {display: none;}
+}
 @media (max-width: 1199px) {
 	#pdt__sales .product__image {width: 200px;}
 	#pdt__sales .product__img {height: 200px;}
 	#pdt__sales .product__shop {width: calc(100% - 200px);padding: 1rem;}
-	#pdt__sales .product__links {width: 200px;justify-content: space-between;padding: .625rem 1rem;}
+	#pdt__sales .product__links {width: 200px;justify-content: space-between;padding: .625rem;}
 	#pdt__sales .product__counter {width: calc(100% - 200px);}
 	#pdt__sales .product__counter div {padding: .5rem;}
 	#pdt__sales .product__ico {padding: .5rem .5rem 0 .5rem;}
@@ -1091,19 +1096,17 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 .viewed .product__img img {border-radius: 10px;}
 @media (min-width: 992px) {
 	.index .viewed .products__grid {margin-top: -1rem;}
-	.index .viewed .product__img {height: 116px;}
+	.index .viewed .product__img {height: 132px;}
 	.index .viewed .owl-item .product__items {padding: 1rem;}
 	.index .viewed .owl-item.active .product__items {padding-left: 2rem;padding-right: 0;}
 	.index .viewed .owl-item.active + .active .product__items {padding-right: 2rem;padding-left: 0;}
-}
-@media (max-width: 991px) {
-	#body .body {width: 100%;padding: 0;}
-	#body .viewed {width: 100%;margin-top: 2rem;}
 }
 @media (max-width: 1199px) {
 	.viewed .product__img {height: 92px;}
 }
 @media (max-width: 991px) {
+	#body .body {width: 100%;padding: 0;}
+	#body .viewed {width: 100%;margin-top: 2rem;}
 	.viewed .product__img {height: 115px;}
 }
 @media (max-width: 767px) {
@@ -1141,17 +1144,25 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 	#news .news__image img {max-height: 288px;}
 }
 @media (max-width: 991px) {
-	#news .news__image {height: 213px;}
-	#news .news__image img {max-height: 213px;}
+	#news .news__image {height: 214px;}
+	#news .news__image img {max-height: 214px;}
 }
 @media (max-width: 767px) {
-	#news .news__image {height: 181px;}
-	#news .news__image img {max-height: 181px;}
+	#news .news__image {height: 182px;}
+	#news .news__image img {max-height: 182px;}
 }
 @media (max-width: 639px) {
+	#news .news__image {height: 208px;}
+	#news .news__image img {max-height: 208px;}
 	#news .tabs__nav {font-size: 1.125rem;}
 	#news .owl-nav [class^="owl-"] {top: -4rem;}
 	#news .tabs__navs {flex-wrap: nowrap;width: calc(100% - 6rem);margin: 0 auto 2rem;overflow-y: auto;justify-content: flex-start;}
+}
+@media (max-width: 479px) {
+	#news .news__image {height: 288px;}
+	#news .news__image img {max-height: 288px;}
+	#news .news__title {max-height: 42px;height: auto;}
+	#news .news__desc {max-height: 76px;height: auto;margin-top: 1rem;}
 }
 
 
@@ -1607,7 +1618,69 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 
 
 
+/**************************************/
+/*** Страница: Сравнение ***/
+/**************************************/
+.CompareGoods .buttons {margin: 2rem 0 0;}
+.CompareGoods .buttons i {margin-right: 6px;vertical-align: middle;}
+.CompareGoods .buttons span {margin-left: 3px;vertical-align: middle;}
+.CompareGoods__nav {width: 100%;margin-bottom: 2rem;position: relative;display: flex;align-items: center;flex-wrap: wrap;justify-content: space-between;}
+.CompareGoods__nav .owl-nav {position: relative;}
+.CompareGoods__filter {display: -ms-flexbox;display: -webkit-flex;display: flex;line-height: 30px;}
+.CompareGoods__filter .button {padding: 0 1rem;}
+.CompareGoods__filter .hide {margin-left: 3px;}
+.CompareGoods__switch {background: #eef2f4;display: inline-block;position: relative;width: 60px;height: 30px;border-radius: 1.5rem;z-index: 0;margin: 0 0.625rem 0 0;padding: 0;border: none;cursor: pointer;transition-duration: 300ms;}
+.CompareGoods__switch:after {background: #ffffff;content: '';position: absolute;top: 3px;left: 3px;height: 1.5rem;width: 1.5rem;border-radius: 17px;transition-duration: 300ms;z-index: 1;}
+.CompareGoods__switch.switch-on {background: #3babeb;}
+.CompareGoods__switch.switch-on:after {left: 33px;}
+.CompareGoods .price__now {margin: 0;}
+.CompareGoods .price__old {margin-right: 1rem;}
+@media (max-width: 479px) {
+	.CompareGoods .buttons .hide {display: none;}
+	.CompareGoodsTableTbody .actions [class^="add-"] {padding: 0 3rem;}
+}
 
+/** Таблица сравнений **/
+.CompareGoodsTableTbody {width: 100%;}
+.CompareGoodsTableTbody > div {border-top: 1px solid #ececec;width: 100%;margin-bottom: 1rem;display: -ms-flexbox;display: -webkit-flex;display: flex;-ms-flex-wrap: wrap;-webkit-flex-wrap: wrap;flex-wrap: wrap;}
+.CompareGoodsTableTbody > div:not(.CompareGoodsTableTbodyComparisonLine) {border: 0;text-align: center;}
+.CompareGoodsTableTbody > div:not(.CompareGoodsTableTbodyComparisonLine) .cell {display: none;}
+.CompareGoodsTableTbody > div .cell {width: 100%;padding: 1rem 0 0.625rem;}
+.CompareGoodsTableTbody > div .cell label {font-weight: bold;}
+.CompareGoodsTableTbody > div .cell input {display: none;}
+.CompareGoodsTableTbody .owl-item .image img {display: inline-block;width: auto;max-width: 100%;}
+.CompareGoodsTableTbody .remove {color: #ececec;background: #ffffff;border: 1px solid #ececec;position: absolute;top: 0;right: 0;z-index: 2;width: 2rem;height: 2rem;}
+.CompareGoodsTableTbody .remove:hover {color: #ffffff;background: #3babeb;border-color: #3babeb;}
+.CompareGoodsTableTbody .remove i {display: block;line-height: 2rem;}
+.CompareGoodsTableTbody .CompareCheckbox {display: none;margin: 0 0.625rem 0 0;vertical-align: middle;}
+.CompareGoodsTableTbody .htmlDataBlock {text-align: left;overflow: hidden;}
+.CompareGoodsTableTbody .CompareGoodsHeader .title {display: block;max-height: 72px;line-height: 1.125rem;overflow: hidden;text-align: left;}
+.CompareGoodsTableTbody .CompareGoodsHeader .mod {display: block;margin-top: 5px;font-size: 13px;line-height: 15px;text-align: left;}
+.CompareGoodsTableTbody .actions {width: 100%;padding: 3px;display: flex;align-items: center;flex-wrap: wrap;justify-content: space-between;}
+.CompareGoodsTableTbody .actions a {padding: 0 2rem;}
+.CompareGoodsTableTbody .actions a i {display: none;vertical-align: middle;}
+.CompareGoodsTableTbody .actions [class^="add-"] {font-size: 1.5rem;}
+.CompareGoodsTableTbody .actions [class^="add-"] span {display: none;}
+.CompareGoodsTableTbody .product__price {border: 0;}
+.CompareGoodsTableTbody .owl-stage-outer {margin-right: -1px;}
+.page-compare .owl-next {margin-left: 1rem;}
+.compare-image {height: 262px;}
+.compare-image img {max-height: 262px;}
+.page-compare .owl-next {margin-left: 1rem;}
+@media all and (max-width: 1199px) {
+	.compare-image {height: 210px;}
+	.compare-image img {max-height: 210px;}
+}
+@media all and (max-width: 479px) {
+.CompareGoods__filter .label {display: none;}
+.CompareGoods .price__old {margin-right: 0.5rem;}
+.CompareGoodsTableTbody .actions .price-box {width: 100%;margin-bottom: 1rem;}
+.CompareGoodsTableTbody .actions .price-box .price__old {display: block;margin-top: 5px;}
+.CompareGoodsTableTbody .actions .add-notify:before {display: none;}
+.compare-image {height: 130px;}
+.compare-image img {max-height: 130px;}
+.CompareGoodsTableTbody .actions .add-notify {padding: 0 1.5rem;}
+}
 
 
 
