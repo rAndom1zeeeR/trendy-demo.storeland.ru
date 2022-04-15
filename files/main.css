@@ -341,7 +341,7 @@ h6 {font-size: 0.875rem;}
 /*** Выпадающее обхекты ***/
 /**************************************/
 .dropdown {position: relative;}
-.dropdown__content {width: 500px;padding: 1rem;right: 0;top: 3rem;height: auto;background: #F6F6F6;border-radius: 10px;position: absolute;z-index: 11;box-shadow: 5px 0px 30px 0px rgb(129 135 189 / 15%);}
+.dropdown__content {width: 500px;padding: 1rem;right: 0;top: 2.75rem;height: auto;background: #F6F6F6;border-radius: 10px;position: absolute;z-index: 11;box-shadow: 5px 0px 30px 0px rgb(129 135 189 / 15%);}
 .dropdown__content {display: block;transform: scale(1,0);transform-origin: right top;transition: all 0.3s ease-in-out;}
 .opened .dropdown__content, .dropdown__content.opened {transform: scale(1);}
 .dropdown__open {position: relative;cursor: pointer;}
@@ -605,6 +605,8 @@ header .mainnav__list li:first-child a {padding-left: 0;}
 .overflowMenu a {color: #151B22;padding: .5rem 1rem;display: block;}
 .overflowMenu a:hover {color: #D30A3D;}
 .menu__icon {display: none;}
+.mainnav__links a {margin-bottom: 1rem;display: block;}
+.mainnav__links a:last-child {margin-bottom: 0;}
 /*** Меню. Адаптивность ***/
 @media (max-width: 1199px) {
 	header .menu {width: calc(100% - 92px);}
@@ -1500,6 +1502,19 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 	.productView__viewed-tabs .productView__tabs {width: 100%;padding-left: 0;}
 }
 
+
+/**************************************/
+/*** Быстрый просмотр ***/
+/**************************************/
+.fancybox-content .productView {padding: 0;box-shadow: none;}
+.fancybox-content .thumblist {display: none;}
+.fancybox-content .productView__images {width: 18rem;}
+.fancybox-content .productView__shop {width: calc(100% - 18rem);}
+
+
+/**************************************/
+/*** Акции ***/
+/**************************************/
 .product__form {background: #F6F6F6;border-radius: 10px;box-shadow: 5px 0px 30px 0px rgb(129 135 189 / 15%);transition: all 0.3s ease;display: block;}
 .promotion__percentage {font-size: 1.5rem;font-weight: bold;}
 .promotion__item .promotion__date {color: #424242;font-size: .75rem;font-weight: 300;}

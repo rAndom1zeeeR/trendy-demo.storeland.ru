@@ -322,22 +322,12 @@
 <div style="display:none;" id="newCartSum">{CART_SUM_NOW | money_format}</div>
 <div style="display:none;" id="newCartCount">{CART_COUNT_TOTAL}</div>
 <div style="display:none;" id="newCartData">
-	<div class="addto__total flex {CURRENCY_CHAR_CODE}">
-		<b>Моя корзина</b>
-		<span class="cartCountTotal">
-			<span class="count-cart">{CART_COUNT_TOTAL}</span>
-			<span class="cart__word">товар{CART_COUNT_TOTAL | gen_word_end("","а","ов")}</span>
-		</span>
-		<span class="price__now cartSumNow">{CART_SUM_NOW | money_format}</span>
-		<a class="removeAll" href="{CART_TRUNCATE_URL}" onclick="removeFromCartAll($(this))" title="Очистить корзину">
-			<i class="icon-close"></i>
-		</a>
-	</div>
+	<div class="addto__title">В Корзине</div>
 	<div class="addto__items">
 		{% FOR cart_items %}
 		<div class="addto__item flex" data-id="{cart_items.GOODS_ID}">
 			<a class="addto__image flex-center" href="{cart_items.GOODS_URL}" title="{cart_items.GOODS_NAME}">
-				<img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" />
+				<img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}" alt="{cart_items.GOODS_NAME}" width="{SETTINGS_GOODS_IMAGES_SIZE_ICON | divide('2')}" height="{SETTINGS_GOODS_IMAGES_SIZE_ICON | divide('2')}" />
 			</a>
 			<div class="addto__content flex-stretch">
 				<div class="addto__info">
@@ -368,9 +358,17 @@
 		</div>
 		{% ENDFOR %}
 	</div>
+	<div class="addto__total {CURRENCY_CHAR_CODE}">
+		<span class="">Итого:</span>
+		<span class="price__now cartSumNow">{CART_SUM_NOW | money_format}</span>
+	</div>
+	{% ENDIF %}
 	<div class="addto__empty">В корзине пока ничего нет</div>
-	<div class="addto__buttons">
-		<a href="{CART_URL}" class="button" title="Перейти в Корзину"><span>Перейти в корзину</span></a>
+	<div class="addto__buttons flex justify-between">											
+		<a class="button-empty removeAll" href="{CART_TRUNCATE_URL}" onclick="removeFromCartAll($(this))" title="Очистить корзину">
+			<span>Очистить</span>
+		</a>
+		<a href="{CART_URL}" class="button-secondary" title="Перейти в Корзину"><span>В Корзину</span></a>
 	</div>
 </div>
 <!-- Обновление данных корзины -->

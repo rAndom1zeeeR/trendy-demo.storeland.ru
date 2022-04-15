@@ -461,6 +461,7 @@ function removeFromCart(e){
     });
   }
 }
+
 // Удаление ВСЕХ товаров из Корзины без обновлении страницы
 function removeFromCartAll(e){
   event.preventDefault();
@@ -480,7 +481,7 @@ function removeFromCartAll(e){
         $('.cart .preloader').hide();
 				$('.product__item').each(function(){
 					$(this).removeClass('inCart');
-					$(this).find('.incount-cart').text('0');
+					$(this).find('.inCart__count').text('0');
 				})
       }
     });
@@ -1031,8 +1032,6 @@ function quickViewMod() {
 			block.removeClass('productViewQuick');
 			block.addClass('productViewMod');
 			block.find('.productView__image img').attr('src', block.find('.productView__image img').data('src'))
-			block.find('.productView__addto button span').text('Добавить в корзину за');
-			block.find('.productView__addto button').append(block.find('.productView__price .price__now').html())
 			return block;
 		}
 		// Быстрый просмотр товара
@@ -1196,12 +1195,12 @@ function addCart() {
 			$('.cart').addClass("has-items");
 			return (false);
 		}
+		// Добавляем активные классы и обновлем счетчик товаров
 		$('.cart').addClass("has-items");
 		$('.count-cart').animate({opacity: 0,display: "none"},500);
 		$('.count-cart').animate({display: "inline",opacity: 1},500);
 		// Находим форму, которую отправляем на сервер, для добавления товара в корзину
 		var formBlock = $($(this).get(0));
-		var addressCart = '/cart';
 		// Проверка на существование формы отправки запроса на добавление товара в корзину
 		if (1 > formBlock.length || formBlock.get(0).tagName != 'FORM') {
 			alert('Не удалось найти форму добавления товара в корзину');
@@ -1222,7 +1221,6 @@ function addCart() {
 			url: formBlock.attr('action'),
 			data: formData,
 			success: function(data) {
-				//$.fancybox.open(data);
 				// Анализ системного сообщения в коризне
 				var str = $(data).html();
 				// Проверяем текст сообщения на наличие ошибки
@@ -1255,37 +1253,36 @@ function addCart() {
 					}
 				} else {
 					// Сообщение с успешным добавлением
-					// if(typeof(Noty) == "function") {
-					// 	new Noty({
-					// 		text: str,
-					// 		layout:"bottomRight",
-					// 		type:"success",
-					// 		theme:"",
-					// 		closeWith: ['click'],
-					// 		textAlign:"center",
-					// 		easing:"swing",
-					// 		animation: {
-					// 			open: 'animated fadeInUp',
-					// 			close: 'animated fadeOutDown',
-					// 			easing: 'swing',
-					// 			speed: 400
-					// 		},
-					// 		timeout:"2000",
-					// 		progressBar:true,
-					// 		closable:true,
-					// 		closeOnSelfClick:true,
-					// 		modal:false,
-					// 		dismissQueue:false,
-					// 		onClose:true,
-					// 		killer:false
-					// 	}).show();
-					// }
+					if(typeof(Noty) == "function") {
+						new Noty({
+							text: str,
+							layout:"bottomRight",
+							type:"success",
+							theme:"",
+							closeWith: ['click'],
+							textAlign:"center",
+							easing:"swing",
+							animation: {
+								open: 'animated fadeInUp',
+								close: 'animated fadeOutDown',
+								easing: 'swing',
+								speed: 400
+							},
+							timeout:"2000",
+							progressBar:true,
+							closable:true,
+							closeOnSelfClick:true,
+							modal:false,
+							dismissQueue:false,
+							onClose:true,
+							killer:false
+						}).show();
+					}
 
 					// Добавляем активный класс если товар успешно добавился в корзину
 					function inCart(obj){
 						obj.addClass("inCart");
-						obj.find('.product__addCart a').removeClass('button').addClass('button flex justify-between')
-						var count = obj.find('.incount-cart');
+						var count = obj.find('.inCart__count');
 						var newCount = parseInt(count.text()) + 1;
 						count.text(newCount)
 					}
@@ -1293,12 +1290,8 @@ function addCart() {
 					inCart(t);
 
 					// Запуск функции активного класса товара в других категориях
-					$('.products__gridBig .product__item[data-id="' + id + '"]').each(function(){
-						inCart($(this))
-					});
-
-					// Запуск функции активного класса товара в других категориях
 					$('.product__item[data-id="' + id + '"]').each(function(){
+						inCart($(this))
 						$(this).addClass('inCart');
 					});
 
@@ -1338,10 +1331,8 @@ function addCart() {
 
 					// Открытие/Закрытие корзины при добавлении
 					$('.cart.dropdown').addClass('opened');
-					$('#menu').css({'z-index' : '10'});
 					setTimeout(function () {
 						$('.cart.dropdown').removeClass('opened')
-						$('#menu').css({'z-index' : '4'})
 						$.fancybox.close();
 					}, 2000);
 
