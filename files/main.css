@@ -1374,16 +1374,16 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 .thumblist__item.show {display: block;}
 .thumblist__buttons {display: none;}
 /* Товар. Основная информация */
-.productView__name {margin-bottom: 1.5rem;max-height: 9rem;overflow: hidden;font-weight: bold;text-transform: uppercase;}
-.productView__inner > div {margin-bottom: 1.5rem;margin-right: 1.5rem;}
+.productView__name {max-height: 9rem;overflow: hidden;font-weight: bold;text-transform: uppercase;}
+.productView__inner > div {margin-right: 1.5rem;}
+.productView__margin {margin-bottom: 1.5rem;}
 .productView__ratings .ratings__label {margin-left: 1rem;}
 .productView__links a {font-size: 1.5rem;line-height: 1;}
 .productView__links a + a {margin-left: 1.5rem;}
 .productView__links a span {display: none;}
-.productView__text {margin-bottom: 1.5rem;line-height: 1.25rem;max-height: 5rem;overflow: hidden;}
+.productView__text {line-height: 1.25rem;max-height: 5rem;overflow: hidden;}
 .productView__goto {margin-top: 2rem;display: none;}
 /* Товар. Модификации */
-.goodsModificationsProperty {margin-bottom: 1.5rem;}
 .goodsModificationsProperty label {display: block;}
 .goodsModificationsValue {margin: 1rem .5rem 0 .5rem;padding: .375rem 1rem;border-radius: 10px; border: 2px solid #0172DB;color: #0172DB;font-weight: 600;line-height: 1;}
 .goodsModificationsValue.active, .goodsModificationsValue:hover {color: #ffffff;background-color: #151B22;border-color: #151B22;}
@@ -1394,7 +1394,7 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 .qty a:hover {color: #F6F6F6;border-color: #151B22;background-color: #151B22;}
 .qty input {width: 3rem;height: 2.5rem;border: 0;text-align: center;font-weight: 600;}
 /* Товар. Цена */
-.productView__price {margin-right: 4rem;margin-bottom: 1.5rem;}
+.productView__price {margin-right: 4rem;}
 .productView__price .price__now {font-size: 1.5rem;}
 .productView__price .price__old {display: block;}
 /* Товар. Акция */
@@ -1403,6 +1403,7 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 /* Товар. В корзину */
 .productView__addtoCart {width: 100%;}
 .productView__addtoCart .add-cart {margin-right: 2rem;}
+.productView__addtoCart .add-cart.quick {margin-right: 0;}
 .productView__addtoCart span {margin-right: .25rem;vertical-align: middle;}
 .productView__addtoCart i {font-size: 1.25rem;vertical-align: middle;}
 /* Товар. Уведомить. Нет в наличии */
@@ -1593,9 +1594,10 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 /*** Быстрый заказ ***/
 /**************************************/
 .fastOrderContent {max-width: 50rem;}
+.fastOrderContent .total__buttons {margin-top: 2rem;}
 #globalOrder {margin-top: 2rem;}
 .fastOrderForm .form__fields label {display: none;}
-.fastOrderForm [order] {margin-bottom: 3rem;width: 100%;padding: 1rem;background: #F6F6F6;border-radius: 10px;transition: all 0.3s ease;}
+.fastOrderForm [order] {margin-bottom: 2rem;width: 100%;padding: 1rem;background: #F6F6F6;border-radius: 10px;transition: all 0.3s ease;}
 .fastOrderForm [order]:hover {box-shadow: 5px 0px 30px 0px rgb(129 135 189 / 15%);}
 .fastOrderForm [order]:last-child {margin-bottom: 0;}
 .fastOrderForm label {display: none;}

@@ -1108,12 +1108,6 @@ function quickViewShowMod(href, atempt) {
 				src  : document.quickviewPreload[href],
 				type : 'inline',
 				transitionEffect: "slide",
-				overlayColor: 'transparent',
-				opts : {
-					beforeShow : function( instance, current ) {
-						$('.fancybox-bg').css({'background' : 'none'})
-					}
-				}
 			});
 			addCart();
 			addTo();
@@ -1129,12 +1123,7 @@ function quickViewShowMod(href, atempt) {
 			$.fancybox.open({
 				src  : $(content).getColumnContent(),
 				type : 'inline',
-				transitionEffect: "slide",
-				opts : {
-					afterShow : function( instance, current ) {
-						console.info( 'done!' );
-					}
-				}
+				transitionEffect: "slide"
 			});
 			addCart();
 			addTo();
@@ -2675,8 +2664,9 @@ function checkTabHash() {
 }
 
 // Изменение кол-ва в карточке
-function prodQty(){
-	$('.productView__qty .quantity').change(function(){
+function prodQty($container){
+	var goodsModView = $container || $('#main .productViewBlock')
+	goodsModView.find('.quantity').change(function(){
 		var t = $(this);
 		// Количество
 		var val = parseInt(t.val());
@@ -2705,23 +2695,33 @@ function prodQty(){
 				progressBar:true
 			}).show();
 		}
+
 		// Обновление кол-ва для функций "Добавить"
 		goodsModView.find('.goodsDataMainModificationId').val($(this).val());
 		// Цена товара без изменений
-		var price = parseInt($('.productView__price .price__now').attr('content'));
+		var price = parseInt(goodsModView.find('.price__now').attr('content'));
+		var priceOld = parseInt(goodsModView.find('.price__old').attr('content'));
 		var newPrice = 0;
+		var newPriceOld = 0;
+
 		// Проверяем наличие добавленных товаров вместе с основным
 		if (goodsModView.find('.productView__form [class^="goodsID-"]').length) {
 			goodsModView.find('.productView__form [class^="goodsID-"]').each(function(){
 				// Сумма всех добавленных товаров
 				newPrice += parseInt($(this).attr('data-price'))
+				newPriceOld += parseInt($(this).attr('data-price-old'))
 			});
 		}
+
 		// Считаем новую сумму товара с учетом добавленных
 		var multi = String(val * price + newPrice);
+		var multiOld = String(val * priceOld + newPriceOld);
+
 		// Обновляем новую сумму
-		goodsModView.find('.productView__price .price__now').attr('data-price', multi);
-		goodsModView.find('.productView__price .price__now').find('.num').text(addSpaces(multi));
+		goodsModView.find('.price__now').attr('data-price', multi);
+		goodsModView.find('.price__now').find('.num').text(addSpaces(multi));
+		goodsModView.find('.price__old').attr('data-price-old', multiOld);
+		goodsModView.find('.price__old').find('.num').text(addSpaces(multiOld));
 	});
 }
 
@@ -2770,11 +2770,11 @@ function newModification($container) {
 		$(this).find('.goodsModificationsValue[data-value="'+ dis +'"]').addClass('disabled');
 	});
 	$parentBlock.find('.goodsModificationsValue').click(function(){
-		$(this).parent().find('.goodsModificationsValue').removeClass('active');
+		$(this).parents().find('.goodsModificationsValue').removeClass('active');
 		$(this).addClass('active');
 		a = $(this).data('value');
-		$(this).parent().parent().find('select option[value="' + a + '"]').prop('selected',true);
-		$(this).parent().parent().find('select').trigger('change');
+		$(this).parents().find('select option[value="' + a + '"]').prop('selected',true);
+		$(this).parents().find('select').trigger('change');
 	});
 	$parentBlock.find('.goodsModificationsValue.disabled').off('click');
 }
@@ -2836,7 +2836,8 @@ function goodsModification($container) {
 	goodsDataProperties.each(function(y){
 		$(this).change(function(){
 			var slug = getSlugFromGoodsDataFormModificationsProperties(goodsDataProperties),
-					modificationBlock             = $parentBlock.find('.goodsModificationsList[rel="'+slug+'"]'),
+					goodsModView                  = $parentBlock.find('.productView'),
+					modificationBlock             = goodsModView.find('.goodsModificationsList[rel="'+slug+'"]'),
 					modificationId                = parseInt(modificationBlock.find('[name="id"]').val()),
 					modificationArtNumber         = modificationBlock.find('[name="art_number"]').val(),
 					modificationPriceNow          = parseInt(modificationBlock.find('[name="price_now"]').val()),
@@ -2847,7 +2848,6 @@ function goodsModification($container) {
 					modificationDescription       = modificationBlock.find('.description').html(),
 					modificationIsInCompareList   = modificationBlock.find('[name="is_has_in_compare_list"]').val(), // Отследить что делает
 					modificationGoodsModImageId   = modificationBlock.find('[name="goods_mod_image_id"]').val(),
-					goodsModView                  = $parentBlock.find('.productView'),
 					goodsModificationId           = goodsModView.find('.goodsModificationId'),
 					goodsPriceNow                 = goodsModView.find('.price__now'),
 					goodsPriceOld                 = goodsModView.find('.price__old'),
@@ -2866,10 +2866,6 @@ function goodsModification($container) {
 				goodsPriceNow.html(modificationPriceNowFormated);
 				goodsPriceNow.attr('data-price', modificationPriceNow);
 				goodsPriceNow.attr('content', modificationPriceNow);
-
-				if($('.productViewMod .productView__addto .num').length){
-					$('.productViewMod .productView__addto .num').text(addSpaces(modificationPriceNow));
-				}
 
 				var relatedPriceNow = $('#related-goods .products__total-price');
 				var goodsID = $('[class^="goodsID-"]');

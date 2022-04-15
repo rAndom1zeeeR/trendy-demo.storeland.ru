@@ -56,13 +56,13 @@
 		<!-- Основная информация о товаре -->
 		<div class="productView__shop">
 			<!-- Имя товара -->
-			<h1 class="productView__name" itemprop="name">{GOODS_NAME}</h1>
+			<h1 class="productView__name productView__margin" itemprop="name">{GOODS_NAME}</h1>
 			
 			<!--  -->
 			<div class="productView__inner flex justify-between">
 				<!-- Среднее значение по результатам всех отзывов об этом товаре -->
 				{% IFNOT SETTINGS_OPINION_DISABLE %}
-				<div class="productView__ratings flex">
+				<div class="productView__ratings productView__margin flex">
 					<div class="ratings" title="Рейтинг товара">
 						{% IF GOODS_OPINION_RATING_VALUE_ROUND %}
 						<span itemprop="aggregateRating" itemscope itemtype="https://schema.org/AggregateRating">
@@ -82,14 +82,14 @@
 
 				<!-- Артикул -->
 				{% IF GOODS_MOD_ART_NUMBER %}
-				<div class="productView__articles">
+				<div class="productView__articles productView__margin">
 					<label>Артикул:</label>
 					<span class="goodsModArtNumber">{GOODS_MOD_ART_NUMBER}</span>
 				</div>
 				{% ENDIF %}
 
 				<!-- Доступность товара -->
-				<div class="productView__available">
+				<div class="productView__available productView__margin">
 					<div class="available__true" {% IF GOODS_MOD_REST_VALUE=0 %}style="display:none;" {% ENDIF %}>
 						<span class="goodsModRestValue" data-value="{GOODS_MOD_REST_VALUE}">В наличии {% IF GOODS_MOD_REST_VALUE > 10 %}Много{% ELSE %}Мало{% ENDIF %}</span>
 					</div>
@@ -99,7 +99,7 @@
 				</div>
 
 				<!-- Добавление в избранное и сравнение -->
-				<div class="productView__links flex {% IF GOODS_MOD_IS_HAS_IN_COMPARE_LIST || GOODS_MOD_IS_HAS_IN_FAVORITES_LIST %}added{% ENDIF %}">
+				<div class="productView__links productView__margin flex {% IF GOODS_MOD_IS_HAS_IN_COMPARE_LIST || GOODS_MOD_IS_HAS_IN_FAVORITES_LIST %}added{% ENDIF %}">
 					<!-- Если в тарифном плане подключен модуль сравнения товаров и он не выключен в настройках магазина -->
 					{% IF SETTINGS_COMPARE_DISABLE=0 %}
 					{% IF GOODS_MOD_IS_HAS_IN_COMPARE_LIST %}
@@ -196,7 +196,7 @@
 			
 			<!-- Краткое описание -->
 			{% IF GOODS_DESCRIPTION_SHORT %}
-			<div class="productView__text" itemprop="description">{GOODS_DESCRIPTION_SHORT}</div>
+			<div class="productView__text productView__margin" itemprop="description">{GOODS_DESCRIPTION_SHORT}</div>
 			{% ENDIF %}
 
 			<!-- Модификации -->
@@ -210,7 +210,7 @@
 				<!-- Модификации -->
 				<div class="goodsModificationsBlock" {% IF GOODS_NO_CHOISE_IN_PROPERTIES_FOR_MODIFICATIONS %}style="display:none;" {% ENDIF %}>
 					{% FOR goods_modifications_properties %}
-					<div class="goodsModificationsProperty">
+					<div class="goodsModificationsProperty productView__margin">
 						<!-- Выдаем списки со свойствами для модификаций, чтобы определить какую модификацию товара хочет пользователь -->
 						{% FOR values %}
 						<!-- Если это первый элемент в списке -->
@@ -271,7 +271,7 @@
 				<!-- Добавление товара в Корзину -->
 				<div class="productView__addto flex">
 					<!-- Количество -->
-					<div class="productView__qty">
+					<div class="productView__qty productView__margin">
 						<div class="qty flex">
 							<a href="javascript:void(0)" class="qty__minus flex-center unselectable" title="Уменьшить"><i class="icon-minus"></i></a>
 							<input class="quantity"
@@ -291,22 +291,22 @@
 					</div>
 
 					<!-- Цена товара -->
-					<div class="productView__price {CURRENCY_CHAR_CODE}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+					<div class="productView__price productView__margin {CURRENCY_CHAR_CODE}" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 						<!-- информация для поисковика о наличии товара -->
 						<meta itemprop="availability" content="{% IF GOODS_MOD_REST_VALUE>0 %}http://schema.org/InStock{% ELSE %}http://schema.org/OutOfStock{% ENDIF %}">
 						<!-- информация для поисковика о валюте товара -->
 						<meta itemprop="priceCurrency" content="{CURRENCY_CHAR_CODE}" />
 						<span class="price__now {CURRENCY_CHAR_CODE}" itemprop="price" content="{GOODS_MOD_PRICE_NOW}" data-price="{GOODS_MOD_PRICE_NOW}">{GOODS_MOD_PRICE_NOW | money_format}</span>
 						{% IF GOODS_MOD_PRICE_NOW_WITHOUT_DISCOUNT>GOODS_MOD_PRICE_NOW %}
-						<span class="price__old {CURRENCY_CHAR_CODE}">{GOODS_MOD_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
+						<span class="price__old {CURRENCY_CHAR_CODE}" content="{GOODS_MOD_PRICE_NOW_WITHOUT_DISCOUNT}" data-price-old="{GOODS_MOD_PRICE_NOW_WITHOUT_DISCOUNT}">{GOODS_MOD_PRICE_NOW_WITHOUT_DISCOUNT | money_format}</span>
 						{% ELSEIF GOODS_MOD_PRICE_OLD>GOODS_MOD_PRICE_NOW %}
-						<span class="price__old {CURRENCY_CHAR_CODE}">{GOODS_MOD_PRICE_OLD | money_format}</span>
+						<span class="price__old {CURRENCY_CHAR_CODE}" content="{GOODS_MOD_PRICE_OLD}" data-price-old="{GOODS_MOD_PRICE_OLD}">{GOODS_MOD_PRICE_OLD | money_format}</span>
 						{% ENDIF %}
 					</div>
 
 					<!-- Блок информации по акции действующей на товар, если таковая есть -->
 					{% IF GOODS_MOD_MAX_DISCOUNT_ID %}
-					<div class="productView__campaign flex">
+					<div class="productView__campaign productView__margin flex">
 						<div class="productView__campaign-discount">
 							<span>-{GOODS_MOD_MAX_DISCOUNT}%</span>
 						</div>

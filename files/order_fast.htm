@@ -303,9 +303,9 @@
 					{% ENDIF %}
 				</div>
 				<!-- Корзина: Оформление -->
-				<div class="total__buttons">
+				<div class="total__buttons flex-center">
 			    <input type="hidden" name="hash" value="{HASH}" />
-					<a class="button disabled" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></a>
+					<button class="button disabled" type="submit" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></button>
 					<div class="total__pp">
 						<span>Нажимая на кнопку &laquo;Оформить заказ&raquo;, Вы соглашаетесь</span>
 						<a data-fancybox data-src="#fancybox__pp" href="javascript:;">с правилами обработки данных</a>
@@ -362,7 +362,6 @@
 		<span class="">Итого:</span>
 		<span class="price__now cartSumNow">{CART_SUM_NOW | money_format}</span>
 	</div>
-	{% ENDIF %}
 	<div class="addto__empty">В корзине пока ничего нет</div>
 	<div class="addto__buttons flex justify-between">											
 		<a class="button-empty removeAll" href="{CART_TRUNCATE_URL}" onclick="removeFromCartAll($(this))" title="Очистить корзину">
