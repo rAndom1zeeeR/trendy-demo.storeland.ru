@@ -742,7 +742,7 @@
 						</a>
 						
 						<!-- Смена Изображения при наведении -->
-						<div class="product__hoverImages flex"></div>
+						<a class="product__hoverImages flex" href="{related_goods.URL_MIN_PRICE_NOW | url_amp}" title="{related_goods.NAME}"></a>
 
 						{% FOR images %}
 						<input type="hidden" class="product__imgID" data-id="{related_goods.images.ID}" data-href="{related_goods.images.MEDIUM}" />
@@ -939,14 +939,13 @@
 									rel="nofollow"
 									href="{% IF related_goods.COUNT_MODIFICATION > 1 %}{related_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 								>
-									<span class="inCart__label-add">В корзину</span>
+									<span class="inCart__label">В корзину</span>
 									<i class="icon-cart"></i>
-									<span class="inCart__block">В корзине</span>
-									<span class="inCart__add">
+									<span class="inCart__added">
 										<span class="inCart__count">{related_goods.NB_GOODS_IN_CART}</span>
 										{% FOR mods %}
-										{% IF related_goods.mods.index > 1 %}{continue}{% ENDIF %}
-										<span class="inCart__measure">{related_goods.mods.MEASURE_NAME}.</span>
+											{% IF related_goods.mods.index > 1 %}{continue}{% ENDIF %}
+											<span class="inCart__measure">{related_goods.mods.MEASURE_NAME}.</span>
 										{% ENDFOR %}
 									</span>
 								</a>
@@ -1007,7 +1006,7 @@
 						</a>
 						
 						<!-- Смена Изображения при наведении -->
-						<div class="product__hoverImages flex"></div>
+						<a class="product__hoverImages flex" href="{related_views_goods.URL_MIN_PRICE_NOW | url_amp}" title="{related_views_goods.NAME}"></a>
 
 						{% FOR images %}
 						<input type="hidden" class="product__imgID" data-id="{related_views_goods.images.ID}" data-href="{related_views_goods.images.MEDIUM}" />
@@ -1204,14 +1203,13 @@
 									rel="nofollow"
 									href="{% IF related_views_goods.COUNT_MODIFICATION > 1 %}{related_views_goods.URL_MIN_PRICE_NOW}{% ELSE %}{CART_ADD_GOODS_MODIFICATION_URL | url_amp}?hash={HASH | url_amp}&amp;form%5Bgoods_from%5D={related_views_goods.GOODS_FROM}&amp;form%5Bgoods_mod_id%5D={related_views_goods.MIN_PRICE_NOW_ID}{% ENDIF %}"
 								>
-									<span class="inCart__label-add">В корзину</span>
+									<span class="inCart__label">В корзину</span>
 									<i class="icon-cart"></i>
-									<span class="inCart__block">В корзине</span>
-									<span class="inCart__add">
+									<span class="inCart__added">
 										<span class="inCart__count">{related_views_goods.NB_GOODS_IN_CART}</span>
 										{% FOR mods %}
-										{% IF related_views_goods.mods.index > 1 %}{continue}{% ENDIF %}
-										<span class="inCart__measure">{related_views_goods.mods.MEASURE_NAME}.</span>
+											{% IF related_views_goods.mods.index > 1 %}{continue}{% ENDIF %}
+											<span class="inCart__measure">{related_views_goods.mods.MEASURE_NAME}.</span>
 										{% ENDFOR %}
 									</span>
 								</a>

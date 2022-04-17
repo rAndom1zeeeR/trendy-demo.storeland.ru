@@ -72,6 +72,10 @@
 		</div>
 		{% ENDFOR %}
 	</div>
+	<div class="addto__save {CURRENCY_CHAR_CODE}">
+		<span class="">Скидка:</span>
+		<span class="price__now cartSumSave" data-price-now="{CART_SUM_NOW}" data-price-old="{CART_SUM_OLD}">{CART_SUM_OLD | money_format}</span>
+	</div>
 	<div class="addto__total {CURRENCY_CHAR_CODE}">
 		<span class="">Итого:</span>
 		<span class="price__now cartSumNow">{CART_SUM_NOW | money_format}</span>

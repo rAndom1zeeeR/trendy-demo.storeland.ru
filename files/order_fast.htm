@@ -293,7 +293,7 @@
 							<input type="hidden" name="oldPromoDiscount" value="0">
 							<input type="hidden" name="orderSumDefaul" value="{CART_SUM_NOW}">
 							<input class="coupon__code form__input" type="text" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" placeholder="Введите код"/>
-							<a href="javascript:void(0)" class="button coupon__button" title="Применить">
+							<a href="javascript:void(0)" class="coupon__button" title="Применить">
 								<span>Применить</span>
 								<i class="icon-check"></i>
 							</a>
@@ -357,6 +357,10 @@
 			</div>
 		</div>
 		{% ENDFOR %}
+	</div>
+	<div class="addto__save {CURRENCY_CHAR_CODE}">
+		<span class="">Скидка:</span>
+		<span class="price__now cartSumSave" data-price-now="{CART_SUM_NOW}" data-price-old="{CART_SUM_OLD}">{CART_SUM_OLD | money_format}</span>
 	</div>
 	<div class="addto__total {CURRENCY_CHAR_CODE}">
 		<span class="">Итого:</span>

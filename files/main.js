@@ -583,20 +583,12 @@ function openMenu() {
 		$('#feedback').toggleClass('opened');
   });
 
+	// Открытие поиска
 	$('.search__icon').on('click', function(event){
 		event.preventDefault();
 		$(this).parent().toggleClass('opened')
 		$('#overlay').toggleClass('opened');
-	})
-
-	// Ховер эффект на корзину в шапке
-	// $('.cart.dropdown').hover(function() {
-	// 	$(this)
-	// 		.toggleClass('opened')
-	// 		.find('.dropdown__content')
-	// 			.stop(true, true)
-	// 			.slideToggle();
-	// });
+	});
 
 }
 
@@ -809,7 +801,7 @@ function pdtSales(){
 			320:{items:1, autoHeight: true},
 			480:{items:1},
 			640:{items:1},
-			768:{items:2},
+			768:{items:1},
 			992:{items:2},
 			1200:{items:2}
 		}
@@ -1114,7 +1106,7 @@ function quickViewShowMod(href, atempt) {
 			goodsModification($('.fancybox-content.productViewBlock'));
 			newModification($('.fancybox-content.productViewBlock'));
 			quantity();
-			prodQty();
+			prodQty($('.fancybox-content.productViewBlock'));
 		}
 	} else {
 		$.get(href, function(content) {
@@ -1130,7 +1122,7 @@ function quickViewShowMod(href, atempt) {
 			goodsModification($('.fancybox-content.productViewBlock'));
 			newModification($('.fancybox-content.productViewBlock'));
 			quantity();
-			prodQty();
+			prodQty($('.fancybox-content.productViewBlock'));
 		});
 	}
 }
@@ -1168,7 +1160,7 @@ function goodsModRest() {
 			$(this).css('opacity', '1');
 			$(this).parent().addClass('alot');
 		}else if (value == 0) {
-			$(this).text('нет в наличии');
+			$(this).text('Нет в наличии');
 			$(this).css('opacity', '1');
 			$(this).parent().addClass('zero');
 		}
@@ -1328,6 +1320,9 @@ function addCart() {
 				}
 				// Скрытое обновление корзины
 				$('.hiddenUpdate').html(data);
+
+				// Пересчитываем сумму экономии в корзине
+				sumSave();
 			}
 		});
 		return false;
@@ -2795,8 +2790,8 @@ function goodsModification($container) {
 	var $parentBlock = $container || $('#main .productViewBlock')
 
 	var
-			goodsDataProperties = $parentBlock.find('.goodsModificationsProperty select[name="form[properties][]"]'),  // Запоминаем поля выбора свойств, для ускорения работы со значениями свойств
-			goodsDataModifications = $parentBlock.find('.goodsModificationsList'); // Запоминаем блоки с информацией по модификациям, для ускорения работы
+		goodsDataProperties = $parentBlock.find('.goodsModificationsProperty select[name="form[properties][]"]'),  // Запоминаем поля выбора свойств, для ускорения работы со значениями свойств
+		goodsDataModifications = $parentBlock.find('.goodsModificationsList'); // Запоминаем блоки с информацией по модификациям, для ускорения работы
 
 	// Обновляет возможность выбора свойств модификации, для отключения возможности выбора по характеристикам модификации которой не существует.
 	function updateVisibility (y) {
@@ -2896,17 +2891,15 @@ function goodsModification($container) {
 					goodsAvailableTrue.show();
 					goodsAvailableFalse.hide();
 					goodsModView.removeClass('productView__empty');
-					$('#related-goods').removeClass('empty');
 					goodsModRestValue.html('В наличии');
 					goodsModRestValue.attr('data-value', modificationRestValue);
 					goodsAvailableQty.find('.quantity').attr('max', modificationRestValue);
 					goodsAvailableQty.find('.quantity').val("1");
-					// Если товара нет в наличии
+					// Если товара Нет в наличии
 				} else {
 					goodsAvailableTrue.hide();
 					goodsAvailableFalse.show();
 					goodsModView.addClass('productView__empty');
-					$('#related-goods').addClass('empty');
 					goodsModRestValue.html(modificationRestValue);
 					goodsModRestValue.attr('data-value', modificationRestValue);
 					goodsAvailableQty.find('.quantity').attr('max', modificationRestValue);
@@ -3109,8 +3102,8 @@ function cartQuantity(){
 					item.find('.price__old').html($(d).find('.cart__item[data-id="' + id + '"] .price__old').html());
 					$('.cartTotal').html($(d).find('.cartTotal').html());
 					c = $(d).find('.cart__item[data-id="' + id + '"] .cartqty').val();
+					sumSave();
 					// Вызов функции быстрого заказа в корзине
-					cartMinSum()
 					$('#startOrder').on('click', function() {
 						startOrder();
 						return false;
@@ -3143,7 +3136,7 @@ function cartDelete(s){
 			success:function(d){
 				$('.page-cartTable').html($(d).find('.page-cartTable').html());
 				cartQuantity();
-				cartMinSum()
+				sumSave();
 				$('#startOrder').on('click', function() {
 					startOrder();
 					return false;
@@ -3238,36 +3231,6 @@ function startOrder(){
 		}
 	});
 	return false;
-}
-
-// Функция вычисления остатка до минимальной суммы заказа
-function cartMinSum(){
-	var minPrice = parseInt($('.cartTotal__min-price').data('price'));
-	var totalSum = parseInt($('.cartSumTotal').data('value'));
-	if(minPrice > totalSum) {
-		var diff = minPrice - totalSum
-		$('.cartTotal__min-price').find('.num').text(addSpaces(diff))
-		$('.cartTotal__min-price').show();
-	}else{
-		$('.cartTotal__min-price').hide();
-	}
-
-	
-	$('.cartTotal__min-icon').append('<svg width="48" height="48"><circle class="svg-figure" stroke-dasharray="139" cx="24" cy="24" r="22" transform="rotate(-90, 24, 24)"/></svg>');
-	// Функция анимации счетчика
-	function cartMinSumAnimate(obj){		
-		$(obj).each(function(){
-			var item = $(this).find('.svg-figure');
-			var max = $('.cartTotal__min-price').data('price');
-			var diff = $('.cartTotal__min-price .num').text().replace(' ','');
-			var limit = item.attr('stroke-dasharray')
-			var current = parseFloat(diff/max * limit)
-
-			item.attr('stroke-dashoffset', current)
-			item.attr('stroke-dasharray', limit)
-		})
-	}
-	cartMinSumAnimate('.cartTotal__min-icon')
 }
 
 
@@ -3375,6 +3338,7 @@ $(document).ready(function(){
 	addCart();
 	addTo();
 	hoverImage();
+	sumSave();
 	// Добавление товара в корзину
 	$('.add-cart').on('click', function() {
 		var form = $(this).closest('form');
@@ -3624,3 +3588,19 @@ function hoverCatalog(){
 }
 
 hoverCatalog()
+
+
+
+// Считаем скидку в корзине
+function sumSave(){
+	$('.addto__save').each(function(){
+		var t = $(this).find('.cartSumSave');
+		var priceSum = parseInt(t.data('price-old')) - parseInt(t.data('price-now'));
+		if(priceSum > 0) {
+			t.attr('data-price', priceSum).find('.num').text(addSpaces(priceSum))
+			t.parent().show();
+		}else{
+			t.parent().hide();
+		}
+	});
+}

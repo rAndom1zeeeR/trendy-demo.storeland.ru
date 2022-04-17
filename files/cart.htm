@@ -120,6 +120,12 @@
 					<div style="display: none;" class="total__price cartSumDiscount" data-value="{CART_SUM_NOW_WITH_DISCOUNT}">{CART_SUM_NOW_WITH_DISCOUNT | money_format}</div>
 				</div>
 
+				<!-- Корзина: Экономия -->
+				<div class="cartTotal__item addto__save {CURRENCY_CHAR_CODE}">
+					<span>Вы экономите</span>
+					<span class="price__now cartSumSave" data-price-now="{CART_SUM_NOW}" data-price-old="{CART_SUM_OLD}">{CART_SUM_OLD | money_format}</span>
+				</div>
+
 				<!-- Корзина: Оформление -->
 				<div class="cartTotal__buttons total__buttons flex">
 					<a id="startOrder" class="button-secondary" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></a>
