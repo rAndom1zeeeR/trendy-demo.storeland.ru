@@ -1737,7 +1737,7 @@
 
 				<!-- Список ВСЕХ новостей магазина. Если в настройках отмечено "Группировать новости в блоке навигации на сайте" -->
 				{% IFNOT news_list_all_empty %}
-				<div id="news_list_all" class="tabs__content active" data-content="news_list_all">
+				<div id="news_list_all" class="tabs__content opened" data-content="news_list_all">
 					<div class="owl-carousel">
 						{% FOR news_list_all %}
 						<div class="news__item">
@@ -1767,7 +1767,7 @@
 
 				<!-- Список Новости -->
 				{% IFNOT news_list_shop_empty %}
-				<div id="news_list_shop" class="tabs__content active" data-content="news_list_shop">
+				<div id="news_list_shop" class="tabs__content opened" data-content="news_list_shop">
 					<div class="owl-carousel">
 						{% FOR news_list_shop %}
 						<div class="news__item">
@@ -1797,7 +1797,7 @@
 
 				<!-- Список Статьи -->
 				{% IFNOT news_list_articles_empty %}
-				<div id="news_list_articles" class="tabs__content {% IF news_list_shop_empty %}active{% ENDIF %}" data-content="news_list_articles">
+				<div id="news_list_articles" class="tabs__content {% IF news_list_shop_empty %}opened{% ENDIF %}" data-content="news_list_articles">
 					<div class="owl-carousel">
 						{% FOR news_list_articles %}
 						<div class="news__item">
@@ -1827,7 +1827,7 @@
 
 				<!-- Список Блог -->
 				{% IFNOT news_list_mass_media_empty %}
-				<div id="news_list_mass_media" class="tabs__content {% IF news_list_shop_empty && news_list_articles_empty %}active{% ENDIF %}" data-content="news_list_mass_media">
+				<div id="news_list_mass_media" class="tabs__content {% IF news_list_shop_empty && news_list_articles_empty %}opened{% ENDIF %}" data-content="news_list_mass_media">
 					<div class="owl-carousel">
 						{% FOR news_list_mass_media %}
 						<div class="news__item">
@@ -1874,7 +1874,7 @@
 								<i class="icon-catalog"></i>
 								<span>Каталог товаров</span>
 							</div>
-							<div class="sidebar__content sideСatalog__content" data-content="catalog">
+							<div class="sidebar__content sideСatalog__content">
 								<div class="catalog__items">
 									{% FOR catalog_full %}
 										{% IFNOT catalog_full.LEVEL = 0 && catalog_full.FIRST %}<div data-level="{catalog_full.LEVEL}" class="sub">{% ENDIF %}
@@ -2587,7 +2587,7 @@
 		</footer>
 		
 
-		<!-- Подвал -->
+		<!-- Наверх -->
 		<div id="toTop">
 			<i class="icon-arrow_2_up"></i>
 		</div>
@@ -2595,6 +2595,44 @@
 		<noindex>
 			<!-- Скрытое обновление корзины -->
 			<div class="hiddenUpdate" style="display: none;"></div>
+
+			<!-- Мобильное меню -->
+			<div id="mobmenu">
+				<div class="mobmenu__nav">
+					<div class="mobmenu__nav-item button" data-open="catalog"><span>Каталог товаров</span></div>
+					<div class="mobmenu__nav-item button opened" data-open="menu"><span>Меню сайта</span></div>
+				</div>
+				<div class="mobmenu__content">
+					<div class="mobmenu__menu opened" data-content="menu">
+						<ul class="mainnav__list unstyled">
+							{% FOR menu %}
+								{% FOR header %}
+									{% FOR links %}
+									<li {% IF menu.header.links.SELECTED %}class="active"{% ENDIF %}>
+										<a class="mainnav__list-link {% IF menu.header.links.SELECTED %}active{%ENDIF%} {% IF menu.header.links.NAME = Каталог %}mainnav__catalog{%ENDIF%}" href="{menu.header.links.URL}" title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}" itemprop="url">
+											<span itemprop="name">{menu.header.links.NAME}</span>
+										</a>
+									</li>
+									{% ENDFOR %}
+								{% ENDFOR %}
+							{% ENDFOR %}
+						</ul>
+					</div>
+					<div class="mobmenu__catalog" data-content="catalog">
+						<div class="catalog__items">
+							{% FOR catalog_full %}
+								{% IFNOT catalog_full.LEVEL = 0 && catalog_full.FIRST %}<div data-level="{catalog_full.LEVEL}" class="sub">{% ENDIF %}
+									<div {% IF catalog_full.HIDE %}style="display: none;"{% ENDIF %} data-level="{catalog_full.LEVEL}" class="catalog__item {% IF catalog_full.ISSET_VISIBLE_SUB %}parent{% ENDIF %} {% IF catalog_full.CURRENT_PARENT %}opened{% ENDIF %}">
+										<a href="{catalog_full.URL}" data-level="{catalog_full.LEVEL}" class="catalog__link {% IF catalog_full.CURRENT %}opened{% ENDIF %}">
+											<span class="catalog__name">{catalog_full.NAME}</span>
+											{% IF catalog_full.ISSET_VISIBLE_SUB %}<span class="catalog__open"></span>{% ENDIF %}
+										</a>
+									{% IF catalog_full.ISSET_SUB=0 %}</div>{% ENDIF %}
+								{% IF catalog_full.LAST %}{% FOR out %}</div> {% IFNOT catalog_full.out.LAST %}</div>{% ENDIF %}{% ENDFOR %}{% ENDIF %}
+							{% ENDFOR catalog_full %}
+					</div>
+				</div>
+			</div>
 
 			<!-- Обратный звонок в модальном окне -->
 			<div id="fancybox__callback" class="modal" style="display:none">
