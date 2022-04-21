@@ -3009,7 +3009,7 @@ function goodsModification($container) {
 // Сравнение товаров
 ///////////////////////////////////////
 function compare() {
-	var owlCompare = $('.CompareGoodsTableTbody .owl-carousel');
+	var owlCompare = $('.compare__tbody .owl-carousel');
 	owlCompare.owlCarousel({
 		items: 4,
 		margin: 16,
@@ -3042,31 +3042,59 @@ function compare() {
 		onInitialized: carouselInitialized,
 		onChanged: carouselInitialized
 	});
+
+	// Сравнение товаров. Скрываем кнопки
 	function carouselInitialized(event){
 		if (event.item.count > event.page.size) {
-			$('.CompareGoods__nav .owl-nav').css('display', 'block');
+			$('.compare__nav .owl-nav').css('display', 'flex');
 		}else{
-			$('.CompareGoods__nav .owl-nav').css('display', 'none');
+			$('.compare__nav .owl-nav').css('display', 'none');
 		}
 	}
-	$('.CompareGoods__nav .owl-nav .owl-prev').click(function(event) {
-		$('.CompareGoodsTableTbody .owl-carousel').trigger('prev.owl.carousel');
+	
+	// Сравнение товаров. Кнопки навигации
+	$('.compare__nav .owl-prev').on('click', function(){
+		owlCompare.trigger('prev.owl.carousel');
 	});
-	$('.CompareGoods__nav .owl-nav .owl-next').click(function(event) {
-		$('.CompareGoodsTableTbody .owl-carousel').trigger('next.owl.carousel');
+	$('.compare__nav .owl-next').on('click', function(){
+		owlCompare.trigger('next.owl.carousel');
 	});
-	// Сравнение товаров. Фильтр в верхней навигации. Отображение всех и различающихся характеристик товара
-	$('.CompareGoods__switch').on('click', function(){
+
+	// Сравнение товаров. Отображение всех и различающихся характеристик товара
+	$('.compare__switch').on('click', function(){
 		$(this).toggleClass('switch-on');
+		var txtHide = $(this).find('.compare__switch-label').data('hide');
+		var txtShow = $(this).find('.compare__switch-label').data('show');
 		if ($(this).hasClass('switch-on')) {
-			$(this).trigger('on.switch');
-			$('.CompareGoodsTableTbodyComparisonLine:not(.same)').show();
-			$('.CompareGoodsTableTbodyComparisonLine.same').hide();
+			$(this).find('.compare__switch-label').text(txtHide)
+			$('.compare__line:not(.same)').show();
+			$('.compare__line.same').hide();
 		} else {
-			$(this).trigger('off.switch');
-			$('.CompareGoodsTableTbodyComparisonLine:hidden').show();
+			$(this).find('.compare__switch-label').text(txtShow)
+			$('.compare__line:hidden').show();
 		}
 	});
+
+	// Сравнение товаров. Скрытие характеристик товара, которые выделил пользователь
+  $('.compare__selected').on('click', function(){
+    $('.compare__showAll').css({'display' : 'inline-block'});
+    $('.compare__line').each(function(){
+      var сheckedCheckbox = $(this).find('.compare__cell input:checked');
+      if(сheckedCheckbox.length>0) {
+        $(this).hide();
+      }
+    });
+    // отменяем выделение характеристик товаров
+    $('.compare__cell input').attr('checked', false);
+    return false;
+  });
+
+	// Сравнение товаров. Отображение скрытых характеристик товара
+  $('.compare__showAll').on('click', function(){
+    $(this).hide();
+    $('.compare__line:hidden').show();
+    return false;
+  });
 }
 
 

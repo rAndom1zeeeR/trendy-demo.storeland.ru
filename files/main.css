@@ -948,7 +948,6 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 	.products__grid .product__item {width: 100%;}
 	.products__grid .product__img {height: 272px;}
 	.products__grid .product__addCart {width: calc(100% - 96px);}
-	.products__grid .product__addCart .inCart__label {display: inline-block;}
 }
 
 
@@ -1456,6 +1455,7 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 /* Товар. Характеристики */
 .features__item {width: 100%;margin-bottom: 1rem;}
 .features__name {margin-right: .5rem;}
+.features__value {font-weight: bold;}
 
 /* Товар. Доставка */
 .delivery__item {margin-bottom: 2rem;}
@@ -1575,7 +1575,7 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 .total__cart {margin-top: 1rem;font-size: 1.125rem;font-weight: bold;color: #0172DB;}
 .cartTotal__label {max-width: 50%;}
 .cartTotal__buttons {margin-top: 1.5rem;}
-.cartTotal__buttons a {width: 100%;text-align: center;}
+.cartTotal__buttons a {width: 100%;text-align: center;text-decoration: underline;}
 .total__pp {margin-top: 1rem;font-size: .75rem;}
 .cart__buttons a {justify-content: flex-end;}
 .cartTotal__item.addto__save {text-align: right;}
@@ -1583,7 +1583,7 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 #OrderAjaxBlock .total__buttons {display: none;}
 @media (max-width: 991px) {
 	.cartTable {width: 100%;padding: 0;}
-	.cartTotal {width: 100%;position: relative;top: auto;}
+	.cartTotal {width: 100%;position: relative;top: auto;margin-top: 2rem;}
 	.cart__item {box-shadow: 5px 0px 30px 0px rgb(129 135 189 / 15%);}
 }
 @media (max-width: 639px) {
@@ -1672,47 +1672,29 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 }
 
 /** Таблица сравнений **/
-.CompareGoodsTableTbody {width: 100%;}
-.CompareGoodsTableTbody > div {border-top: 1px solid #ececec;width: 100%;margin-bottom: 1rem;display: -ms-flexbox;display: -webkit-flex;display: flex;-ms-flex-wrap: wrap;-webkit-flex-wrap: wrap;flex-wrap: wrap;}
-.CompareGoodsTableTbody > div:not(.CompareGoodsTableTbodyComparisonLine) {border: 0;text-align: center;}
-.CompareGoodsTableTbody > div:not(.CompareGoodsTableTbodyComparisonLine) .cell {display: none;}
-.CompareGoodsTableTbody > div .cell {width: 100%;padding: 1rem 0 0.625rem;}
-.CompareGoodsTableTbody > div .cell label {font-weight: bold;}
-.CompareGoodsTableTbody > div .cell input {display: none;}
-.CompareGoodsTableTbody .owl-item .image img {display: inline-block;width: auto;max-width: 100%;}
-.CompareGoodsTableTbody .remove {color: #ececec;background: #ffffff;border: 1px solid #ececec;position: absolute;top: 0;right: 0;z-index: 2;width: 2rem;height: 2rem;}
-.CompareGoodsTableTbody .remove:hover {color: #ffffff;background: #3babeb;border-color: #3babeb;}
-.CompareGoodsTableTbody .remove i {display: block;line-height: 2rem;}
-.CompareGoodsTableTbody .CompareCheckbox {display: none;margin: 0 0.625rem 0 0;vertical-align: middle;}
-.CompareGoodsTableTbody .htmlDataBlock {text-align: left;overflow: hidden;}
-.CompareGoodsTableTbody .CompareGoodsHeader .title {display: block;max-height: 72px;line-height: 1.125rem;overflow: hidden;text-align: left;}
-.CompareGoodsTableTbody .CompareGoodsHeader .mod {display: block;margin-top: 5px;font-size: 13px;line-height: 15px;text-align: left;}
-.CompareGoodsTableTbody .actions {width: 100%;padding: 3px;display: flex;align-items: center;flex-wrap: wrap;justify-content: space-between;}
-.CompareGoodsTableTbody .actions a {padding: 0 2rem;}
-.CompareGoodsTableTbody .actions a i {display: none;vertical-align: middle;}
-.CompareGoodsTableTbody .actions [class^="add-"] {font-size: 1.5rem;}
-.CompareGoodsTableTbody .actions [class^="add-"] span {display: none;}
-.CompareGoodsTableTbody .product__price {border: 0;}
-.CompareGoodsTableTbody .owl-stage-outer {margin-right: -1px;}
-.page-compare .owl-next {margin-left: 1rem;}
-.compare-image {height: 262px;}
-.compare-image img {max-height: 262px;}
-.page-compare .owl-next {margin-left: 1rem;}
-@media all and (max-width: 1199px) {
-	.compare-image {height: 210px;}
-	.compare-image img {max-height: 210px;}
-}
-@media all and (max-width: 479px) {
-.CompareGoods__filter .label {display: none;}
-.CompareGoods .price__old {margin-right: 0.5rem;}
-.CompareGoodsTableTbody .actions .price-box {width: 100%;margin-bottom: 1rem;}
-.CompareGoodsTableTbody .actions .price-box .price__old {display: block;margin-top: 5px;}
-.CompareGoodsTableTbody .actions .add-notify:before {display: none;}
-.compare-image {height: 130px;}
-.compare-image img {max-height: 130px;}
-.CompareGoodsTableTbody .actions .add-notify {padding: 0 1.5rem;}
-}
-
+/**************************************/
+/*** Страница: Сравнение ***/
+/**************************************/
+.compare__nav {margin-bottom: 2rem;}
+.compare__nav .owl-prev + .owl-next {margin-left: 1rem;}
+.compare__switch:hover {cursor: pointer;}
+.compare__switch-icon {background: lightgray;display: inline-block;position: relative;width: 60px;height: 30px;border-radius: 1.5rem;z-index: 0;margin: 0 0.625rem 0 0;padding: 0;border: none;cursor: pointer;transition-duration: 300ms;}
+.compare__switch-icon:after {background: white;content: '';position: absolute;top: 3px;left: 3px;height: 1.5rem;width: 1.5rem;border-radius: 1rem;transition-duration: 300ms;z-index: 1;}
+.switch-on .compare__switch-icon {background: blue;}
+.switch-on .compare__switch-icon:after {left: 2rem;}
+.compare__buttons a {margin: 1rem 2rem 0 0;}
+.compare__buttons a i {vertical-align: middle;margin-right: .5rem;}
+.compare__line {border-bottom: 1px solid lightgray;margin-bottom: 1rem;padding-bottom: 1rem;}
+.compare__line:nth-child(-n+2) {border-bottom: 0;}
+.compare__cell {margin-bottom: 1rem;width: 100%;font-weight: bold;}
+.compare__cell input {margin-right: .5rem;}
+.compare__image {height: 228px;}
+.compare__remove {top: .5rem;right: .5rem;position: absolute;padding: 0;}
+.compare__remove i {font-size: 1.5rem;display: block;}
+.compare__mod {margin-top: .5rem;font-size: .75rem;}
+.compare__price .price__old {display: block;margin-top: .5rem;}
+.compare__addCart i {display: none;}
+.compare__showAll {display: none;}
 
 
 
