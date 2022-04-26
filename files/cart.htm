@@ -39,8 +39,8 @@
 							<div class="cart__actions flex">
 								<div class="cart__qty">
 									<div class="qty flex-center">
-										<a href="javascript:void(0)" class="qty__minus flex-center unselectable" title="Уменьшить"><i class="icon-minus"></i></a>
-										<input type="text" name="form[quantity][{cart_items.GOODS_MOD_ID}]" maxlength="4" value="{cart_items.ORDER_LINE_QUANTITY}" max="{cart_items.GOODS_MOD_REST_VALUE}" title="Количество, {cart_items.GOODS_MOD_MEASURE_NAME}" class="cartqty" onkeypress="return keyPress(this, event);" onpaste="return false;" autocomplete="off" />
+										<a class="qty__minus flex-center unselectable" title="Уменьшить" href="javascript:void(0)"><i class="icon-minus"></i></a>
+										<input class="qty__cart cartqty" type="text" name="form[quantity][{cart_items.GOODS_MOD_ID}]" maxlength="4" value="{cart_items.ORDER_LINE_QUANTITY}" max="{cart_items.GOODS_MOD_REST_VALUE}" title="Количество, {cart_items.GOODS_MOD_MEASURE_NAME}" onkeypress="return keyPress(this, event);" onpaste="return false;" autocomplete="off" />
 										<a href="javascript:void(0)" class="qty__plus flex-center unselectable" title="Увеличить"><i class="icon-plus"></i></a>
 									</div>
 								</div>
@@ -127,10 +127,10 @@
 				</div>
 
 				<!-- Корзина: Оформление -->
-				<div class="cartTotal__buttons total__buttons flex">
-					<a id="startOrder" class="button-secondary" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></a>
-					<a id="makeOrder" class="button disabled" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></a>
-					<a id="closeOrder" class="button2" title="Отменить заказ"><span>Изменить </span><span>заказ</span></a>
+				<div class="cartTotal__buttons total__buttons flex-center">
+					<button class="button startOrder" type="submit" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></button>
+					<button class="button makeOrder disabled" type="submit" title="Перейти к быстрому оформлению заказа"><span>Оформить </span><span>заказ</span></button>
+					<a class="button2 closeOrder" title="Отменить заказ"><span>Изменить </span><span>заказ</span></a>
 					<div class="total__pp">
 						<span>Нажимая на кнопку &laquo;Оформить заказ&raquo;, Вы соглашаетесь</span>
 						<a data-fancybox data-src="#fancybox__pp" href="javascript:;">с правилами обработки данных</a>

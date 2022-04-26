@@ -138,7 +138,7 @@
 						 data-add-tooltip="Добавлено в сравнение"
 						 data-del-tooltip="Удалено из сравнения"
 						 data-tooltip="Добавить в сравнение"
-						 title="Убрать &laquo;{GOODS_NAME}&raquo; из списка сравнения с другими товарами"
+						 title="Добавить &laquo;{GOODS_NAME}&raquo; в список сравнения с другими товарами"
 						 href="{COMPARE_ADD_URL}?id={GOODS_MOD_ID}&amp;return_to={CURRENT_URL | urlencode}"
 						 rel="nofollow"
 					><span>В сравнение</span></a>
@@ -615,7 +615,7 @@
 								<div class="opinion__blocks">
 									<div class="opinion__block">
 										<label for="goods_opinion_name">Представьтесь, пожалуйста:</label>
-										<input id="goods_opinion_name" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_GOODS_OPINION_NAME}]" value="{% IF CLIENT_IS_LOGIN %}{CLIENT_NAME}{% ELSE %}{FORM_GOODS_OPINION_NAME}{% ENDIF %}" maxlength="50" class="form__input" placeholder="Ваше имя:" required />
+										<input id="goods_opinion_name" type="text" name="form[{ANTISPAM_FORM_FIELD_NAME_GOODS_OPINION_NAME}]" value="{% IF CLIENT_IS_LOGIN %}{CLIENT_NAME}{% ELSE %}{FORM_GOODS_OPINION_NAME}{% ENDIF %}" maxlength="50" class="form__input" placeholder="Ваше имя" required />
 									</div>
 									<div class="opinion__block" style="display: none;">
 										<label for="goods_opinion_title">Заголовок:</label>

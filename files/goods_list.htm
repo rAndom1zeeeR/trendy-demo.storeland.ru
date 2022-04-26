@@ -700,6 +700,13 @@
 	<!-- Страницы -->
 	{% IF show_pages %}
 	<div class="toolbar-bottom">
+		<div class="pages__ajax">
+			<span>Показано</span>
+			<strong class="pages__onPage">{GOODS_PAGES_RESULTS_ON_PAGE}</strong>
+			<span>товар{GOODS_PAGES_RESULTS_ON_PAGE | gen_word_end("","а","ов")}</span>
+			<span>из</span>
+			<span class="pages__results">{GOODS_PAGES_RESULTS}</span>
+		</div>
 		<ol class="pages flex-center unstyled">
 			{% IF GOODS_PAGES_SHOW_FIRST %}
 			<li class="first">
@@ -719,13 +726,6 @@
 			</li>
 			{% ENDIF %}
 		</ol>
-		<div class="status">
-			<span>Показано</span>
-			<strong class="status__visible">{GOODS_PAGES_RESULTS_ON_PAGE}</strong>
-			<span>товар{GOODS_PAGES_RESULTS_ON_PAGE | gen_word_end("","а","ов")}</span>
-			<span>из</span>
-			<span class="status__total">{GOODS_PAGES_RESULTS}</span>
-		</div>
 	</div>
 	{% ENDIF %}
 	<!-- //END Страницы -->

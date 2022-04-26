@@ -329,7 +329,11 @@
               {% IF cart_discount.DISCOUNT_IS_ENABLED %}
                 <tr class="discount">
                   <td colspan="2" class="name">{cart_discount.DISCOUNT_NAME}</td>
-                  {% IF cart_discount.IS_PERCENT %}<td colspan="2" class="percent">{cart_discount.DISCOUNT_VALUE}%</td>{% ELSE %}<td colspan="2" class="percent">{cart_discount.DISCOUNT_VALUE | money_format}</td>{% ENDIF %}
+                  {% IF cart_discount.IS_PERCENT %}
+                  <td colspan="2" class="percent">{cart_discount.DISCOUNT_VALUE}%</td>
+                  {% ELSE %}
+                  <td colspan="2" class="value">{cart_discount.DISCOUNT_VALUE | money_format}</td>
+                  {% ENDIF %}
                 </tr>
               {% ENDIF %}
             {% ENDFOR %}
@@ -345,7 +349,7 @@
           <tbody>
             {% FOR cart_items %}
               <tr class="items"> 
-                <td><div class="image"><a href="{cart_items.GOODS_URL}"><img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=Deluxe{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}"></a></div></td>
+                <td><div class="image"><a href="{cart_items.GOODS_URL}"><img src="{% IF cart_items.GOODS_IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{cart_items.GOODS_IMAGE_ICON}{% ENDIF %}"></a></div></td>
                 <td class="name"> 
                   <a href="{cart_items.GOODS_URL}">
                     {cart_items.GOODS_NAME}

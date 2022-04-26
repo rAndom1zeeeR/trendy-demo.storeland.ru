@@ -237,7 +237,7 @@
 
 							<!-- Результаты поиска -->
 							<div id="search__result" style="display: none;">
-								<div class="result__inner">
+								<div class="result__inner flex-start">
 									<div class="result__category">
 										<div class="result__title">Категории товаров</div>
 									</div>
@@ -260,7 +260,7 @@
 									<i class="icon-compare"></i>
 									<span class="addto__count count-compare" data-count="{COMPARE_GOODS_COUNT}">{COMPARE_GOODS_COUNT}</span>
 								</a>
-								<div class="addto__compare dropdown__content" data-content="compare">
+								<div class="addto__compare dropdown__content">
 									<div class="addto__title">В Сравнении</div>
 									<div class="addto__items">
 										{% FOR compare_goods %}
@@ -304,7 +304,7 @@
 									<i class="icon-favorites"></i>
 									<span class="addto__count count-favorites" data-count="{FAVORITES_GOODS_COUNT}">{FAVORITES_GOODS_COUNT}</span>
 								</a>
-								<div class="addto__favorites dropdown__content" data-content="favorites">
+								<div class="addto__favorites dropdown__content">
 									<div class="addto__title">В Избранном</div>
 									<div class="addto__items">
 										{% FOR favorites_goods %}
@@ -348,7 +348,7 @@
 									<span class="addto__count count-cart" data-count="{CART_COUNT_TOTAL}">{CART_COUNT_TOTAL}</span>
 								</a>
 								<!-- Выпадаюзая Корзина -->
-								<div class="addto__cart dropdown__content" data-content="cart">
+								<div class="addto__cart dropdown__content">
 									{% IFNOT cart_items_empty %}
 									<div class="addto__title">В Корзине</div>
 									<div class="addto__items">
@@ -2354,7 +2354,7 @@
 			</div>
 		</section>
 
-		<!-- Обратная связь -->
+		<!-- Подвал -->
 		<footer id="footer">
 			<div class="footer__middle">
 				<div class="container">
@@ -2601,6 +2601,9 @@
 				<div class="mobmenu__nav">
 					<div class="mobmenu__nav-item button" data-open="catalog"><span>Каталог товаров</span></div>
 					<div class="mobmenu__nav-item button opened" data-open="menu"><span>Меню сайта</span></div>
+					<div class="mobmenu__close" onclick="closeAll()">
+						<i class="icon-close"></i>
+					</div>
 				</div>
 				<div class="mobmenu__content">
 					<div class="mobmenu__menu opened" data-content="menu">
@@ -2803,12 +2806,12 @@
 	<script type="text/javascript">	
 	// Загрузка основных функций шаблона Товары
 	$(document).ready(function(){
-		catalog();
 		priceFilter();
 		restCookie();
 	});
 	</script>
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}jqueryui.js?design=THEMENAME"></script>
+	<script defer type="text/javascript" src="{ASSETS_JS_PATH}debounce.js?design=THEMENAME"></script>
 	{% ENDIF %}
 
 	{% IF MOD_LNAME = catalog || MOD_LNAME = search || MOD_LNAME = discount %}
@@ -2816,6 +2819,7 @@
 	// Загрузка основных функций шаблона Товары
 	$(document).ready(function(){
 		ajaxProducts();
+		catalog();
 	});
 	</script>
 	{% ENDIF %}
@@ -2843,7 +2847,7 @@
 		initTabs();	
 	});
 	</script>
-	<script defer type="text/javascript" src="{ASSETS_JS_PATH}jquery-star-rating.js?design=Deluxe"></script>
+	<script defer type="text/javascript" src="{ASSETS_JS_PATH}jquery-star-rating.js?design=THEMENAME"></script>
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}air-datepicker.js?design=THEMENAME"></script>
 	{% ENDIF %}
 
@@ -2862,8 +2866,8 @@
 	$(document).ready(function(){
 		cartQuantity();
 		// Вызов функции быстрого заказа в корзине
-		$('#startOrder').on('click', function() {
-			startOrder();
+		$('.startOrder').on('click', function() {
+			orderStart();
 			return false;
 		});
 	});

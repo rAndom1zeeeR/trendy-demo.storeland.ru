@@ -56,7 +56,7 @@
   	      <div class="select__items">
   		      {% FOR goods_order_fields %}
   			      {% IF goods_order_fields.ID = 1 || goods_order_fields.ID = 2 || goods_order_fields.ID = 5 || goods_order_fields.ID = 11 || goods_order_fields.ID = 13 %}
-  		          <a href="?goods_search_field_id={goods_order_fields.ID}&per_page={PER_PAGE}" title="{goods_order_fields.NAME}" {% IF goods_order_fields.SELECTED %}class="active"{% ENDIF %}>
+  		          <a href="?q={SEARCH_QUERY}&goods_search_field_id={goods_order_fields.ID}&per_page={PER_PAGE}" title="{goods_order_fields.NAME}" {% IF goods_order_fields.SELECTED %}class="active"{% ENDIF %}>
   			          {% IF goods_order_fields.ID = 1%}
 										<span>Цена</span>
 										<i class="icon-arrow_2_down"></i>
@@ -85,7 +85,7 @@
   	      </label>
   	      <div class="select__items">
   		      {% FOR goods_per_page_list %}
-  		      <a href="?goods_search_field_id={GOODS_SEARCH_FIELD_ID}&per_page={goods_per_page_list.LIMIT}" {% IF goods_per_page_list.SELECTED %}class="active"{% ENDIF %}>{goods_per_page_list.LIMIT}</a>
+  		      <a href="?q={SEARCH_QUERY}&goods_search_field_id={GOODS_SEARCH_FIELD_ID}&per_page={goods_per_page_list.LIMIT}" {% IF goods_per_page_list.SELECTED %}class="active"{% ENDIF %}>{goods_per_page_list.LIMIT}</a>
   		      {% ENDFOR %}
   	      </div>
         </div>
@@ -112,7 +112,7 @@
 	<div class="products__container">
 		{% IF GOODS_VIEW_TYPE=2 %}
 		<!-- Вывод товаров Маленьким СПИСКОМ -->
-		<div class="products__list products__ajax">
+		<div class="products__list">
 			{% FOR goods %}
 			<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{goods.ID}" itemscope itemtype="https://schema.org/Product">
 				<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{goods.MIN_PRICE_NOW_ID} goodsListForm flex">
@@ -372,7 +372,7 @@
 		{% ELSE %}
 		<!-- Вывод товаров ТАБЛИЦЕЙ -->
 		<div class="row">
-			<div class="products__grid products__ajax flex-stretch">
+			<div class="products__grid flex-stretch">
 				{% FOR goods %}
 				<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{goods.ID}" itemscope itemtype="https://schema.org/Product">
 					<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{goods.MIN_PRICE_NOW_ID} goodsListForm">
