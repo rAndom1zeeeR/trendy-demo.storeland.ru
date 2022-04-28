@@ -494,7 +494,7 @@ function removeFromCartAll(e){
 ///////////////////////////////////////
 // Функция удаления классов всех активных элементов
 function closeAll() {
-	$('div, a, form, span, nav, ul').removeClass('opened');
+	$('div, a, form, span, nav, ul, li').removeClass('opened');
 	$('.overflowMenu').removeClass('active');
 	$('.search__reset').click();
 	$('#overlay').click();
@@ -604,24 +604,24 @@ function mainnav(id,rows,media){
 				for(a;a < menuCount;a++){
 					mainnav.find('.mainnav__list li:nth-child('+ a +')').addClass('mainnav__replaced');
 				}
+				// Кнопка Еще
+				mainnav.find('.mainnav__list').append('<li class="mainnav__item mainnav__more dropdown"><a class="header__block-link"><span>Ещё...</span></a></li>');
+				mainnav.find('.mainnav__more').append('<ul class="overflowMenu unstyled dropdown__content"></ul>');
+				// Переносим пункты меню в скрытый список
 				mainnav.find('.mainnav__replaced').each(function(){
 					mainnav.find('.overflowMenu').append($(this));
 				});
-				mainnav.find('.mainnav__list').append('<li class="mainnav__item mainnav__more"><a class="header__block-link"><span>Ещё...</span></a></li>');
+				// Функция открытия Еще
 				mainnav.find('.mainnav__more').on('click',function(){
 					if($(this).hasClass('opened')){
 						$(this).removeClass('opened');
-						mainnav.removeClass('opened');
-						mainnav.find('.overflowMenu').removeClass('opened');
+						mainnav.removeClass('opened').find('.overflowMenu').removeClass('opened');
 						$('#overlay').removeClass('opened');
 					} else{
 						$(this).addClass('opened');
-						mainnav.addClass('opened');
-						mainnav.find('.overflowMenu').addClass('opened');
+						mainnav.addClass('opened').find('.overflowMenu').addClass('opened');
 						$('#overlay').addClass('opened')
 					}
-					// Определение положения кнопки еще
-					positionMore()
 				});
 				
 				// Определение положения кнопки еще

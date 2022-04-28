@@ -95,7 +95,7 @@
 										{% FOR header %}
 											{% FOR links %}
 											<li {% IF menu.header.links.SELECTED %}class="active"{% ENDIF %}>
-												<a class="header__block-link {% IF menu.header.links.SELECTED %}active{%ENDIF%} {% IF menu.header.links.NAME = Каталог %}mainnav__catalog{%ENDIF%}" href="{menu.header.links.URL}" title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}" itemprop="url">
+												<a class="mainnav__list-link header__block-link {% IF menu.header.links.SELECTED %}active{%ENDIF%} {% IF menu.header.links.NAME = Каталог %}mainnav__catalog{%ENDIF%}" href="{menu.header.links.URL}" title="{% IF menu.header.links.TITLE %}{menu.header.links.TITLE}{% ELSE%}{menu.header.links.NAME}{% ENDIF %}" itemprop="url">
 													<span itemprop="name">{menu.header.links.NAME}</span>
 												</a>
 											</li>
@@ -103,8 +103,6 @@
 										{% ENDFOR %}
 									{% ENDFOR %}
 								</ul>
-								<!-- Меню. Еще -->
-								<ul class="overflowMenu unstyled dropdown__content"></ul>
 							</nav>
 						</div>
 
