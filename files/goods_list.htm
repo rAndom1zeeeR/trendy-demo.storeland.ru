@@ -256,7 +256,7 @@
 								{% ENDIF %}
 							</div>
 							<div class="ratings__count">({goods.OPINION_RATING_CNT_ALL})</div>
-							<div class="ratings__label">{% IF goods.OPINION_RATING_VALUE %}{goods.OPINION_RATING_CNT_ALL} отзыв{goods.OPINION_RATING_CNT_ALL | gen_word_end("","а","ов")}{% ELSE %}Нет отзывов{% ENDIF %}</div>
+							<div class="ratings__label">{% IF goods.OPINION_RATING_CNT_ALL > 0 %}{goods.OPINION_RATING_CNT_ALL} отзыв{goods.OPINION_RATING_CNT_ALL | gen_word_end("","а","ов")}{% ELSE %}Нет отзывов{% ENDIF %}</div>
 							{% ENDIF %}
 							
 							<!-- Доступность товара -->
@@ -508,7 +508,7 @@
 									{% ENDIF %}
 								</div>
 								<div class="ratings__count">({goods.OPINION_RATING_CNT_ALL})</div>
-								<div class="ratings__label">{% IF goods.OPINION_RATING_VALUE %}{goods.OPINION_RATING_CNT_ALL} отзыв{goods.OPINION_RATING_CNT_ALL | gen_word_end("","а","ов")}{% ELSE %}Нет отзывов{% ENDIF %}</div>
+								<div class="ratings__label">{% IF goods.OPINION_RATING_CNT_ALL > 0 %}{goods.OPINION_RATING_CNT_ALL} отзыв{goods.OPINION_RATING_CNT_ALL | gen_word_end("","а","ов")}{% ELSE %}Нет отзывов{% ENDIF %}</div>
 							</div>
 							{% ENDIF %}
 

@@ -5,7 +5,7 @@ html {font-size: 100%;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;
 body {background-color: #F6F6F6;color: #151B22;font-family: 'Montserrat', sans-serif;font-size: .875rem;line-height: 1.3;font-weight: 400;position: relative;overflow-x: hidden;margin: 0;padding: 0;}
 section {margin: 4rem 0;position: relative;}
 #main {margin: 2rem 0;}
-.main__left {width: 25%;padding-right: 1rem;flex-grow: 1;}
+.main__left {width: 25%;padding-right: 1rem;}
 .main__right {width: 100%;padding-left: 0;flex-grow: 1;}
 .main__right.has-sidebar {width: 75%;padding-left: 1rem;}
 @media (max-width: 991px) {
@@ -186,7 +186,7 @@ button:hover, .button:hover, [class*="button-"]:hover, .paymentFormSubmitLink:ho
 .ratings .rating {position: absolute;left: 0;top: 0;overflow: hidden;}
 .ratings .rating:before {font-size: 1.25rem;color: #151B22;line-height: 1;white-space:nowrap;font-family: 'icomoon';content: '\e928\e928\e928\e928\e928';letter-spacing: .125rem;}
 .stars {overflow: hidden;}
-.star {color: #9E9E9E;font-size: 1.5rem;width: 1.5rem;height: 1.5rem;line-height: 1.5rem;white-space: nowrap;float:left;cursor: pointer;zoom:1;display:block;}
+.star {color: #9E9E9E;font-size: 1.5rem;width: 1.5rem;height: 1.5rem;line-height: 1.5rem;white-space: nowrap;float:left;cursor: pointer;display:block;}
 .star:after {content: '\e927';font-family: 'icomoon';}
 .stars .fullStar {color: #151B22;}
 .stars .tmp_fs {color: #151B22;}
@@ -1325,7 +1325,7 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 
 /*** Фильтры. Адаптивность ***/
 @media (max-width: 991px) {
-	#filters {padding: 2rem 1rem 2rem 2rem;position: fixed;top: 0;right: 0;margin: 0;z-index: 12;transform: translateX(100%);transition: all 0.5s ease-in-out;background-color: #ffffff;}
+	#filters {width: 18rem;padding: 2rem 1rem 2rem 2rem;position: fixed;top: 0;right: 0;margin: 0;z-index: 12;transform: translateX(100%);transition: all 0.5s ease-in-out;background-color: #F6F6F6;}
 	#filters.opened {transform: translateX(0);}
 	#filters .sidebar__content {padding-right: 1rem;height: calc(100vh - 4rem);overflow-y: auto;}
 	#filters .sidebar__content::-webkit-scrollbar {width: .5rem;}
@@ -1415,6 +1415,7 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 @media (max-width: 479px) {
 	.select__label {display: none;}
 	.sort {display: flex;flex-wrap: wrap;}
+	.select__items {width: 10rem;}
 	.select__value + i {display: inline-block;}
 	.select__value:hover + i {color: #151B22;}
 }

@@ -606,7 +606,7 @@
 											{% ENDIF %}
 										</div>
 										<div class="ratings__count">({index_page_favorites_goods.OPINION_RATING_CNT_ALL})</div>
-										<div class="ratings__label">{% IF index_page_favorites_goods.OPINION_RATING_VALUE %}{index_page_favorites_goods.OPINION_RATING_CNT_ALL} отзыв{index_page_favorites_goods.OPINION_RATING_CNT_ALL | gen_word_end("","а","ов")}{% ELSE %}Нет отзывов{% ENDIF %}</div>
+										<div class="ratings__label">{% IF index_page_favorites_goods.OPINION_RATING_CNT_ALL > 0 %}{index_page_favorites_goods.OPINION_RATING_CNT_ALL} отзыв{index_page_favorites_goods.OPINION_RATING_CNT_ALL | gen_word_end("","а","ов")}{% ELSE %}Нет отзывов{% ENDIF %}</div>
 									</div>
 									{% ENDIF %}
 
@@ -875,7 +875,7 @@
 											{% ENDIF %}
 										</div>
 										<div class="ratings__count">({index_page_sale_goods.OPINION_RATING_CNT_ALL})</div>
-										<div class="ratings__label">{% IF index_page_sale_goods.OPINION_RATING_VALUE %}{index_page_sale_goods.OPINION_RATING_CNT_ALL} отзыв{index_page_sale_goods.OPINION_RATING_CNT_ALL | gen_word_end("","а","ов")}{% ELSE %}Нет отзывов{% ENDIF %}</div>
+										<div class="ratings__label">{% IF index_page_sale_goods.OPINION_RATING_CNT_ALL > 0 %}{index_page_sale_goods.OPINION_RATING_CNT_ALL} отзыв{index_page_sale_goods.OPINION_RATING_CNT_ALL | gen_word_end("","а","ов")}{% ELSE %}Нет отзывов{% ENDIF %}</div>
 									</div>
 									{% ENDIF %}
 
@@ -1524,7 +1524,7 @@
 											{% ENDIF %}
 										</div>
 										<div class="ratings__count">({index_page_goods.OPINION_RATING_CNT_ALL})</div>
-										<div class="ratings__label">{% IF index_page_goods.OPINION_RATING_VALUE %}{index_page_goods.OPINION_RATING_CNT_ALL} отзыв{index_page_goods.OPINION_RATING_CNT_ALL | gen_word_end("","а","ов")}{% ELSE %}Нет отзывов{% ENDIF %}</div>
+										<div class="ratings__label">{% IF index_page_goods.OPINION_RATING_CNT_ALL > 0 %}{index_page_goods.OPINION_RATING_CNT_ALL} отзыв{index_page_goods.OPINION_RATING_CNT_ALL | gen_word_end("","а","ов")}{% ELSE %}Нет отзывов{% ENDIF %}</div>
 									</div>
 									{% ENDIF %}
 
@@ -2885,16 +2885,8 @@
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}search.js?design=THEMENAME"></script>
 	<!-- Уведомления о действиях -->
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}noty.min.js?design=THEMENAME"></script>
-	<!-- Маска ввода-->
-	<script defer type="text/javascript" src="{ASSETS_JS_PATH}jquery.maskedinput.min.js?design=THEMENAME"></script>
-	<!-- Валидатор форм -->
-	<script defer type="text/javascript" src="{ASSETS_JS_PATH}jquery.validate.min.js?design=THEMENAME"></script>
 	<!-- Модальные окна -->
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}jquery.fancybox.min.js?design=THEMENAME"></script>
-	<!-- Предзагрузчик изображений -->
-	<script defer type="text/javascript" src="{ASSETS_JS_PATH}lozad.min.js?design=THEMENAME"></script>
-	<!-- Определение браузера -->
-	<script defer type="text/javascript" src="{ASSETS_JS_PATH}detect.js?design=THEMENAME"></script>
 	<script defer type="text/javascript" src="{ASSETS_JS_PATH}forall.js?design=THEMENAME"></script>
 </body>
 </html>
