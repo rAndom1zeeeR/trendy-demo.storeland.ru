@@ -289,7 +289,7 @@
 						<div class="block__title">
 							<h4 class="title"><span>Купон</span></h4>
 						</div>
-						<div class="form__field coupon__order">
+						<div class="coupon__order">
 							<input type="hidden" name="oldPromoDiscount" value="0">
 							<input type="hidden" name="orderSumDefaul" value="{CART_SUM_NOW}">
 							<input class="coupon__code form__input" type="text" name="form[coupon_code]" value="{ORDER_FORM_COUPON_CODE}" placeholder="Введите код"/>
@@ -297,7 +297,9 @@
 								<span>Применить</span>
 								<i class="icon-check"></i>
 							</a>
-							<a href="javascript:void(0)" class="coupon__reset" title="Сбросить"></a>
+							<a href="javascript:void(0)" class="coupon__reset" title="Сбросить">
+								<i class="icon-close"></i>
+							</a>
 						</div>
 					</div>
 					{% ENDIF %}

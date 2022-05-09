@@ -1174,7 +1174,7 @@ function priceDiff(obj,type) {
 	});
 }
 
-// Много и Мало вместо точного количества
+// много и мало вместо точного количества
 function goodsModRest() {
 	$('.goodsModRestValue').each(function(){
 		var value = $(this).data('value');
@@ -2074,10 +2074,31 @@ function orderScriptsSelect() {
 function coupons() {
 	var submitBtn = $('.coupon__button');
 	var couponInput = $('.coupon__code');
+	var couponParent = couponInput.parent();
 	var resetBtn = $('.coupon__reset');
-	submitBtn.on('click', function(){
+	var totalCouponBlock = $('.total__coupons');
+	var totalDiscountBlock = $('.total__discount');
+
+	// Отправка формы
+	submitBtn.off('click').on('click', function(){
 		var url = '/order/stage/confirm';
 		var val = couponInput.val();
+		var oldVal = couponInput.attr('data-value');
+		couponInput.attr('data-value', val);
+
+		// Если ничего не ввели
+		if(val == ''){
+			couponInput.addClass('error')
+			return false;
+		}
+
+		// Если купон не изменился
+		if(val == oldVal){
+			couponInput.removeClass('focus');
+			return false;
+		}
+
+
 		// Получаем данные формы, которые будем отправлять на сервер
 		var formData = $('#myform').serializeArray();
 		formData.push({name: 'ajax_q', value: 1});
@@ -2089,18 +2110,19 @@ function coupons() {
 			url: url,
 			data: formData,
 			success: function(data) {
-				var cartSumTotal = $('.cartSumTotal:eq(0) .num').text().toString().replace(/\s/g, '')
 				// Получаем блок скидки
 				var discountBlock = $(data).closest('#myform').find('.discount');
 				var discountName = discountBlock.find('.name').text();
 				var discountPrice = discountBlock.find('.value').html();
 				var discountPercent = discountBlock.find('.percent').html();
+				
+				// Определяем наличие скидки в % или валюте
 				if (discountPrice) {
 					discountPrice = discountPrice
 				}else if (discountPercent){
 					discountPrice = discountPercent
 				}else {
-					$('.total__coupons').hide();
+					totalCouponBlock.hide();
 				}
 
 				// Получаем новую итоговую стоимость заказа
@@ -2108,85 +2130,90 @@ function coupons() {
 				var totalSum = totalBlock.find('.total-sum').data('total-sum');
 				var deliveryPrice = parseInt($('.cartSumDelivery:eq(0) .num').text());
 				var newTotalSum = totalSum + deliveryPrice;
+
 				// Записываем название и размер скидки по купону
-				$('.total__coupons .total__label span').html(discountName);
-				$('.total__coupons .cartSumCoupons').html(discountPrice);
-				$('.cartSumCouponsDiscount').html(discountPrice);
-				$('.total__discount').hide();
-				$('.total__coupons').show();
+				totalCouponBlock.find('.cartTotal__label span').html(discountName);
+				totalCouponBlock.find('.cartSumCoupons').html(discountPrice);
+				totalCouponBlock.show();
+				totalDiscountBlock.hide();
+
+				// Проверяем купон
+				var cartSumTotal = $('.cartSumTotal:eq(0) .num').text().toString().replace(/\s/g, '')
 				if (newTotalSum > cartSumTotal) {
-					couponInput.parent().addClass('error');
-					couponInput.parent().removeClass('active');
-					couponInput.val("").attr("placeholder", "Купон неверен");
-					$('.total__coupons').hide();
-					$('.total__discount').show();
+					couponInput.val("").attr("placeholder", "Купон неверен").removeClass('focus');
+					couponParent.removeClass('good').addClass('error');
+					totalCouponBlock.hide();
+					totalDiscountBlock.show();
 					$('.cartSumTotal .num').text(addSpaces(newTotalSum));
-					$('.cartSumCouponsDiscount').html('0 руб.');
 				} else if (newTotalSum == cartSumTotal) {
-					couponInput.parent().removeClass('error');
-					couponInput.parent().addClass('active');
+					if (discountName) {
+						couponInput.addClass('focus');
+						couponParent.addClass('good');
+						totalCouponBlock.show();
+					}else{
+						couponInput.val("").addClass('error');
+						couponParent.addClass('error');
+						totalCouponBlock.hide();
+					}
 				} else {
-					couponInput.parent().removeClass('error');
-					couponInput.parent().addClass('active');
-					$('.total__coupons').show();
+					couponInput.addClass('focus');
+					couponParent.removeClass('error').addClass('good');
+					totalCouponBlock.show();
 					// Обновляем значение итоговой стоимости
-					$('.cartSumTotal .num').text(addSpaces(newTotalSum));
 					$('.cartSumTotal').attr('data-value', newTotalSum);
+					$('.cartSumTotal .num').text(addSpaces(newTotalSum));
 					$('.cartSumCoupons').attr('data-value', newTotalSum);
 					$('.cartSumTotalHide').attr('data-value', newTotalSum);
 					$('.cartSumTotalHide .num').text(addSpaces(newTotalSum));
 					$('.cartSumDiscount .num').text(addSpaces(totalSum));
 				}
+
+				// Тестирование. Проверка переменных
+				// console.log('---', )
+				// console.log('discountName', discountName)
+				// console.log('discountPrice', discountPrice)
+				// console.log('discountPercent', discountPercent)
+				// console.log('totalBlock', totalBlock)
+				// console.log('totalSum', totalSum)
+				// console.log('deliveryPrice', deliveryPrice)
+				// console.log('newTotalSum', newTotalSum)
+				// console.log('---', )
 			},
 			error: function(data){
 				console.log("Возникла ошибка: Невозможно отправить форму купона.");
 			}
 		});
 	});
+
 	// Сброс
 	resetBtn.on('click', function(){
-		$('.coupon__code').val('').trigger('input');
-		$('.fake__input').val('').trigger('input');
+		couponInput.val('').trigger('input');
 		setTimeout(function(){
-			$('.total__coupons').hide();
-			$('.total__discount').show();
+			totalCouponBlock.hide();
+			totalDiscountBlock.show();
 			var cartSum = $('.cartSumDiscount').data('value');
 			var deliveryPrice = parseInt($('.cartSumDelivery:eq(0) .num').text());
 			var newTotalSum = cartSum + deliveryPrice;
+			// Возвращаем значение по умолчанию итоговой стоимости
 			$('.cartSumTotal .num').text(addSpaces(newTotalSum));
 			$('.cartSumTotal').attr('data-value', newTotalSum);
 			$('.cartSumCoupons').attr('data-value', newTotalSum);
 			$('.cartSumTotalHide').attr('data-value', newTotalSum);
 			$('.cartSumTotalHide .num').text(addSpaces(newTotalSum));
-			$('.cartSumCouponsDiscount').html('0 руб.');
-			couponInput.parent().removeClass('error');
-			couponInput.parent().removeClass('active');
-			couponInput.val("").attr("placeholder", "Введите купон");
+			couponInput.val("").attr("placeholder", "Введите купон").removeClass('focus').removeClass('error');
+			couponParent.removeClass('error').removeClass('success');
 		}, 500);
 	});
+
 	// Отображение кнопки Сброс
 	couponInput.on('input',function(){
 		if($(this).val()) {
-			$(this).parent().find('.coupon__reset').addClass('active')
+			resetBtn.addClass('focus')
 		} else {
-			$(this).parent().find('.coupon__reset').removeClass('active')
+			resetBtn.removeClass('focus')
 		}
 	});
-	// Фальшивая кнопка купона
-	$('.fake__button').on('click', function(event){
-		event.preventDefault();
-		var fakeValue = $('.fake__input').val();		
-		couponInput.val(fakeValue);
-		submitBtn.click();
-	});
-	// Отображение фальшивой кнопки Сброс
-	$('.fake__input').on('input',function(){
-		if($(this).val()) {
-			resetBtn.addClass('active')
-		} else {
-			resetBtn.removeClass('active')
-		}
-	});
+
 }
 
 
@@ -2966,11 +2993,11 @@ function goodsModification($container) {
 					goodsAvailableQty.find('.quantity').attr('max', modificationRestValue);
 					goodsAvailableQty.find('.quantity').val("1");
 				}
-				// Много Мало
+				// много мало
 				if(modificationRestValue>10) {
-					goodsModRestValue.html('В наличии Много');
+					goodsModRestValue.html('В наличии много');
 				} else {
-					goodsModRestValue.html('В наличии Мало');
+					goodsModRestValue.html('В наличии мало');
 				}
 
 				// Покажем артикул модификации товара, если он указан

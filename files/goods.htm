@@ -91,7 +91,7 @@
 				<!-- Доступность товара -->
 				<div class="productView__available productView__margin">
 					<div class="available__true" {% IF GOODS_MOD_REST_VALUE=0 %}style="display:none;" {% ENDIF %}>
-						<span class="goodsModRestValue" data-value="{GOODS_MOD_REST_VALUE}">В наличии {% IF GOODS_MOD_REST_VALUE > 10 %}Много{% ELSE %}Мало{% ENDIF %}</span>
+						<span class="goodsModRestValue" data-value="{GOODS_MOD_REST_VALUE}">В наличии {% IF GOODS_MOD_REST_VALUE > 10 %}много{% ELSE %}мало{% ENDIF %}</span>
 					</div>
 					<div class="available__false" {% IF GOODS_MOD_REST_VALUE > 0 %}style="display:none;"{% ENDIF %}>
 						<span>Нет в наличии</span>
@@ -340,6 +340,7 @@
 
 	<div class="productView__viewed-tabs flex-start">
 		<!-- Вы смотрели -->
+		{% IFNOT recently_viewed_goods_empty %}
 		<div class="viewed">
 			<div class="block__title block__nav flex-center">
 				<div class="title"><span>Вы смотрели</span></div>
@@ -371,6 +372,7 @@
 				</div>
 			</div>
 		</div>
+		{% ENDIF %}
 
 		<!-- Табы Описание, Хар-ки, Доставка, Отзывы -->
 		<div class="productView__tabs">
