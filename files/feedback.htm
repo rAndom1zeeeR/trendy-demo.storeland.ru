@@ -27,9 +27,9 @@
 							title="{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}">
 							<span itemprop="telephone">{SETTINGS_STORE_PHONE_COUNTRY_CODE2}({SETTINGS_STORE_PHONE_CITY_CODE2}){SETTINGS_STORE_PHONE_NUMBER2}</span>
 						</a>
-						{% ENDIF SETTINGS_STORE_PHONE_NUMBER2 %}
 					</div>
 				</div>
+				{% ENDIF SETTINGS_STORE_PHONE_NUMBER2 %}
 				<!-- Телефон 3 -->
 				{% IF SETTINGS_STORE_PHONE_NUMBER3 %}
 				<div class="flex">
@@ -83,9 +83,11 @@
 				</div>
 			</div>
 			{% ENDIF %}
+
 			<!-- Название магазина -->
 			<meta itemprop="name" content="{SETTINGS_STORE_ORG_NAME}" />
 	  </div>
+
 	  <div class="client__block maps">
 	    <iframe src="https://api-maps.yandex.ru/frame/v1/-/CZRYYCOw" width="100%" height="400" frameborder="0"></iframe>
 	  </div>

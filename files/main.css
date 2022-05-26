@@ -424,10 +424,10 @@ h6 {font-size: 0.875rem;}
 .page-feedback .contacts__block label {display: none;}
 .page-feedback .contacts__block-link {white-space: normal;max-width: 100%;}
 .page-feedback .contacts__block-link + .contacts__block-link {margin-top: .5rem;}
-.page-feedback .client__blocks {margin-top: 2rem;}
+.page-feedback .client__blocks {margin-top: 3rem;}
 .page-feedback .client__block:first-child {width: 300px;flex-grow: 0;}
 .page-feedback .client__block {flex-grow: 1;}
-
+/* Страница: Связь с администрацией. Форма связи */
 .page-feedback .form__fields {width: calc(33.333333% - 2rem);margin: 1rem;}
 .page-feedback .feedbackForm {padding: 1rem 0rem;box-shadow: 5px 0px 30px 0px #8187BD26;}
 .page-feedback textarea {height: 172px;}
@@ -477,7 +477,7 @@ h6 {font-size: 0.875rem;}
 /**************************************/
 .addto__title {margin-bottom: 2rem;color: #0172DB;font-size: 1.125rem;font-weight: normal;display: none;}
 .addto__empty {font-size: 1.125rem;font-weight: bold;margin: 0;}
-.addto__items {max-height: 19rem;overflow-y: auto;}
+.addto__items {max-height: 19rem;overflow-y: auto;display: none;}
 .addto__items::-webkit-scrollbar {width: .5rem;}
 .addto__items::-webkit-scrollbar-thumb {border-radius: 10px;}
 .addto__item {margin-bottom: 2rem;transition: all 0.3s ease;align-items: stretch;}
@@ -491,19 +491,20 @@ h6 {font-size: 0.875rem;}
 .addto__remove {width: 2rem;height: 2rem;color: #bebebe;font-size: 1.25rem;}
 .addto__qty {font-size: 13px;}
 .addto__total {display: none;color: #0172DB;font-size: 1.125rem;margin-top: 1rem;}
-.has-items .addto__total {display: block;}
 .addto__total .price__now {margin-left: .5rem;}
 .addto__save {display: none;color: #D30A3D;margin-top: 1rem;}
-.has-items .addto__save {display: block;}
 .addto__save .price__now {color: #D30A3D;font-size: .875rem;font-weight: normal;}
 .addto__price {margin-top: .625rem;}
 .addto__price .price__now {font-size: 1.125rem;font-weight: normal;color: #151B22;}
 .addto__price .price__old {display: inline-block;margin: 0 0 0 1rem;}
 .addto__separator {margin: 0 .25rem;}
+.addto__buttons {display: none;}
+.has-items .addto__total {display: block;}
+.has-items .addto__save {display: block;}
 .has-items .addto__title {display: block;}
 .has-items .addto__empty {display: none;}
-.addto__buttons {display: none;}
 .has-items .addto__buttons {margin-top: 1rem;display: flex;}
+.has-items .addto__items {display: block;}
 .addto__buttons a {flex-grow: .3;}
 .login .addto__buttons {margin-top: 2rem;}
 .login .form__text {margin-bottom: 2rem;}
@@ -610,7 +611,7 @@ h6 {font-size: 0.875rem;}
 }
 
 /** Шапка. Меню **/
-header .menu {width: calc(100% - 368px);flex-grow: 1;}
+header .menu {width: calc(100% - 384px);flex-grow: 1;}
 header .mainnav__list {height: 60px;}
 header .mainnav__list a {padding: 20px;font-size: 1rem;display: inline-block;}
 header .mainnav__list > li:first-child a {padding-left: 0;}
@@ -1519,7 +1520,7 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 /* Товар. Доставка */
 .delivery__item {margin-bottom: 2rem;}
 .delivery__index {display: none;}
-.delivery__name {font-size: 1.125rem;font-weight: bold;margin-bottom: 1.5rem;}
+.delivery__name {font-size: 1.125rem;font-weight: bold;margin-bottom: .75rem;}
 .delivery__text {color: #9E9E9E;margin-bottom: .75rem;}
 .delivery__item strong {color: #0172DB;font-weight: 400;margin-left: .25rem;display: inline-block;}
 .zone__name {font-size: 1rem;font-weight: bold;margin-bottom: .75rem;}
@@ -1681,9 +1682,10 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 .fastOrderForm .row {margin: 0 -.5rem;}
 .fastOrderForm .form__fields .form__field {margin: 0 .5rem;width: calc(100% - 1rem);}
 .fastOrderForm .form__fields.flex .form__field {width: calc(33.333333% - 1rem);flex-grow: 1;}
-.fastOrderForm .form__registration {padding: 0 1rem;margin-bottom: 0;}
-.fastOrderForm .form__registration label {margin: 0 0 0 1rem;display: inline-block;}
-.fastOrderForm .form__pass {margin: 1rem 1rem 0 1rem;}
+.form__registration {margin-bottom: 0;}
+.form__registration label {margin: 0 0 0 .5rem;display: inline-block !important;}
+.fastOrderForm .form__fields.form__registration {padding: 0 .5rem;}
+.fastOrderForm .form__pass {margin: 1rem .5rem 0 .5rem;}
 .delivery__zoneSelect {margin-top: 1rem;}
 .delivery__descriptionBlock {margin-top: 1rem;}
 .delivery__descriptionBlock .delivery__price {font-weight: bold;}
@@ -1738,7 +1740,7 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 	.CompareGoodsTableTbody .actions [class^="add-"] {padding: 0 3rem;}
 }
 
-/** Таблица сравнений **/
+
 /**************************************/
 /*** Страница: Сравнение ***/
 /**************************************/
@@ -1771,8 +1773,24 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 }
 
 
+.stages__navs {margin-bottom: 2rem;}
+.stages__nav {flex-grow: 1;font-size: 1.25rem;font-weight: 500;position: relative;transition: all 0.3s ease;}
+.stages__nav.active {color: #D30A3D;cursor: default;}
+.stages__nav:after {content: '';background-color: #151B22;width: 100%;height: .125rem;position: absolute;bottom: -.5rem;left: 0;}
+.stages__nav.active:after, .stages__nav:hover:after {background-color: #D30A3D;}
 
+.stages__block {width: 50%;}
+.stages__title {margin-bottom: 1rem;}
 
+.stages__text {margin-bottom: 1rem;}
+.stages__item {margin-bottom: .75rem;}
+.stages__item i {font-size: 1.5rem;vertical-align: sub;margin-right: .5rem;}
+.stages__buttons {width: 100%;}
+.stages__buttons [class*="button-"] {margin: 1rem 1rem 0 0;}
+.stages__buttons [class*="button-"]:last-child {margin-right: 0;}
+
+.delivery__option + .delivery__option {margin-top: 1.5rem;}
+.delivery__radio {vertical-align: bottom;}
 
 /**************************************/
 /*** Если не работает JS ***/

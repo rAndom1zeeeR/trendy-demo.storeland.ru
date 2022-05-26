@@ -1983,6 +1983,7 @@
 						{% ENDIF filters %}
 
 						<!-- Вы смотрели -->
+						{% IFNOT recently_viewed_goods_empty %}
 						<div class="sidebar__block viewed">
 							<div class="sidebar__title sidebar__nav flex-center">
 								<div class="title"><span>Вы смотрели</span></div>
@@ -1992,28 +1993,29 @@
 								<div class="products__grid flex-stretch owl-carousel">
 									{% FOR recently_viewed_goods %}
 									{% IF recently_viewed_goods.first %}<div class="product__items">{% ENDIF %}
-									<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && recently_viewed_goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF recently_viewed_goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{recently_viewed_goods.ID}" itemscope itemtype="https://schema.org/Product">
-										<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{index_page_favorites_goods.MIN_PRICE_NOW_ID} goodsListForm">
-											<input type="hidden" name="hash" value="{HASH}" />
-											<input type="hidden" name="form[goods_from]" value="{index_page_favorites_goods.GOODS_FROM}" />
-											<input type="hidden" name="form[goods_mod_id]" value="{index_page_favorites_goods.MIN_PRICE_NOW_ID}" />
-											<input type="hidden" name="form[goods_id][{index_page_favorites_goods.ID}]" value="{index_page_favorites_goods.ID}" />
-											<link itemprop="image" href="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}" />
-											<!-- Изображение -->
-											<a class="product__img flex-center" href="{recently_viewed_goods.URL_MIN_PRICE_NOW | url_amp}" title="{recently_viewed_goods.NAME}" itemprop="url">
-												<noscript>
-													<img src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{recently_viewed_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{recently_viewed_goods.NAME}" />
-												</noscript>
-												<img class="lozad script__on" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{recently_viewed_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{recently_viewed_goods.NAME}" />
-											</a>
-										</form>
-									</div>
+										<div class="product__item {% IF SETTINGS_GOODS_DONT_PUT_TO_CART_MORE_THAN_AVAILABLE && recently_viewed_goods.MAX_REST_VALUE=0 %}product__empty{% ENDIF %} {% IF recently_viewed_goods.COUNT_MODIFICATION > 1 %}has-mod{% ENDIF %} {% IF recently_viewed_goods.NB_GOODS_IN_CART %}inCart{% ENDIF %}" data-id="{recently_viewed_goods.ID}" itemscope itemtype="https://schema.org/Product">
+											<form action="{CART_ADD_GOODS_MODIFICATION_URL | url_amp}" method="post" class="product__form-{index_page_favorites_goods.MIN_PRICE_NOW_ID} goodsListForm">
+												<input type="hidden" name="hash" value="{HASH}" />
+												<input type="hidden" name="form[goods_from]" value="{index_page_favorites_goods.GOODS_FROM}" />
+												<input type="hidden" name="form[goods_mod_id]" value="{index_page_favorites_goods.MIN_PRICE_NOW_ID}" />
+												<input type="hidden" name="form[goods_id][{index_page_favorites_goods.ID}]" value="{index_page_favorites_goods.ID}" />
+												<link itemprop="image" href="{% IF index_page_favorites_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{index_page_favorites_goods.IMAGE_MEDIUM}{% ENDIF %}" />
+												<!-- Изображение -->
+												<a class="product__img flex-center" href="{recently_viewed_goods.URL_MIN_PRICE_NOW | url_amp}" title="{recently_viewed_goods.NAME}" itemprop="url">
+													<noscript>
+														<img src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{recently_viewed_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{recently_viewed_goods.NAME}" />
+													</noscript>
+													<img class="lozad script__on" src="{ASSETS_IMAGES_PATH}placeholder.png?design=THEMENAME" data-src="{% IF recently_viewed_goods.IMAGE_EMPTY %}{ASSETS_IMAGES_PATH}no-photo.png?design=THEMENAME{% ELSE %}{recently_viewed_goods.IMAGE_MEDIUM}{% ENDIF %}" alt="{recently_viewed_goods.NAME}" />
+												</a>
+											</form>
+										</div>
 									{% IFNOT recently_viewed_goods.last %}{recently_viewed_goods.index | is_divided("2","</div><div class=product__items>","")}{% ENDIF %}
-										{% IF recently_viewed_goods.last %}</div>{% ENDIF %}
-									{% ENDFOR %}
+									{% IF recently_viewed_goods.last %}</div>{% ENDIF %}
+									{% ENDFOR recently_viewed_goods %}
 								</div>
 							</div>
 						</div>
+						{% ENDIF %}
 
 						<!-- Баннеры в сайдбаре -->
 						<div class="sidebar__block banners">
@@ -2051,7 +2053,7 @@
 							<div id="breadcrumbs">
 								<ul class="flex unstyled" itemscope itemtype="https://schema.org/BreadcrumbList">
 									<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="home">
-										<a itemprop="item" href="{INDEX_PAGE_URL}" title="Перейти на главную"><i class="icon-house"></i><span itemprop="name">Главная</span>
+										<a itemprop="item" href="{INDEX_PAGE_URL}" title="Перейти на главную"><span itemprop="name">Главная</span>
 											<meta itemprop="position" content="1" />
 										</a>
 									</li>
@@ -2473,7 +2475,7 @@
 										{% IF SETTINGS_COMPARE_DISABLE=0 %}<li><a href="{COMPARE_URL}" title="Сравнение" rel="nofollow">Сравнение</a></li>{% ENDIF %}
 										<li><a href="{NEWS_SHOP_URL}" title="Новости магазина" rel="nofollow"><span>Новости магазина</span></a></li>
 										<li><a href="{NEWS_ARTICLES_URL}" title="Каталог статей" rel="nofollow"><span>Каталог статей</span></a></li>
-										<li><a href="{NEWS_MASS_MEDIA_URL}" title="Материалами СМИ" rel="nofollow"><span>Материалами СМИ</span></a></li>
+										<li><a href="{NEWS_MASS_MEDIA_URL}" title="Материалы СМИ" rel="nofollow"><span>Материалы СМИ</span></a></li>
 									</ul>
 								</div>
 							</div>

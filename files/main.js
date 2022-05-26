@@ -265,7 +265,7 @@ function ajaxForms(id,flag,successMessage,errorMessage){
 						},1000);
             t.hide();
             t.find('.form__input').val(' ');
-            t.parent().append('<div class="form__text">'+ errorMessage +'</div>');
+            t.parent().append('<div class="form__text">'+ successMessage +'</div>');
 						$(id).addClass('error')
             new Noty({
               text: '<div class="noty__addto"><div class="noty__message">' + successMessage + '</div></div>',
@@ -1557,23 +1557,23 @@ function addTo() {
 		// Объект ссылки, по которой кликнули
 		var
 				a = $(this)
-				isAdd = a.attr('data-action-is-add'),
-				addUrl = a.attr('data-action-add-url'),
-				delUrl = a.attr('data-action-delete-url'),
-				addTitle = a.attr('data-action-add-title'),
-				delTitle = a.attr('data-action-delete-title'),
-				pageUrl = a.attr('data-action-url'),
-				pName = a.attr('data-prodname'),
-				pUrl = a.attr('data-produrl'),
-				pImg = a.attr('data-prodimg'),
-				pDataid = a.attr('data-id'),
-				pDataPrice = a.attr('data-mod-price'),
-				pDataChar = a.attr('data-char-code'),
-				pDataMod = a.attr('data-mod-id'),
-				aText = a.parent().find('.add-compare'),
-				addTooltip = a.attr('data-add-tooltip'),
-				delTooltip = a.attr('data-del-tooltip'),
-				requestUrl = a.attr('href');
+			isAdd = a.attr('data-action-is-add'),
+			addUrl = a.attr('data-action-add-url'),
+			delUrl = a.attr('data-action-delete-url'),
+			addTitle = a.attr('data-action-add-title'),
+			delTitle = a.attr('data-action-delete-title'),
+			pageUrl = a.attr('data-action-url'),
+			pName = a.attr('data-prodname'),
+			pUrl = a.attr('data-produrl'),
+			pImg = a.attr('data-prodimg'),
+			pDataid = a.attr('data-id'),
+			pDataPrice = a.attr('data-mod-price'),
+			pDataChar = a.attr('data-char-code'),
+			pDataMod = a.attr('data-mod-id'),
+			aText = a.find('span'),
+			addTooltip = a.attr('data-add-tooltip'),
+			delTooltip = a.attr('data-del-tooltip'),
+			requestUrl = a.attr('href');
 
 		var atl = $(this).closest('.product__links');
 		var atlS = $(this).closest('.product__shop');
@@ -2246,13 +2246,14 @@ function catalog() {
       }, 1);
     }
   });
+
   // Обновление названия сортировки
   var selectText = $('.select .select__items a.active span').text();
   var lengthText = selectText.length;
   if (lengthText == '0' ){
-    selectText = 'Название сортировки';
+    selectText = $('.select .select__items a span').eq(0).text()
   }
-  $('.toolbar .sort-by .select__value span').text(selectText);
+  $('.toolbar .sort-by .select__value').text(selectText);
 
 	// Боковое меню сохранение открытой вложенности
 	// $('.collapsible:not(".active")').find('.collapsible__content').css('display', 'none');
@@ -2276,46 +2277,6 @@ function catalog() {
 		checkboxes.prop('checked', false).attr('checked', false);
 		$('.form__filters')[0].submit();
 	});
-
-	function prodPromo() {
-		var id = $('.products__promo');
-		var carousel = id.find('.owl-carousel');
-		var buttons = id.find('.owl-nav');
-		var dots = id.find('.owl-dots');
-		carousel.owlCarousel({
-			items: 3,
-			margin: 20,
-			loop: false,
-			rewind: true,
-			lazyLoad: true,
-			nav: true,
-			navContainer: buttons,
-			navText: [ , ],
-			dots: true,
-			dotsContainer: dots,
-			autoHeight: true,
-			autoHeightClass: 'owl-height',
-			autoplay: false,
-			autoplayHoverPause: true,
-			smartSpeed: 500,
-			mouseDrag: true,
-			touchDrag: true,
-			pullDrag: true,
-			responsiveClass: true,
-			responsiveRefreshRate: 100,
-			responsive: {
-				0:{items:1, autoHeight: true},
-				320:{items:1, autoHeight: true},
-				480:{items:1},
-				640:{items:2},
-				768:{items:2},
-				992:{items:2},
-				1200:{items:3}
-			}
-		});
-	}
-	// Запуск
-	prodPromo()
 
 }
 

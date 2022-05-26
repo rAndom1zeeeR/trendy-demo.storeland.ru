@@ -328,7 +328,16 @@
 							<i class="icon-check_circle"></i>
 						</button>
 						<!-- Уведомить -->
-						<a class="add-notify button-tertiary" data-fancybox data-src="#fancybox__notify" href="javascript:;">
+						<a class="add-notify button-tertiary"
+							title="Уведомить"
+							data-tooltip="Уведомить"
+							rel="nofollow"
+							data-fancybox
+							data-src="#fancybox__notify"
+							href="javascript:;"
+							data-name="{GOODS_NAME}"
+							data-art="{GOODS_MOD_ART_NUMBER}"
+						>
 							<span>Уведомить</span>
 						</a>
 					</div>
@@ -435,7 +444,7 @@
 							<div class="delivery__index">{goods_delivery.index}</div>
 							<div class="delivery__name">{goods_delivery.NAME}</div>
 							{% IF goods_delivery.DESC %}
-							<div class="delivery__text">{goods_delivery.DESC}</div>
+							<div class="delivery__description">{goods_delivery.DESC}</div>
 							{% ENDIF %}
 							{% IF goods_delivery.rules_empty %}
 							<div class="delivery__price">

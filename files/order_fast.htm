@@ -36,9 +36,9 @@
 									{% ENDIF %}
 								{% ENDFOR %}
 								<div class="delivery__descriptionBlock">
-									<div class="delivery__priceBox">
+									<div class="delivery__price">
 										<span class="label">Стоимость доставки:</span>
-										<span class="delivery__price">
+										<span>
 											<span class="changeprice"></span>
 											<span class="currency">{CURRENCY_NAME}</span>
 										</span>
@@ -61,10 +61,11 @@
 											checked="checked"
 										{% ENDIF %}
 										/>
-										<label for="deliveryId{order_delivery.ID}" class="delivery__name">{order_delivery.NAME}</label>
+										<label class="delivery__label" for="deliveryId{order_delivery.ID}">{order_delivery.NAME}</label>
 										<div class="delivery__desc">{order_delivery.DESC}</div>
 										<div class="delivery__fields">
-											<label>Стоимость доставки:</label><span class="delivery__price">{order_delivery.END_PRICE | money_format}</span>
+											<label>Стоимость доставки:</label>
+											<span class="delivery__price">{order_delivery.END_PRICE | money_format}</span>
 										</div>
 										{% IFNOT order_delivery.zone_list_empty %}
 										<div class="delivery__zones">
