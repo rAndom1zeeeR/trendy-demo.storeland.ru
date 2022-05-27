@@ -38,47 +38,54 @@
 								<div class="delivery__descriptionBlock">
 									<div class="delivery__price">
 										<span class="label">Стоимость доставки:</span>
-										<span>
+										<strong>
 											<span class="changeprice"></span>
 											<span class="currency">{CURRENCY_NAME}</span>
-										</span>
+										</strong>
 									</div>
 									<div class="delivery__description"></div>
 								</div>
 							</div>
+
 							<!-- Новый Cпособ доставки -->
 							<div class="order__delivery" style="display: none;">
 								{% FOR order_delivery %}
-									<div class="delivery__option" rel="{order_delivery.ID}">
-										<input type="radio" id="deliveryId{order_delivery.ID}" name="form[delivery][id]" value="{order_delivery.ID}" class="deliveryRadio square delivery__radio"
+									<div class="delivery__option checkbox" rel="{order_delivery.ID}">
+										<input class="delivery__radio square" type="radio" 
+											id="deliveryId{order_delivery.ID}" 
+											name="form[delivery][id]" 
+											value="{order_delivery.ID}"
 											price="{order_delivery.END_PRICE}"
 											pricewithoutzones="{order_delivery.END_PRICE}"
 											pricewithzone="{order_delivery.ZONE_END_PRICE}"
-											data-name="{order_delivery.NAME}"
-										{% IFNOT ORDER_FORM_DELIVERY_ID %}
-											{% IF order_delivery.first %}checked="checked"{% ENDIF %}
-										{% ELSEIF order_delivery.ID = ORDER_FORM_DELIVERY_ID %}
-											checked="checked"
-										{% ENDIF %}
+											{% IFNOT ORDER_FORM_DELIVERY_ID %}
+												{% IF order_delivery.first %}checked="checked"{% ENDIF %}
+											{% ELSEIF order_delivery.ID = ORDER_FORM_DELIVERY_ID %}
+												checked="checked"
+											{% ENDIF %}
 										/>
 										<label class="delivery__label" for="deliveryId{order_delivery.ID}">{order_delivery.NAME}</label>
-										<div class="delivery__desc">{order_delivery.DESC}</div>
-										<div class="delivery__fields">
+										<!-- Стоимость -->
+										<div class="delivery__price">
 											<label>Стоимость доставки:</label>
-											<span class="delivery__price">{order_delivery.END_PRICE | money_format}</span>
+											<strong>{order_delivery.END_PRICE | money_format}</strong>
 										</div>
+										<!-- Описание -->
+										{% IF order_delivery.DESC %}<div class="delivery__description">{order_delivery.DESC}</div>{% ENDIF %}
+										<!-- Зоны доставки -->
 										{% IFNOT order_delivery.zone_list_empty %}
 										<div class="delivery__zones">
 											{% FOR zone_list %}
-											<!-- Заголовок внутри метода доставки, появляется только один раз-->
+											<!-- Заголовок внутри метода доставки, появляется только один раз-->  
 											{% IF order_delivery.zone_list.index=1 %}
-												<div class="zones__title">Зоны доставки:</div>
+											<div class="zones__title">Зоны доставки:</div>
 											{% ENDIF %}
 											<div class="delivery__zone">
-												<input type="radio" class="zone__radio square" id="deliveryZoneId{order_delivery.zone_list.ID}"
-													name="form[delivery][zone_id]"
+												<input class="zone__radio square" type="radio"
+													id="deliveryZoneId{order_delivery.zone_list.ID}" 
+													name="form[delivery][zone_id]" 
 													value="{order_delivery.zone_list.ID}"
-													deliveryid="{order_delivery.ID}"
+													deliveryid="{order_delivery.ID}" 
 													price="{order_delivery.zone_list.END_PRICE}"
 													{% IF order_delivery.zone_list.ID = ORDER_FORM_DELIVERY_ZONE_ID %}
 														checked="checked" rel="true"
@@ -93,6 +100,7 @@
 									</div>
 								{% ENDFOR %}
 							</div>
+
 						</div>
 					</div>
 
@@ -125,12 +133,12 @@
 								{% IFNOT order_delivery.available_payment_list_empty %}
 									<div class="order__payment" rel="{order_delivery.ID}" style="display: none;">
 										{% FOR available_payment_list %}
-										<div class="payment__option">
-											<input type="radio" id="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}" name="form[payment][id]" deliveryid="{order_delivery.available_payment_list.ID}" value="{order_delivery.available_payment_list.ID}" class="paymentRadio square required" {% IFNOT ORDER_FORM_PAYMENT_ID %}{% IF order_delivery.available_payment_list.first %}checked="checked"{% ENDIF %}{% ELSEIF order_delivery.available_payment_list.ID = ORDER_FORM_PAYMENT_ID %}checked="checked"{% ENDIF %}/>
-											<label for="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}" class="payment__name">{order_delivery.available_payment_list.NAME}</label>
+										<div class="payment__option checkbox">
+											<input class="payment__radio square" type="radio" id="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}" name="form[payment][id]" deliveryid="{order_delivery.available_payment_list.ID}" value="{order_delivery.available_payment_list.ID}" {% IFNOT ORDER_FORM_PAYMENT_ID %}{% IF order_delivery.available_payment_list.first %}checked="checked"{% ENDIF %}{% ELSEIF order_delivery.available_payment_list.ID = ORDER_FORM_PAYMENT_ID %}checked="checked"{% ENDIF %}/>
+											<label class="payment__name" for="quickPaymentId{order_delivery.ID}_{order_delivery.available_payment_list.ID}">{order_delivery.available_payment_list.NAME}</label>
 											<!-- Сообщение для пользователя -->
 											{% IF order_delivery.available_payment_list.MESSAGE %}
-												<div class="payment__desc">{order_delivery.available_payment_list.MESSAGE}</div>
+											<div class="payment__description">{order_delivery.available_payment_list.MESSAGE}</div>
 											{% ENDIF %}
 										</div>
 										{% ENDFOR %}
@@ -251,11 +259,11 @@
 								</div>
 								<!-- Если в тарифном плане подключен раздел личного кабинета -->
 								{% IFNOT CLIENT_IS_LOGIN %}
-								<div class="form__fields form__registration flex">
+								<div class="form__registration checkbox">
 									<input type="checkbox" class="square" id="form__registration" name="form[contact][want_register]" value="1" {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}checked="checked"{% ENDIF %}>
 									<label for="form__registration"><span>Я хочу зарегистрироваться</span></label>
 								</div>
-								<div class="form__fields form__pass" {% IFNOT ORDER_FORM_CONTACT_WANT_REGISTER %}style="display: none;"{% ENDIF %}>
+								<div class="form__pass" {% IFNOT ORDER_FORM_CONTACT_WANT_REGISTER %}style="display: none;"{% ENDIF %}>
 									<input id="sites_client_pass" type="password" name="form[contact][pass]" value="{ORDER_FORM_CONTACT_PASS}" maxlength="50" minlength="6" class="form__input {% IF ORDER_FORM_CONTACT_WANT_REGISTER %}required{% ENDIF %}" onkeyup="checkCapsWarning(event)" onfocus="checkCapsWarning(event)" onblur="removeCapsWarning()" placeholder="Придумайте пароль *"/>
 									<div class="showPassBlock"><a href="#" rel="Скрыть пароль" class="showPass">Показать пароль</a></div>
 								</div>

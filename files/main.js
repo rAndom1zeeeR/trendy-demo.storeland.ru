@@ -1971,7 +1971,7 @@ function orderScriptsSelect() {
 			$('.delivery__description').css("display", "block");
 		}
 		// Вывод описания оплаты
-		var PaymentDescription = $('.hiddenRadio .paymentRadio:checked').parent().find('.delivery__desc').html()
+		var PaymentDescription = $('.hiddenRadio .payment__radio:checked').parent().find('.delivery__desc').html()
 		$('.payment__description').html(PaymentDescription);
 		if (PaymentDescription == undefined ) {
 			$('.payment__description').css("display", "none");
@@ -2015,7 +2015,7 @@ function orderScriptsSelect() {
 			$('.delivery__description').css("display", "block");
 		}
 		// Вывод описания оплаты
-		var PaymentDescription = $('.hiddenRadio .paymentRadio:checked').parent().find('.payment__desc').html();
+		var PaymentDescription = $('.hiddenRadio .payment__radio:checked').parent().find('.payment__desc').html();
 		$('.payment__description').html(PaymentDescription);
 		if (PaymentDescription == undefined ) {
 			$('.payment__description').css("display", "none");
@@ -2045,8 +2045,8 @@ function orderScriptsSelect() {
 	// Выбор оплаты
 	$('.paymentSelect').change(function(){
 		var selectedDelId = $(this).find('option:selected').attr('value');
-		$('.hiddenRadio .paymentRadio[value="'+selectedDelId+'"]').click();
-		var PaymentDescription = $('.hiddenRadio .paymentRadio:checked').parent().find('.payment__desc').html();
+		$('.hiddenRadio .payment__radio[value="'+selectedDelId+'"]').click();
+		var PaymentDescription = $('.hiddenRadio .payment__radio:checked').parent().find('.payment__desc').html();
 		$('.payment__description').html(PaymentDescription);
 		if (PaymentDescription == undefined ) {
 			$('.payment__description').css("display", "none");

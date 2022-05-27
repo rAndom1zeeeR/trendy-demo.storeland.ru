@@ -110,7 +110,7 @@ textarea.error:-ms-input-placeholder {color: red;}
 /*** Селекты ***/
 /**************************************/
 .selectBox {position: relative;}
-.selectBox:after {content: '\e904';color: #9E9E9E;font-size: 1.25rem;line-height: 3rem;top: 0;right: .5rem;position: absolute;font-family: 'icomoon';pointer-events: none;}
+.selectBox:after {content: '\e904';color: #9E9E9E;font-size: 1.25rem;line-height: 3rem;bottom: 0;right: .5rem;position: absolute;font-family: 'icomoon';pointer-events: none;}
 .selectBox select {padding: 0 1.75rem 0 1rem;}
 .selectBox:hover:after {color: #0172DB;}
 
@@ -1688,8 +1688,9 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 .fastOrderForm .form__pass {margin: 1rem .5rem 0 .5rem;}
 .delivery__zoneSelect {margin-top: 1rem;}
 .delivery__descriptionBlock {margin-top: 1rem;}
-.delivery__descriptionBlock .delivery__price {font-weight: bold;}
 .delivery__description {margin-top: .75rem;font-size: 13px;}
+.delivery__subtitle {margin-top: .75rem;}
+.delivery__price {margin-top: .5rem;}
 .payment__description {margin-top: .75rem;font-size: 13px;}
 .fastOrderForm .block__title .title {font-size: 1.125rem;text-align: left;text-transform: capitalize;}
 .fastOrderForm .comment .form__field {margin: 0;width: 100%;}
@@ -1773,15 +1774,20 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 }
 
 
+/**************************************/
+/*** Страница: Оформление заказа ***/
+/**************************************/
 .stages__navs {margin-bottom: 2rem;}
 .stages__nav {flex-grow: 1;font-size: 1.25rem;font-weight: 500;position: relative;transition: all 0.3s ease;}
-.stages__nav.active {color: #D30A3D;cursor: default;}
+.stages__nav.active {color: #D30A3D;}
+.stages__nav.active:hover {color: #151B22;}
 .stages__nav:after {content: '';background-color: #151B22;width: 100%;height: .125rem;position: absolute;bottom: -.5rem;left: 0;}
 .stages__nav.active:after, .stages__nav:hover:after {background-color: #D30A3D;}
+.stages__nav.active:hover:after {background-color: #151B22;}
 
 .stages__block {width: 50%;}
+.stages__block.full {width: 100%;}
 .stages__title {margin-bottom: 1rem;}
-
 .stages__text {margin-bottom: 1rem;}
 .stages__item {margin-bottom: .75rem;}
 .stages__item i {font-size: 1.5rem;vertical-align: sub;margin-right: .5rem;}
@@ -1789,8 +1795,9 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 .stages__buttons [class*="button-"] {margin: 1rem 1rem 0 0;}
 .stages__buttons [class*="button-"]:last-child {margin-right: 0;}
 
-.delivery__option + .delivery__option {margin-top: 1.5rem;}
-.delivery__radio {vertical-align: bottom;}
+.checkbox + .checkbox {margin-top: 1.5rem;}
+.checkbox input {vertical-align: middle;}
+
 
 /**************************************/
 /*** Если не работает JS ***/
