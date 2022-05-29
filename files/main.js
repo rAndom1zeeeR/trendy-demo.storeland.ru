@@ -3614,3 +3614,29 @@ function sumSave(){
 		}
 	});
 }
+
+// Функция вычисления скидки в корзине
+function cartSaleSum(){
+	var arr = [];
+	// Находим разницу в цене
+	$('.addto__cart .addto__item').each(function(){
+		var priceNow = $(this).find('.price__now').attr('data-price')
+		var priceOld = $(this).find('.price__old').attr('data-price')
+		if(typeof(priceOld) !== 'undefined'){
+			if(priceOld > priceNow){
+				var diff = priceOld - priceNow;
+				// Добавляем разницу в массив
+				arr.push(diff);
+			}
+		}
+	});
+
+	// Итоговая сумма скидки
+	var sum = 0;
+	for (var i=0; i<arr.length; i++){
+		sum += arr[i]
+	}
+	
+	// Обновляем сумму скидки
+	$('.addto__cart .cartSumOld').find('.num').text(addSpaces(sum)).parent().show();
+}

@@ -75,11 +75,15 @@ textarea {height: auto;padding-top: 1rem;resize: vertical;}
 select {cursor: pointer;}
 input.error {border-color: red;}
 input[type="file"] {margin-top: 0.25rem;height: auto;line-height: 1;border: 0;padding: 0;border-radius: 0;background: transparent;}
+
 .square {background-color: transparent;border: 0;color: #151B22;font-size: 1.5rem;width: 1.5rem;height: 1.5rem;line-height: 1.5rem;margin: 0;padding: 0;text-align: center;cursor: pointer;}
 .square:after {content: '\e90c';line-height: 1;vertical-align: top;font-family: 'icomoon';}
 .square:checked:after {content: '\e90d';color: #0172DB;}
 .square:disabled {color: #9E9E9E;cursor: default}
 .square:disabled:after {content: '\e90c';opacity: .5;}
+
+.checkbox + .checkbox {margin-top: 1.5rem;}
+.checkbox input {vertical-align: middle;}
 
 input + label {cursor: pointer;}
 .disabled label {color: #9E9E9E;cursor: default;}
@@ -1795,8 +1799,6 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 .stages__buttons [class*="button-"] {margin: 1rem 1rem 0 0;}
 .stages__buttons [class*="button-"]:last-child {margin-right: 0;}
 
-.checkbox + .checkbox {margin-top: 1.5rem;}
-.checkbox input {vertical-align: middle;}
 
 
 /**************************************/
