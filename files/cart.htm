@@ -44,9 +44,9 @@
 										<a href="javascript:void(0)" class="qty__plus flex-center unselectable" title="Увеличить"><i class="icon-plus"></i></a>
 									</div>
 								</div>
-								<div class="cart__price {CURRENCY_CHAR_CODE}">
+								<div class="cart__price {CURRENCY_CHAR_CODE} {% IF cart_items.ORDER_LINE_PRICE_OLD > cart_items.ORDER_LINE_PRICE_NOW %}has-oldPrice{% ENDIF %}">
 									<!-- {% IF cart_items.ORDER_LINE_PRICE_OLD > 0 %}<div class="price__old">{cart_items.ORDER_LINE_PRICE_OLD | money_format}</div>{% ENDIF %} -->
-									<div class="cartPriceTotal price__now">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</div>
+									<div class="price__now">{cart_items.ORDER_LINE_PRICE_NOW | money_format}</div>
 									{% IF cart_items.ORDER_LINE_PRICE_OLD > cart_items.ORDER_LINE_PRICE_NOW %}
 									<div class="price__old">{cart_items.ORDER_LINE_PRICE_OLD | money_format}</div>
 									{% ENDIF %}
@@ -82,7 +82,7 @@
 				<!-- Корзина: Заголовок -->
 				<div class="cartTotal__title">Ваш заказ</div>
 				<!-- Корзина: Товары -->
-				<div class="cartTotal__item total__coupons flex justify-between">
+				<div class="cartTotal__item flex justify-between">
 					<span class="cartTotal__label"><span>Товары ({CART_COUNT_TOTAL})</span></span>
 					<span class="cartTotal__price"><span class="cartSumNow" data-value="{CART_SUM_NOW}">{CART_SUM_NOW | money_format}</span></span>
 				</div>

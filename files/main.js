@@ -611,8 +611,13 @@ function openMenu() {
 	// Открытие поиска
 	$('.search__icon').on('click', function(event){
 		event.preventDefault();
-		$(this).parent().toggleClass('opened')
-		$('#overlay').toggleClass('opened');
+		if($('.search').hasClass('opened')){
+			$(this).removeClass('active')
+			$('.search').removeClass('opened').slideUp('slow')
+		}else{
+			$(this).addClass('active')
+			$('.search').addClass('opened').slideDown('slow')
+		}
 	});
 
 }
@@ -2356,24 +2361,35 @@ function priceFilter() {
 		$('#filters').toggleClass('opened');
 		$('#overlay').toggleClass('opened transparent');
 	});
+	
+	// $('.filter__list').each(function(){
+	// 	var item = $(this).find('.filter__item').length;
+	// 	var search = $(this).find('.filter__search');
+	// 	item < 4 ? search.hide() : search.show()
+	// });
 
 	// Фильтры поиск
-	$('.filter__search').on('input', function () {
+	$('.filter__search').on('input', function() {
 		var $items = $(this).next('.filter__items').children()
 		var $checkboxes = $items.find('label');
-		var itemsArray = $checkboxes.map(function () {return $(this).data('name').toLowerCase()}).toArray();
+		var itemsArray = $checkboxes.map(function() {return $(this).data('name').toLowerCase()}).toArray();
 		var str = $(this).val();
-
-		var resultArray = itemsArray.map((item, i) => item.indexOf(str) >= 0 ? i : -1).filter(item => item >= 0);
-		$items.hide().filter(function () {        
-			return resultArray.some(el => el === $(this).index())
+		// console.log('itemsArray', itemsArray)
+		// console.log('str', str)
+		// Создаем массив результатов поиска
+		var resultArray = itemsArray.map(function(item, i){ if(item.indexOf(str) >= 0){ return i }else{ return -1; } }).filter(function(item){ return item >= 0; });
+		// Фильтруем результаты поиска
+		$items.hide().filter(function(item) {
+			var t = $(this);
+			return resultArray.some(function(el){ return el === t.index() })
 		}).show();
-	})
-	
-	$('.filter__list').each(function(){
-		var item = $(this).find('.filter__item').length;
-		var search = $(this).find('.filter__search');
-		item < 4 ? search.hide() : search.show()
+		// Стрелочные функции не работают в ИЕ
+		// Создаем массив результатов поиска
+		// var resultArray = itemsArray.map((item, i) => item.indexOf(str) >= 0 ? i : -1).filter(item => item >= 0);
+		// Фильтруем результаты поиска
+		// $items.hide().filter(function () {
+		// 	return resultArray.some(el => el === $(this).index())
+		// }).show();
 	});
 
 }
@@ -3576,7 +3592,7 @@ function hoverCatalog(){
 		var height = $('.slider__item').height()
 
 		if(height == undefined){
-			var height = 500
+			var height = 550
 		}
 
 		// Скрываем кнопку если мало категорий. Сравниваем размеры по слайдеру

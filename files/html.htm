@@ -105,6 +105,11 @@
 								</ul>
 							</nav>
 						</div>
+							
+						<!-- Иконка поиска -->
+						<div class="search__icon">
+							<i class="icon-search"></i>
+						</div>
 
 						<!-- Почта -->
 						{% IF SETTINGS_STORE_EMAIL_MAIN %}
@@ -231,7 +236,7 @@
 								<a href="javascript:;" class="search__reset">
 									<i class="icon-close"></i>
 								</a>
-							</form><!-- //END Форма поиска -->
+							</form>
 
 							<!-- Результаты поиска -->
 							<div id="search__result" style="display: none;">
@@ -465,11 +470,11 @@
 					<!-- Слайд 2 -->
 					<div class="slider__item lozad" data-background-image="{ASSETS_IMAGES_PATH}slide_2.jpg?design=THEMENAME">
 						<div class="slider__content flex">
-							<a class="slider__subtitle" href="{CATALOG_URL}"><span>Возвращение легенды</span></a>
+							<a class="slider__subtitle" href="{CATALOG_URL}"><span>Стильная укладка за 5 минут</span></a>
 							<a class="slider__title" href="{CATALOG_URL}">
-								<span>Скорость</span>
-								<span>Стиль</span>
-								<span class="tc">Спорт</span>
+								<span>Новый</span>
+								<span>Формат</span>
+								<span class="tc">Укладки</span>
 							</a>
 							<div class="slider__buttons">
 								<a class="slider__button button-tertiary" href="{CATALOG_URL}" title="Смотреть каталог">
@@ -483,11 +488,11 @@
 					<!-- Слайд 3 -->
 					<div class="slider__item lozad" data-background-image="{ASSETS_IMAGES_PATH}slide_3.jpg?design=THEMENAME">
 						<div class="slider__content flex">
-							<a class="slider__subtitle" href="{CATALOG_URL}"><span>Возвращение легенды</span></a>
+							<a class="slider__subtitle" href="{CATALOG_URL}"><span>Новое звучание</span></a>
 							<a class="slider__title" href="{CATALOG_URL}">
-								<span>Скорость</span>
+								<span>Мелодия</span>
 								<span>Стиль</span>
-								<span class="tc">Спорт</span>
+								<span class="tc">Звук</span>
 							</a>
 							<div class="slider__buttons">
 								<a class="slider__button button-tertiary" href="{CATALOG_URL}" title="Смотреть каталог">
@@ -1103,6 +1108,7 @@
 						<div>{BODY}</div>						
 					</div>
 
+					{% IFNOT recently_viewed_goods_empty %}
 					<div class="viewed">
 						<div class="block__title block__nav flex">
 							<h3 class="title"><span>Вы смотрели</span></h3>
@@ -1134,6 +1140,7 @@
 							</div>
 						</div>
 					</div>
+					{% ENDIF %}
 
 				</div>
 			</div>
