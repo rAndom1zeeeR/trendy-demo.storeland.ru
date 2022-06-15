@@ -2361,12 +2361,6 @@ function priceFilter() {
 		$('#filters').toggleClass('opened');
 		$('#overlay').toggleClass('opened transparent');
 	});
-	
-	// $('.filter__list').each(function(){
-	// 	var item = $(this).find('.filter__item').length;
-	// 	var search = $(this).find('.filter__search');
-	// 	item < 4 ? search.hide() : search.show()
-	// });
 
 	// Фильтры поиск
 	$('.filter__search').on('input', function() {
@@ -2374,8 +2368,6 @@ function priceFilter() {
 		var $checkboxes = $items.find('label');
 		var itemsArray = $checkboxes.map(function() {return $(this).data('name').toLowerCase()}).toArray();
 		var str = $(this).val();
-		// console.log('itemsArray', itemsArray)
-		// console.log('str', str)
 		// Создаем массив результатов поиска
 		var resultArray = itemsArray.map(function(item, i){ if(item.indexOf(str) >= 0){ return i }else{ return -1; } }).filter(function(item){ return item >= 0; });
 		// Фильтруем результаты поиска
@@ -2383,13 +2375,6 @@ function priceFilter() {
 			var t = $(this);
 			return resultArray.some(function(el){ return el === t.index() })
 		}).show();
-		// Стрелочные функции не работают в ИЕ
-		// Создаем массив результатов поиска
-		// var resultArray = itemsArray.map((item, i) => item.indexOf(str) >= 0 ? i : -1).filter(item => item >= 0);
-		// Фильтруем результаты поиска
-		// $items.hide().filter(function () {
-		// 	return resultArray.some(el => el === $(this).index())
-		// }).show();
 	});
 
 }
@@ -3404,6 +3389,7 @@ $(window).resize(function(){
     $('body').removeClass('landscape');
   }
   mainnav('header .mainnav', '1', 991);
+	userAgent();
 });
 
 
