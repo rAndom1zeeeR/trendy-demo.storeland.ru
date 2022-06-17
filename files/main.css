@@ -1054,7 +1054,7 @@ footer .contacts__block-fancy {font-size: .75rem;font-weight: 300;padding: 0;}
 	.products__list .add-notify span {display: none;}
 }
 @media (max-width: 479px) {
-	.products__list .product__price {width: 100%;}
+	.products__list .product__price {width: 100%;margin: 0;}
 	.products__list .product__image {width: 8rem;}
 	.products__list .product__img {height: 8rem;}
 	.products__list .product__addCart a i {display: inline-block;line-height: 2.25rem;}
