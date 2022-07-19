@@ -1182,18 +1182,21 @@ function priceDiff(obj,type) {
 // много и мало вместо точного количества
 function goodsModRest() {
 	$('.goodsModRestValue').each(function(){
-		var value = $(this).data('value');
+		var value = $(this).attr('data-value');
 		if (value > 0 && value < 11) {
-			$(this).text('В наличии мало');
+			$(this).text('Мало');
 			$(this).css('opacity', '1');
+			$(this).parent().removeClass('alot').removeClass('zero');
 			$(this).parent().addClass('few');
 		}else if (value > 10) {
-			$(this).text('В наличии много');
+			$(this).text('Много');
 			$(this).css('opacity', '1');
+			$(this).parent().removeClass('few').removeClass('zero');
 			$(this).parent().addClass('alot');
 		}else if (value == 0) {
-			$(this).text('Нет в наличии');
+			$(this).text('Отсутствует');
 			$(this).css('opacity', '1');
+			$(this).parent().removeClass('few').removeClass('zero');
 			$(this).parent().addClass('zero');
 		}
 	});
